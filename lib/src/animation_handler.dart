@@ -26,7 +26,7 @@ class AnimationHandler {
       if (t.y > windowHeight) {
         print("removing a taco");
         t.element.remove();
-        _tacos.remove(t);
+        new Future(() => _tacos.remove(t)); // do it async so there's no concurrent modification.
       } else t.render();
     }
     while (_tacos.length < numTacos) addTaco();
