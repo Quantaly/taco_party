@@ -24,7 +24,6 @@ class AnimationHandler {
     for (var t in _tacos) {
       t.advance();
       if (t.y > windowHeight) {
-        print("removing a taco");
         t.element.remove();
         new Future(() => _tacos.remove(t)); // do it async so there's no concurrent modification.
       } else t.render();
