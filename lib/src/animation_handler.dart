@@ -6,7 +6,7 @@ import 'package:taco_party/taco_party.dart';
 class AnimationHandler {
   static const numTacos = 30;
 
-  final List<Taco> _tacos = [];
+  final List<Taco> _tacos = new List(numTacos);
   final Element _outputElement;
   Timer timer;
 
@@ -14,26 +14,27 @@ class AnimationHandler {
 
   void start() {
     if (timer?.isActive ?? false) return;
-    for (int i=0; i<numTacos; i++) addTaco();
+    for (int i = 0; i < numTacos; i++) _tacos[i] = newTaco();
     runFrame();
     timer = new Timer.periodic(const Duration(milliseconds: 33), runFrame);
   }
 
   void runFrame([_]) {
     var windowHeight = window.innerHeight;
-    for (var t in _tacos) {
+    for (int i = 0; i < numTacos; i++) {
+      var t = _tacos[i];
       t.advance();
       if (t.y > windowHeight) {
         t.element.remove();
-        new Future(() => _tacos.remove(t)); // do it async so there's no concurrent modification.
-      } else t.render();
+        _tacos[i] = newTaco();
+      }
+      _tacos[i].render();
     }
-    while (_tacos.length < numTacos) addTaco();
   }
 
-  void addTaco() {
+  Taco newTaco() {
     var taco = new Taco.random(window.innerWidth - Taco.width, 0 - Taco.height);
     _outputElement.append(taco.element);
-    _tacos.add(taco);
+    return taco;
   }
 }
