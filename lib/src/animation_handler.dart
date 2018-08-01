@@ -1,27 +1,25 @@
 import 'dart:async';
 import 'dart:html';
 
-import 'package:taco_party/taco_party.dart';
+import '../taco_party.dart';
 
 class AnimationHandler {
-  static const numTacos = 32;
-
-  final List<Taco> _tacos = new List(numTacos);
+  final List<Taco> _tacos = new List(spriteInfo.numTacos);
   final Element _outputElement;
   Timer timer;
 
-  AnimationHandler() : _outputElement = document.querySelector("body");
+  AnimationHandler() : _outputElement = document.querySelector("#images");
 
   void start() {
     if (timer?.isActive ?? false) return;
-    for (int i = 0; i < numTacos; i++) _tacos[i] = newTaco();
+    for (int i = 0; i < spriteInfo.numTacos; i++) _tacos[i] = newTaco();
     runFrame();
     timer = new Timer.periodic(const Duration(milliseconds: 16), runFrame);
   }
 
   void runFrame([_]) {
     var windowHeight = window.innerHeight;
-    for (int i = 0; i < numTacos; i++) {
+    for (int i = 0; i < _tacos.length; i++) {
       var t = _tacos[i];
       t.advance();
       if (t.y > windowHeight) {
@@ -33,7 +31,7 @@ class AnimationHandler {
   }
 
   Taco newTaco() {
-    var taco = new Taco.random(window.innerWidth - Taco.width, 0.0 - Taco.height);
+    var taco = new Taco.random(window.innerWidth - spriteInfo.maxWidth, 0.0 - spriteInfo.maxHeight);
     _outputElement.append(taco.element);
     return taco;
   }
