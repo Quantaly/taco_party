@@ -6,24 +6,33 @@ class Taco {
   static const height = 216;
 
   static final _rand = new math.Random();
-  static const maxHorzVelocity = 7;
-  static const minVertVelocity = 10;
-  static const maxVertVelocity = 25; // pixels / frame @ 30fps
-  static const maxAngularVelocity = 9; // degrees / frame @ 30fps
+  static const maxHorzVelocity = 4;
+  static const minVertVelocity = 5;
+  static const maxVertVelocity = 11; // pixels / frame @ 60fps
+  static const maxAngularVelocity = 4; // degrees / frame @ 60fps
 
-  int x, y, angle = 0;
-  final int horzVelocity, vertVelocity, angularVelocity;
+  double x, y, angle;
+  final double horzVelocity, vertVelocity, angularVelocity;
   final ImageElement element;
 
-  Taco(this.x, this.y, this.horzVelocity, this.vertVelocity, this.angularVelocity) :
-        element = new ImageElement(src: "https://openclipart.org/image/2400px/svg_to_png/151201/taco.png", width: width, height: height) {
+  Taco(this.x, this.y, this.angle, this.horzVelocity, this.vertVelocity,
+      this.angularVelocity)
+      : element = new ImageElement(
+            src:
+                "https://openclipart.org/image/2400px/svg_to_png/151201/taco.png",
+            width: width,
+            height: height) {
     element.classes.add("taco");
     render();
   }
-  Taco.random(int maxX, int y) : this(_rand.nextInt(maxX), y,
-      _rand.nextInt(maxHorzVelocity) * (_rand.nextBool() ? 1 : -1),
-      _rand.nextInt(maxVertVelocity - minVertVelocity) + minVertVelocity,
-      _rand.nextInt(maxAngularVelocity) * (_rand.nextBool() ? 1 : -1));
+  Taco.random(num maxX, double y)
+      : this(
+            _rand.nextDouble() * maxX,
+            y,
+            _rand.nextDouble() * 360,
+            _rand.nextDouble() * maxHorzVelocity * (_rand.nextBool() ? 1 : -1),
+            _rand.nextDouble() * (maxVertVelocity - minVertVelocity) + minVertVelocity,
+            _rand.nextDouble() * maxAngularVelocity * (_rand.nextBool() ? 1 : -1));
 
   void advance() {
     x += horzVelocity;
@@ -33,8 +42,8 @@ class Taco {
 
   void render() {
     element.style
-      ..top = "${y}px"
-      ..left = "${x}px"
+      ..top = "${y.floor()}px"
+      ..left = "${x.floor()}px"
       ..transform = "rotate(${angle}deg)";
   }
 }
