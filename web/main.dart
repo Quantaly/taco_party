@@ -8,22 +8,27 @@ void main() {
   switch (Uri.base.queryParameters["type"]) {
     case "pokemon":
       print("Gotta catch 'em all!");
-      spriteInfo = new PokemonSpriteInfo();
+      spriteInfo = PokemonSpriteInfo();
+      break;
+    case "umbreon":
+      print("Happy borthday, daddy-o."); // my dad's favorite 'mon
+      spriteInfo = UmbreonSpriteInfo();
       break;
   }
 
-  querySelector("body").style..color = spriteInfo.textColor
-  ..backgroundColor = spriteInfo.backgroundColor;
+  querySelector("body").style
+    ..color = spriteInfo.textColor
+    ..backgroundColor = spriteInfo.backgroundColor;
 
   _fillCache().then((_) => querySelector("#loading-notice").remove());
 
-  new AnimationHandler().start();
+  AnimationHandler().start();
 }
 
 Future _fillCache() {
   var cacheHolder = querySelector("#cache-holder");
   return Future.wait(spriteInfo.cacheUrls.map((u) {
-    var element = new ImageElement(src: u);
+    var element = ImageElement(src: u);
     cacheHolder.append(element);
     return element.onLoad.first;
   }));

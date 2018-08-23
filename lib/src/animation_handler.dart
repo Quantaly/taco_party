@@ -4,7 +4,7 @@ import 'dart:html';
 import '../taco_party.dart';
 
 class AnimationHandler {
-  final List<Taco> _tacos = new List(spriteInfo.numTacos);
+  final List<Taco> _tacos = List(spriteInfo.numTacos);
   final Element _outputElement;
   Timer timer;
 
@@ -14,7 +14,7 @@ class AnimationHandler {
     if (timer?.isActive ?? false) return;
     for (int i = 0; i < spriteInfo.numTacos; i++) _tacos[i] = newTaco();
     runFrame();
-    timer = new Timer.periodic(const Duration(milliseconds: 16), runFrame);
+    timer = Timer.periodic(const Duration(milliseconds: 16), runFrame);
   }
 
   void runFrame([_]) {
@@ -31,7 +31,8 @@ class AnimationHandler {
   }
 
   Taco newTaco() {
-    var taco = new Taco.random(window.innerWidth - spriteInfo.maxWidth, 0.0 - spriteInfo.maxHeight);
+    var taco = Taco.random(
+        window.innerWidth - spriteInfo.maxWidth, 0.0 - spriteInfo.maxHeight);
     _outputElement.append(taco.element);
     return taco;
   }

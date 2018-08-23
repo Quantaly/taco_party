@@ -4,7 +4,7 @@ import 'dart:html';
 import '../taco_party.dart';
 
 class Taco {
-  static final _rand = new math.Random();
+  static final _rand = math.Random();
 
   double x, y, angle;
   final double horzVelocity, vertVelocity, angularVelocity;
@@ -23,8 +23,11 @@ class Taco {
             _rand.nextDouble() * maxX,
             y,
             _rand.nextDouble() * 360,
-            _rand.nextDouble() * spriteInfo.maxHorzVelocity * (_rand.nextBool() ? 1 : -1),
-            _rand.nextDouble() * (spriteInfo.maxVertVelocity - spriteInfo.minVertVelocity) +
+            _rand.nextDouble() *
+                spriteInfo.maxHorzVelocity *
+                (_rand.nextBool() ? 1 : -1),
+            _rand.nextDouble() *
+                    (spriteInfo.maxVertVelocity - spriteInfo.minVertVelocity) +
                 spriteInfo.minVertVelocity,
             _rand.nextDouble() *
                 spriteInfo.maxAngularVelocity *
