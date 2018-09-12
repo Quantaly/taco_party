@@ -13,3 +13,6 @@ linter:
     - test_types_in_equals
     - unrelated_type_equality_checks
     - valid_regexps
+    - await_only_futures
+    - unnecessary_new
+    - unnecessary_const

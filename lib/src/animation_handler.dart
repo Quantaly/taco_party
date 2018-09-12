@@ -23,17 +23,17 @@ class AnimationHandler {
       var t = _tacos[i];
       t.advance();
       if (t.y > windowHeight) {
-        t.element.remove();
+        //t.element.remove();
         _tacos[i] = newTaco();
       }
-      _tacos[i].render();
+      //_tacos[i].render();
     }
   }
 
   Taco newTaco() {
-    var taco = Taco.random(
+    /*var taco = Taco.random(
         window.innerWidth - spriteInfo.maxWidth, 0.0 - spriteInfo.maxHeight);
     _outputElement.append(taco.element);
-    return taco;
+    return taco;*/
   }
 }

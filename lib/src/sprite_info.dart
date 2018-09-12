@@ -8,7 +8,7 @@ abstract class SpriteInfo {
   num get maxHorzVelocity;
   num get minVertVelocity;
   num get maxVertVelocity; // pixels/frame @ 60Hz
-  num get maxAngularVelocity; // degrees/frame @ 60Hz
+  num get maxAngularVelocity; // degrees/frame @ 60Hz TODO convert to radians
 
   ImageElement makeElement();
   Iterable<String> get cacheUrls;

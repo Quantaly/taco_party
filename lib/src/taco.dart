@@ -8,17 +8,11 @@ class Taco {
 
   double x, y, angle;
   final double horzVelocity, vertVelocity, angularVelocity;
-  final ImageElement element;
-
-  int get width => element.width;
-  int get height => element.height;
+  final ImageElement image;
 
   Taco(this.x, this.y, this.angle, this.horzVelocity, this.vertVelocity,
-      this.angularVelocity)
-      : element = spriteInfo.makeElement()..classes.add("taco") {
-    render();
-  }
-  Taco.random(num maxX, double y)
+      this.angularVelocity, this.image);
+  Taco.random(num maxX, double y, ImageElement image)
       : this(
             _rand.nextDouble() * maxX,
             y,
@@ -31,7 +25,8 @@ class Taco {
                 spriteInfo.minVertVelocity,
             _rand.nextDouble() *
                 spriteInfo.maxAngularVelocity *
-                (_rand.nextBool() ? 1 : -1));
+                (_rand.nextBool() ? 1 : -1),
+            image);
 
   void advance() {
     x += horzVelocity;
@@ -39,10 +34,12 @@ class Taco {
     angle += angularVelocity;
   }
 
-  void render() {
-    element.style
-      ..top = "${y.floor()}px"
-      ..left = "${x.floor()}px"
-      ..transform = "rotate(${angle}deg)";
+  void render(CanvasRenderingContext2D context) {
+    context
+      ..save()
+      ..translate(x, y)
+      ..rotate(angle / 360 * 2 * math.pi)
+      ..drawImageScaled(image, -image.width ~/ 2, -image.height ~/ 2, image.width, image.height)
+      ..restore();
   }
 }
