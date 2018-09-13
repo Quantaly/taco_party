@@ -26,8 +26,8 @@ abstract class SpriteInfo {
 class DefaultSpriteInfo implements SpriteInfo {
   final num maxHorzVelocity = 4;
   final num minVertVelocity = 5;
-  final num maxVertVelocity = 11;
-  final num maxAngularVelocity = toRadians(4);
+  final num maxVertVelocity = 10.3;
+  final num maxAngularVelocity = toRadians(3);
 
   final List<ImageElement> images = [
     ImageElement(
@@ -50,9 +50,9 @@ class PokemonSpriteInfo implements SpriteInfo {
   static const int numPokemon = 649; // gen 5
 
   final num maxHorzVelocity = 2.5;
-  final num minVertVelocity = 4;
-  final num maxVertVelocity = 9;
-  final num maxAngularVelocity = toRadians(3);
+  final num minVertVelocity = 4.2;
+  final num maxVertVelocity = 8.7;
+  final num maxAngularVelocity = toRadians(2.7);
 
   Iterable<ImageElement> get images sync* {
     for (int i = 1; i <= numPokemon; i++) {
