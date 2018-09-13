@@ -20,7 +20,7 @@ class AnimationHandler {
   AnimationHandler(this._canvas, [SpriteInfo spriteInfo])
       : spriteInfo = spriteInfo ?? _defaultSi,
         _tacos = List(spriteInfo?.numTacos ?? _defaultSi.numTacos),
-  _maxHalfDiagonal = maxHalfDiagonal(spriteInfo);
+        _maxHalfDiagonal = maxHalfDiagonal(spriteInfo);
 
   Future<void> start() async {
     if (_started) throw StateError("The animation has already been started!");
@@ -35,11 +35,13 @@ class AnimationHandler {
       return img.onLoad.first;
     }));
 
-    for (var i=0; i<_tacos.length; i++) {
+    for (var i = 0; i < _tacos.length; i++) {
       _tacos[i] = newTaco();
     }
 
-    ResizeObserver(adjustCanvasSize).observe(querySelector("body"));
+    // resizeobservers appear to be borked
+    //ResizeObserver((_, __) => adjustCanvasSize()).observe(querySelector("body"));
+    window.addEventListener("resize", adjustCanvasSize);
 
     runFrame(0);
   }
@@ -68,12 +70,12 @@ class AnimationHandler {
     window.animationFrame.then(runFrame);
   }
 
-  void adjustCanvasSize([_, __]) {
+  void adjustCanvasSize([_]) {
     _canvas
       ..width = window.innerWidth
       ..height = window.innerHeight;
   }
 
-  Taco newTaco() => Taco.random(_canvas.width,
-      0.0 - spriteInfo.maxHeight, images[spriteInfo.nextIndex], spriteInfo);
+  Taco newTaco() => Taco.random(_canvas.width, 0.0 - spriteInfo.maxHeight,
+      images[spriteInfo.nextIndex], spriteInfo);
 }

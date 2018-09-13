@@ -89,4 +89,5 @@ class UmbreonSpriteInfo extends PokemonSpriteInfo {
 }
 
 num toRadians(num degrees) => degrees / 360 * 2 * math.pi;
-num maxHalfDiagonal(SpriteInfo si) => math.sqrt(si.maxHeight * si.maxHeight + si.maxWidth * si.maxWidth) / 2;
+num maxHalfDiagonal(SpriteInfo si) =>
+    math.sqrt(si.maxHeight * si.maxHeight + si.maxWidth * si.maxWidth) / 2;
