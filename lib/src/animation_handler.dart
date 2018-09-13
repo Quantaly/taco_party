@@ -3,37 +3,77 @@ import 'dart:html';
 
 import '../taco_party.dart';
 
+final SpriteInfo _defaultSi = DefaultSpriteInfo();
+const animSpeed = 16; // ms
+
 class AnimationHandler {
-  final List<Taco> _tacos = List(spriteInfo.numTacos);
-  final Element _outputElement;
-  Timer timer;
+  final List<Taco> _tacos;
+  final CanvasElement _canvas;
+  final SpriteInfo spriteInfo;
+  final num _maxHalfDiagonal;
 
-  AnimationHandler() : _outputElement = document.querySelector("#images");
+  num _lastFrame = 0;
 
-  void start() {
-    if (timer?.isActive ?? false) return;
-    for (int i = 0; i < spriteInfo.numTacos; i++) _tacos[i] = newTaco();
-    runFrame();
-    timer = Timer.periodic(const Duration(milliseconds: 16), runFrame);
+  bool _started = false;
+  List<ImageElement> images;
+
+  AnimationHandler(this._canvas, [SpriteInfo spriteInfo])
+      : spriteInfo = spriteInfo ?? _defaultSi,
+        _tacos = List(spriteInfo?.numTacos ?? _defaultSi.numTacos),
+  _maxHalfDiagonal = maxHalfDiagonal(spriteInfo);
+
+  Future<void> start() async {
+    if (_started) throw StateError("The animation has already been started!");
+    _started = true;
+
+    adjustCanvasSize();
+
+    var imageHolder = querySelector("#render-images");
+    images = spriteInfo.images.toList(growable: false);
+    await Future.wait(images.map((img) {
+      imageHolder.append(img);
+      return img.onLoad.first;
+    }));
+
+    for (var i=0; i<_tacos.length; i++) {
+      _tacos[i] = newTaco();
+    }
+
+    ResizeObserver(adjustCanvasSize).observe(querySelector("body"));
+
+    runFrame(0);
   }
 
-  void runFrame([_]) {
-    var windowHeight = window.innerHeight;
-    for (int i = 0; i < _tacos.length; i++) {
-      var t = _tacos[i];
-      t.advance();
-      if (t.y > windowHeight) {
-        //t.element.remove();
+  void updateAndRender() {
+    var context = _canvas.context2D
+      ..setFillColorRgb(spriteInfo.backgroundColor.r,
+          spriteInfo.backgroundColor.g, spriteInfo.backgroundColor.b)
+      ..fillRect(0, 0, _canvas.width, _canvas.height);
+    for (var i = 0; i < _tacos.length; i++) {
+      var t = _tacos[i]..advance();
+      //print("t.y is ${t.y} and _canvas.height is ${_canvas.height}");
+      if (t.y - _maxHalfDiagonal > _canvas.height) {
         _tacos[i] = newTaco();
+        //print("new taco's image is ${_tacos[i].image}");
       }
-      //_tacos[i].render();
+      _tacos[i].render(context);
     }
   }
 
-  Taco newTaco() {
-    /*var taco = Taco.random(
-        window.innerWidth - spriteInfo.maxWidth, 0.0 - spriteInfo.maxHeight);
-    _outputElement.append(taco.element);
-    return taco;*/
+  void runFrame(num delta) {
+    if (delta - _lastFrame > animSpeed) {
+      _lastFrame = delta;
+      updateAndRender();
+    }
+    window.animationFrame.then(runFrame);
   }
+
+  void adjustCanvasSize([_, __]) {
+    _canvas
+      ..width = window.innerWidth
+      ..height = window.innerHeight;
+  }
+
+  Taco newTaco() => Taco.random(_canvas.width,
+      0.0 - spriteInfo.maxHeight, images[spriteInfo.nextIndex], spriteInfo);
 }

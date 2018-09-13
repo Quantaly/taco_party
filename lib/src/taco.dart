@@ -12,11 +12,11 @@ class Taco {
 
   Taco(this.x, this.y, this.angle, this.horzVelocity, this.vertVelocity,
       this.angularVelocity, this.image);
-  Taco.random(num maxX, double y, ImageElement image)
+  Taco.random(num maxX, double y, ImageElement image, SpriteInfo spriteInfo)
       : this(
             _rand.nextDouble() * maxX,
             y,
-            _rand.nextDouble() * 360,
+            _rand.nextDouble() * 2 * math.pi,
             _rand.nextDouble() *
                 spriteInfo.maxHorzVelocity *
                 (_rand.nextBool() ? 1 : -1),
@@ -38,8 +38,9 @@ class Taco {
     context
       ..save()
       ..translate(x, y)
-      ..rotate(angle / 360 * 2 * math.pi)
-      ..drawImageScaled(image, -image.width ~/ 2, -image.height ~/ 2, image.width, image.height)
+      ..rotate(angle)
+      ..drawImageScaled(image, -image.width ~/ 2, -image.height ~/ 2,
+          image.width, image.height)
       ..restore();
   }
 }
