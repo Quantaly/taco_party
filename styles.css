@@ -1,11 +1,19 @@
-html, body {
+html, body, {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
-#cache-holder {
+#stage {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
+}
+
+#image-holder {
   display: none;
 }
 
@@ -17,16 +25,5 @@ html, body {
   transform: translate(-50%, -50%);
   font-size: 96pt;
   font-weight: bold;
-  z-index: 413;
-}
-
-.taco {
-  position: fixed;
-}
-
-#loading-notice {
-  position: fixed;
-  bottom: 25px;
-  left: 25px;
   z-index: 413;
 }
