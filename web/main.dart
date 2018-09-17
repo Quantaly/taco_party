@@ -1,18 +1,21 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:html';
+
 import 'package:taco_party/taco_party.dart';
 
-void main() {
+import 'sprite_sets/default.dart';
+import 'sprite_sets/sprite_sets.dart';
+
+void main() async {
+  var name = Uri.base.queryParameters["type"];
   SpriteInfo spriteInfo = DefaultSpriteInfo();
-  switch (Uri.base.queryParameters["type"]) {
-    case "pokemon":
-      print("Gotta catch 'em all!");
-      spriteInfo = PokemonSpriteInfo();
-      break;
-    case "umbreon":
-      print("Happy borthday, daddy-o."); // my dad's favorite 'mon
-      spriteInfo = UmbreonSpriteInfo();
-      break;
+  if (name != null) {
+    var request = await HttpRequest.request("sprite_sets/$name.json");
+    if (request.status == 200) {
+      var object = jsonDecode(request.responseText);
+      spriteInfo = getSpriteSet(object["name"], object["data"], Uri.base.queryParameters);
+    }
   }
 
   querySelector("body").style

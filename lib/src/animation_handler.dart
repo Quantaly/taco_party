@@ -3,7 +3,6 @@ import 'dart:html';
 
 import '../taco_party.dart';
 
-final SpriteInfo _defaultSi = DefaultSpriteInfo();
 const animSpeed = 16; // ms
 
 class AnimationHandler {
@@ -17,9 +16,9 @@ class AnimationHandler {
   bool _started = false;
   List<ImageElement> images;
 
-  AnimationHandler(this._canvas, [SpriteInfo spriteInfo])
-      : spriteInfo = spriteInfo ?? _defaultSi,
-        _tacos = List(spriteInfo?.numTacos ?? _defaultSi.numTacos),
+  AnimationHandler(this._canvas, SpriteInfo spriteInfo)
+      : spriteInfo = spriteInfo,
+        _tacos = List(spriteInfo.numTacos),
         _maxHalfDiagonal = maxHalfDiagonal(spriteInfo);
 
   Future<void> start() async {
