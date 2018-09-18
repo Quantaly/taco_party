@@ -16,6 +16,8 @@ class DefaultSpriteInfo implements SpriteInfo {
   ];
   final int nextIndex = 0;
 
+  final String name = "Tacos!";
+
   final Color textColor = const Color(0x80, 0x00, 0x80); // purple
   final Color backgroundColor = const Color(0xff, 0xff, 0x00); // yellow
 

@@ -13,6 +13,8 @@ class PokemonSpriteInfo implements SpriteInfo {
   final num maxVertVelocity = 8.7;
   final num maxAngularVelocity = toRadians(2.7);
 
+  final String name = "Pokémon!";
+
   Iterable<ImageElement> get images sync* {
     for (int i = 1; i <= numPokemon; i++) {
       yield ImageElement(

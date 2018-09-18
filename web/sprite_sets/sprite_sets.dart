@@ -18,6 +18,7 @@ SpriteInfo getSpriteSet(
           minVertVelocity: data["minVertVelocity"],
           maxVertVelocity: data["maxVertVelocity"],
           maxAngularVelocity: toRadians(data["maxAngularVelocity"]),
+          name: data["name"],
           images: List.from(data["images"].map((data) => ImageElement(
               src: data["src"], width: data["width"], height: data["height"]))),
           textColor: Color(

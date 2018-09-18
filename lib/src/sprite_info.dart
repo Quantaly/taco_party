@@ -9,6 +9,8 @@ abstract class SpriteInfo {
   num get maxVertVelocity; // pixels/frame @ 60Hz
   num get maxAngularVelocity; // radians/frame @ 60Hz
 
+  String get name;
+
   Iterable<ImageElement> get images;
   int get nextIndex;
 

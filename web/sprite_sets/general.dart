@@ -13,6 +13,8 @@ class GeneralSpriteInfo implements SpriteInfo {
   final num maxVertVelocity;
   final num maxAngularVelocity;
 
+  final String name;
+
   final List<ImageElement> images;
   int get nextIndex => _rand.nextInt(images.length);
 
@@ -31,6 +33,7 @@ class GeneralSpriteInfo implements SpriteInfo {
       this.minVertVelocity,
       this.maxVertVelocity,
       this.maxAngularVelocity,
+        this.name,
       this.images,
       this.textColor,
       this.backgroundColor,

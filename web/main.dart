@@ -19,6 +19,8 @@ void main() async {
     }
   }
 
+  querySelector("title").innerHtml = "Taco Party | ${spriteInfo.name}";
+
   querySelector("body").style
     ..color = spriteInfo.textColor.toString()
     ..backgroundColor = spriteInfo.backgroundColor.toString();

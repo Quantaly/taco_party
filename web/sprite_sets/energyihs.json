@@ -5,6 +5,7 @@
     "minVertVelocity": 5,
     "maxVertVelocity": 10.3,
     "maxAngularVelocity": 3,
+    "name": "Energy!",
     "images": [
       {
         "src": "images/energy_windmill.png"
