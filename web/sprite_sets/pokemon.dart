@@ -17,7 +17,7 @@ class PokemonSpriteInfo implements SpriteInfo {
     for (int i = 1; i <= numPokemon; i++) {
       yield ImageElement(
           src:
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$i.png");
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$i.png");
     }
   }
 
