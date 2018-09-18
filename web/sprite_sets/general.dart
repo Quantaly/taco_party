@@ -33,7 +33,7 @@ class GeneralSpriteInfo implements SpriteInfo {
       this.minVertVelocity,
       this.maxVertVelocity,
       this.maxAngularVelocity,
-        this.name,
+      this.name,
       this.images,
       this.textColor,
       this.backgroundColor,
