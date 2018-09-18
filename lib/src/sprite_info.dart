@@ -23,4 +23,4 @@ abstract class SpriteInfo {
 
 num toRadians(num degrees) => degrees / 360 * 2 * math.pi;
 num maxHalfDiagonal(SpriteInfo si) =>
-    math.sqrt(si.maxHeight * si.maxHeight + si.maxWidth * si.maxWidth) / 2;
+    math.sqrt(si.maxHeight * si.maxHeight + si.maxWidth * si.maxWidth);
