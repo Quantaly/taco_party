@@ -1,0 +1,24 @@
+{
+  "class": "general",
+  "data": {
+    "maxHorzVelocity": 4,
+    "minVertVelocity": 5,
+    "maxVertVelocity": 10.3,
+    "maxAngularVelocity": 3,
+    "name": "Energy!",
+    "images": [
+      {
+        "src": "images/energy_windmill.png"
+      },
+      {
+        "src": "images/energy_platform.png"
+      },
+      {
+        "src": "images/energy_gears.png"
+      }
+    ],
+    "textColor": [255, 142, 28],
+    "backgroundColor": [255, 255, 255],
+    "numTacos": 50
+  }
+}

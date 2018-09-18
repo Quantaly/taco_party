@@ -1,5 +1,10 @@
 .packages
+directory.css
+directory.html
 favicon.ico
+images/energy_gears.png
+images/energy_platform.png
+images/energy_windmill.png
 index.html
 main.dart.js
 packages/$sdk/_internal/ddc_sdk.sum
@@ -40,4 +45,8 @@ packages/kernel/analyzer/readme.md
 packages/kernel/binary/readme.md
 packages/kernel/target/readme.md
 packages/kernel/text/readme.md
+sprite_sets/default.json
+sprite_sets/energyihs.json
+sprite_sets/minediamonds.json
+sprite_sets/pokemon.json
 styles.css
