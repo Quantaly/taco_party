@@ -1,5 +1,5 @@
 {
-  "name": "general",
+  "class": "general",
   "data": {
     "maxHorzVelocity": 4,
     "minVertVelocity": 5,
