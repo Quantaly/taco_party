@@ -15,7 +15,7 @@ void main() async {
     if (request.status == 200) {
       var object = jsonDecode(request.responseText);
       spriteInfo = getSpriteSet(
-          object["name"], object["data"], Uri.base.queryParameters);
+          object["class"], object["data"], Uri.base.queryParameters);
     }
   }
 
