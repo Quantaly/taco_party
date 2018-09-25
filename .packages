@@ -14,7 +14,6 @@ build_web_compilers:packages/build_web_compilers/
 built_collection:packages/built_collection/
 built_value:packages/built_value/
 charcode:packages/charcode/
-cli_util:packages/cli_util/
 code_builder:packages/code_builder/
 collection:packages/collection/
 convert:packages/convert/
@@ -38,6 +37,7 @@ meta:packages/meta/
 mime:packages/mime/
 package_config:packages/package_config/
 path:packages/path/
+pedantic:packages/pedantic/
 plugin:packages/plugin/
 pool:packages/pool/
 protobuf:packages/protobuf/
@@ -53,6 +53,7 @@ stack_trace:packages/stack_trace/
 stream_channel:packages/stream_channel/
 stream_transform:packages/stream_transform/
 string_scanner:packages/string_scanner/
+timing:packages/timing/
 typed_data:packages/typed_data/
 utf:packages/utf/
 watcher:packages/watcher/
