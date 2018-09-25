@@ -6,17 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taco Party | Directory</title>
     <link rel="stylesheet" href="directory.css">
+    <link rel="icon" href="favicon.ico">
+    <script defer src="directory.dart.js" type="application/javascript"></script>
 </head>
 <body>
 
-<h1>Directory</h1>
-<div class="separator"></div>
-<ul>
-    <li><a href="." title="this is why its called taco party">Tacos (Default)</a></li>
-    <li><a href="./?type=pokemon">Pokémon</a></li>
-    <li><a href="./?type=minediamonds">Minecraft Diamonds</a></li>
-    <li><a href="./?type=energyihs">Energy Institute</a></li>
-</ul>
+<div id="container">
+    <h1>Directory</h1>
+    <ul id="types">
+        <li><a id="default" title="this is why its called taco party">Tacos (Default)</a></li>
+        <li><a id="pokemon">Pokémon</a></li>
+        <li><a id="minediamonds">Minecraft Diamonds</a></li>
+        <li><a id="energyihs">Energy Institute</a></li>
+        <li><a id="tetris">Tetris</a></li>
+    </ul>
+
+    <ul id="params">
+        <li>Message: <input type="text" id="msg"></li>
+    </ul>
+</div>
 
 </body>
 </html>

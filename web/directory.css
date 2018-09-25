@@ -1,23 +1,48 @@
 body {
   background-color: yellow;
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  grid-template-rows: 100px auto;
+  grid-template-areas:
+    'header header'
+    'types params';
+  justify-content: center;
+  align-content: start;
+  grid-gap: 10px;
+  padding: 10px;
 }
 
 h1, ul {
-  width: 90%;
-  margin: auto;
   background-color: #ffff99;
   padding: 30px;
+  margin: 0;
 }
 
 h1 {
   font-size: 32px;
   border-radius: 10px 10px 0 0;
   color: purple;
+  grid-area: header;
 }
 
 ul {
   border-radius: 0 0 10px 10px;
-  color: green;
+  list-style-type: none;
+}
+
+#types {
+  border-radius: 0 0 0 10px;
+  grid-area: types;
+}
+
+#params {
+  border-radius: 0 0 10px 0;
+  grid-area: params;
 }
 
 .separator {
