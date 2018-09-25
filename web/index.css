@@ -17,21 +17,26 @@ body {
   padding: 10px;
 }
 
-h1, ul {
+h1, h2, ul {
   background-color: #ffff99;
-  padding: 30px;
   margin: 0;
 }
 
 h1 {
   font-size: 32px;
   border-radius: 10px 10px 0 0;
+  padding: 30px;
   color: purple;
   grid-area: header;
 }
 
+h2 {
+  font-size: 28px;
+}
+
 ul {
   border-radius: 0 0 10px 10px;
+  padding: 20px;
   list-style-type: none;
 }
 

@@ -24,7 +24,7 @@ void updateHref(AnchorElement element) {
     }
     return "&";
   }
-  var builder = StringBuffer("./");
+  var builder = StringBuffer("stage.html");
   if (element.id != "default") builder.write("${sep()}type=${element.id}");
   if (input.value.isNotEmpty) builder.write("${sep()}msg=${Uri.encodeComponent(input.value)}");
   element.href = builder.toString();

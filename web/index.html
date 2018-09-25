@@ -1,25 +1,32 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="scaffolded-by" content="https://github.com/google/stagehand">
     <title>Taco Party</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="favicon.ico">
-    <script defer src="main.dart.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="https://openclipart.org/image/2400px/svg_to_png/151201/taco.png">
+    <script defer src="index.dart.js" type="application/javascript"></script>
 </head>
-
 <body>
 
-    <div id="image-holder">
-        <img src="https://openclipart.org/image/2400px/svg_to_png/151201/taco.png" width="240" height="216" id="loading-taco">
-        <div id="render-images"></div>
-    </div>
-    <p id="text">Loading...</p>
-    <canvas id="stage"></canvas>
+<div id="container">
+    <h1>Taco Party by quantumAssembly</h1>
+    <ul id="types">
+        <li><h2>Image Sets</h2></li>
+        <li><a id="default">Tacos</a></li>
+        <li><a id="pokemon">Pokémon</a></li>
+        <li><a id="minediamonds">Minecraft Diamonds</a></li>
+        <li><a id="energyihs">Energy Institute</a></li>
+        <li><a id="tetris">Tetris</a></li>
+    </ul>
+
+    <ul id="params">
+        <li><h2>Options</h2></li>
+        <li>Message: <input type="text" id="msg"></li>
+    </ul>
+</div>
 
 </body>
 </html>
