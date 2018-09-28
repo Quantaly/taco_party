@@ -19,6 +19,8 @@ void main() async {
     }
   }
 
+  print(Uri.base.queryParameters["data"]);
+
   querySelector("title").innerHtml = "Taco Party | ${spriteInfo.name}";
 
   querySelector("body").style

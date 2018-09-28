@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:html';
 
 import 'default.dart';
@@ -34,6 +35,10 @@ SpriteInfo getSpriteSet(
           numTacos: data["numTacos"],
         );
       }
+      break;
+    case "inline":
+      return getSpriteSet(
+          "general", jsonDecode(queryParameters["data"]), queryParameters);
   }
   return DefaultSpriteInfo();
 }

@@ -7,10 +7,11 @@ body {
 #container {
   display: grid;
   grid-template-columns: 45% 45%;
-  grid-template-rows: 100px auto;
+  grid-template-rows: 100px auto auto;
   grid-template-areas:
     'header header'
-    'types params';
+    'images properties'
+    'images options';
   justify-content: center;
   align-content: start;
   grid-gap: 10px;
@@ -39,22 +40,38 @@ ul {
   list-style-type: none;
 }
 
-#types {
-  border-radius: 0 0 0 10px;
-  grid-area: types;
-}
-
-#params {
-  border-radius: 0 0 10px 0;
-  grid-area: params;
-}
-
 li {
-  margin: auto;
-  padding: 10px;
-  font-size: 16pt;
+  margin: 5px;
 }
 
-li a {
-  color: green;
+#images {
+  border-radius: 0 0 0 10px;
+  grid-area: images;
+  overflow: hidden;
+}
+
+.smol {
+  width: 60px;
+}
+
+td img {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+#properties {
+  border-radius: 0;
+  grid-area: properties;
+}
+
+#properties input {
+  width: 60px;
+}
+
+#options {
+  border-radius: 0 0 10px 0;
+}
+
+#options li {
+  float: left;
 }
