@@ -75,6 +75,9 @@ class AnimationHandler {
       ..height = window.innerHeight;
   }
 
-  Taco newTaco() => Taco.random(_canvas.width, 0.0 - spriteInfo.maxHeight,
-      images[spriteInfo.nextIndex], spriteInfo);
+  Taco newTaco() => Taco.random(
+      _canvas.width,
+      0.0 - maxHalfDiagonal(spriteInfo),
+      images[spriteInfo.nextIndex],
+      spriteInfo);
 }

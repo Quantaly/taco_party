@@ -41,6 +41,28 @@ class Taco {
       ..rotate(angle)
       ..drawImageScaled(image, -image.width ~/ 2, -image.height ~/ 2,
           image.width, image.height)
+      // draw cool box around image
+      /*..setStrokeColorRgb(255, 0, 0)
+      ..beginPath()
+      ..ellipse(0, 0, 5, 5, 0, 0, 2 * math.pi, false)
+      ..stroke()
+      ..strokeRect(
+          -image.width / 2, -image.height / 2, image.width, image.height)
+      ..closePath()
+      ..beginPath()
+      ..moveTo(-image.width / 2, -image.height / 2)
+      ..lineTo(image.width / 2, image.height / 2)
+      ..stroke()
+      ..closePath()
+      ..beginPath()
+      ..moveTo(image.width / 2, -image.height / 2)
+      ..lineTo(-image.width / 2, image.height / 2)
+      ..stroke()
+      ..closePath()
+      ..restore()
+      ..save()
+      ..scale(3, 3)
+      ..strokeText("x: ${x.round()}    y: ${y.round()}", 10, 10)*/
       ..restore();
   }
 }

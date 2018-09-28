@@ -4,7 +4,6 @@ import 'dart:math' as math;
 import 'default.dart';
 import 'package:taco_party/taco_party.dart';
 
-final DefaultSpriteInfo _def = DefaultSpriteInfo();
 final math.Random _rand = math.Random();
 
 class GeneralSpriteInfo implements SpriteInfo {
@@ -48,5 +47,6 @@ class GeneralSpriteInfo implements SpriteInfo {
     print("updating dims with ${el.width} x ${el.height}");
     if (_maxWidth < el.width) _maxWidth = el.width;
     if (_maxHeight < el.height) _maxHeight = el.height;
+    print("maxHalfDiagonal is ${maxHalfDiagonal(this)}");
   }
 }
