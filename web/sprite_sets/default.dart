@@ -23,6 +23,7 @@ class DefaultSpriteInfo implements SpriteInfo {
 
   final int maxWidth = 240;
   final int maxHeight = 216;
+  final num maxHalfDiagonal = calcHalfDiagonal(240, 216);
 
   final int numTacos = 32;
 }

@@ -30,6 +30,7 @@ class PokemonSpriteInfo implements SpriteInfo {
 
   final int maxWidth = 151;
   final int maxHeight = 151;
+  final num maxHalfDiagonal = calcHalfDiagonal(151, 151);
 
   final int numTacos = 151;
 }

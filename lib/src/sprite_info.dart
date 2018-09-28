@@ -19,10 +19,10 @@ abstract class SpriteInfo {
 
   int get maxWidth;
   int get maxHeight;
+  num get maxHalfDiagonal;
 
   int get numTacos;
 }
 
 num toRadians(num degrees) => degrees / 360 * 2 * math.pi;
-num maxHalfDiagonal(SpriteInfo si) =>
-    math.sqrt(si.maxHeight * si.maxHeight + si.maxWidth * si.maxWidth) / 2;
+num calcHalfDiagonal(num x, num y) => math.sqrt(x * x + y * y) / 2;

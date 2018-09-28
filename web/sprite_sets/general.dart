@@ -24,6 +24,8 @@ class GeneralSpriteInfo implements SpriteInfo {
   int get maxWidth => _maxWidth;
   int _maxHeight = 100;
   int get maxHeight => _maxHeight;
+  num _maxHalfDiagonal = 100 * math.sqrt2;
+  num get maxHalfDiagonal => _maxHalfDiagonal;
 
   final int numTacos;
 
@@ -47,6 +49,7 @@ class GeneralSpriteInfo implements SpriteInfo {
     print("updating dims with ${el.width} x ${el.height}");
     if (_maxWidth < el.width) _maxWidth = el.width;
     if (_maxHeight < el.height) _maxHeight = el.height;
-    print("maxHalfDiagonal is ${maxHalfDiagonal(this)}");
+    _maxHalfDiagonal = calcHalfDiagonal(_maxWidth, _maxHeight);
+    //print("maxHalfDiagonal is $_maxHalfDiagonal");
   }
 }

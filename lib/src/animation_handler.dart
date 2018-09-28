@@ -9,7 +9,6 @@ class AnimationHandler {
   final List<Taco> _tacos;
   final CanvasElement _canvas;
   final SpriteInfo spriteInfo;
-  final num _maxHalfDiagonal;
 
   num _lastFrame = 0;
 
@@ -18,8 +17,7 @@ class AnimationHandler {
 
   AnimationHandler(this._canvas, SpriteInfo spriteInfo)
       : spriteInfo = spriteInfo,
-        _tacos = List(spriteInfo.numTacos),
-        _maxHalfDiagonal = maxHalfDiagonal(spriteInfo);
+        _tacos = List(spriteInfo.numTacos);
 
   Future<void> start() async {
     if (_started) throw StateError("The animation has already been started!");
@@ -53,7 +51,7 @@ class AnimationHandler {
     for (var i = 0; i < _tacos.length; i++) {
       var t = _tacos[i]..advance();
       //print("t.y is ${t.y} and _canvas.height is ${_canvas.height}");
-      if (t.y - _maxHalfDiagonal > _canvas.height) {
+      if (t.y - spriteInfo.maxHalfDiagonal > _canvas.height) {
         _tacos[i] = newTaco();
         //print("new taco's image is ${_tacos[i].image}");
       }
@@ -75,9 +73,6 @@ class AnimationHandler {
       ..height = window.innerHeight;
   }
 
-  Taco newTaco() => Taco.random(
-      _canvas.width,
-      0.0 - maxHalfDiagonal(spriteInfo),
-      images[spriteInfo.nextIndex],
-      spriteInfo);
+  Taco newTaco() => Taco.random(_canvas.width, 0.0 - spriteInfo.maxHalfDiagonal,
+      images[spriteInfo.nextIndex], spriteInfo);
 }
