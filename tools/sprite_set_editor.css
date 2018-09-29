@@ -10,8 +10,8 @@ body {
   grid-template-rows: 100px auto auto;
   grid-template-areas:
     'header header'
-    'types links'
-    'types params';
+    'images properties'
+    'images options';
   justify-content: center;
   align-content: start;
   grid-gap: 10px;
@@ -36,53 +36,42 @@ h2 {
 }
 
 ul {
+  padding: 20px;
   list-style-type: none;
 }
 
-#links, #types, #params {
-  background-color: #ffff99;
-  padding: 20px;
-}
-
-#links {
-  grid-area: links;
-  padding-bottom: 10px;
-}
-
-#links h2 {
-  padding-bottom: 10px;
-}
-
-#links ul {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
-#links li {
-  display: inline-block;
-}
-
-#links li a {
-  padding: 10px;
-}
-
-#types {
-  border-radius: 0 0 0 10px;
-  grid-area: types;
-}
-
-#params {
-  border-radius: 0 0 10px 0;
-  grid-area: params;
-}
-
 li {
-  margin: auto;
-  padding: 10px;
-  font-size: 16pt;
+  margin: 5px;
 }
 
-li a {
-  color: green;
+#images {
+  border-radius: 0 0 0 10px;
+  grid-area: images;
+  overflow: hidden;
+}
+
+.smol {
+  width: 60px;
+}
+
+td img {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+#properties {
+  border-radius: 0;
+  grid-area: properties;
+}
+
+#properties input {
+  width: 60px;
+}
+
+#options {
+  border-radius: 0 0 10px 0;
+}
+
+#options li {
+  float: left;
 }

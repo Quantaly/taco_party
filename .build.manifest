@@ -49,9 +49,13 @@ packages/kernel/text/readme.md
 packages/pedantic/analysis_options.yaml
 sprite_sets/default.json
 sprite_sets/energyihs.json
+sprite_sets/inline.json
 sprite_sets/minediamonds.json
 sprite_sets/pokemon.json
 sprite_sets/tetris.json
 stage.css
 stage.dart.js
 stage.html
+tools/sprite_set_editor.css
+tools/sprite_set_editor.dart.js
+tools/sprite_set_editor.html

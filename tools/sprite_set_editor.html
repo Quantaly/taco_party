@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Taco Party | Sprite Set Editor</title>
+    <link rel="stylesheet" href="sprite_set_editor.css">
+    <link rel="icon" href="https://openclipart.org/image/2400px/svg_to_png/151201/taco.png">
+    <script defer src="sprite_set_editor.dart.js" type="application/javascript"></script>
+</head>
+<body>
+
+<div id="container">
+    <h1>Sprite Set Editor</h1>
+
+    <ul id="images">
+        <li><h2>Images</h2></li>
+        <li><ul id="image-stage">
+            <!--li><table>
+                <tr>
+                    <td colspan="2">URL: <input type="url"></td>
+                    <td rowspan="3"><img src="https://openclipart.org/image/2400px/svg_to_png/151201/taco.png"></td>
+                </tr>
+                <tr>
+                    <td>Width: <input type="number" class="smol"></td>
+                    <td>Height: <input type="number" class="smol"></td>
+                </tr>
+                <tr>
+                    <td>Weight: <input type="number" class="smol"></td>
+                    <td><input type="button" value="Remove"></td>
+                </tr>
+            </table></li-->
+        </ul></li>
+        <li><input type="button" value="+" id="btn-addimage"></li>
+        <p>Width, height, and weight do not need to be specified.</p>
+    </ul>
+
+    <ul id="properties">
+        <li><h2>Properties</h2></li>
+        <li>name: <input type="text" value="Tacos!" id="name"></li>
+        <li>maxHorzVelocity: <input type="number" value="4" id="maxHorzVelocity"></li>
+        <li>minVertVelocity: <input type="number" value="5" id="minVertVelocity"></li>
+        <li>maxVertVelocity: <input type="number" value="10.3" id="maxVertVelocity"></li>
+        <li>maxAngularVelocity: <input type="number" value="3" id="maxAngularVelocity"></li>
+        <li>textColor: rgb(<input type="number" step="1" value="128" id="textColorR">, <input type="number" step="1" value="0" id="textColorG">, <input type="number" step="1" value="128" id="textColorB">)</li>
+        <li>backgroundColor: rgb(<input type="number" step="1" value="255" id="backgroundColorR">, <input type="number" step="1" value="255" id="backgroundColorG">, <input type="number" step="1" value="0" id="backgroundColorB">)</li>
+        <li>numTacos: <input type="number" step="1" value="32" id="numTacos"></li>
+    </ul>
+
+    <ul id="options">
+        <li><input type="button" value="Preview" id="btn-preview"></li>
+        <li><a download="spriteset.json" id="download-link"><input type="button" value="Download JSON" id="btn-download"></a></li>
+    </ul>
+</div>
+
+</body>
+</html>
