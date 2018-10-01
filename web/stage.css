@@ -27,3 +27,12 @@ html, body {
   font-weight: bold;
   z-index: 413;
 }
+
+.rainbow {
+  animation: rainbow 1s linear infinite;
+}
+
+@keyframes rainbow {
+  from {filter: hue-rotate(0deg);}
+  to {filter: hue-rotate(360deg);}
+}

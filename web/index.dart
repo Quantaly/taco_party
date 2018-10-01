@@ -2,14 +2,16 @@ import 'dart:html';
 
 final List<AnchorElement> links = [];
 
-InputElement input;
+InputElement msg;
+SelectElement filter;
 
 void main() {
-  input = querySelector("#msg") as InputElement;
-  print(input);
   links.addAll(querySelectorAll(".stagelink"));
-  input.onInput.listen((_) => links.forEach(updateHref));
-  links.forEach(updateHref);
+
+  msg = querySelector("#msg")..onInput.listen(go);
+  filter = querySelector("#filter")..onInput.listen(go);
+
+  go();
 }
 
 void updateHref(AnchorElement element) {
@@ -24,7 +26,11 @@ void updateHref(AnchorElement element) {
 
   var builder = StringBuffer("stage.html");
   if (element.id != "default") builder.write("${sep()}type=${element.id}");
-  if (input.value.isNotEmpty)
-    builder.write("${sep()}msg=${Uri.encodeComponent(input.value)}");
+  if (msg.value.isNotEmpty)
+    builder.write("${sep()}msg=${Uri.encodeComponent(msg.value)}");
+  if (filter.value.isNotEmpty)
+    builder.write("${sep()}filter=${Uri.encodeComponent(filter.value)}");
   element.href = builder.toString();
 }
+
+void go([_]) => links.forEach(updateHref);
