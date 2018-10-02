@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:html';
 
+import 'package:taco_party/taco_party.dart';
+
 List<ImageContainer> _images = [];
 
 InputElement name;
@@ -88,6 +90,37 @@ void main() {
   var downloadLink = querySelector("#download-link") as AnchorElement;
   querySelector("#btn-download").onClick.listen((_) => downloadLink.href =
       "data:application/json;charset=utf-8,${Uri.encodeComponent(jsonEncode(generateJson()))}");
+
+  var body = querySelector("body");
+  var title = querySelector("h1");
+  var segments = querySelectorAll(".segment");
+  print(segments.length);
+
+  void updateTextColor([_]) {
+    title.style.color = Color(int.parse(textColorR.value),
+            int.parse(textColorG.value), int.parse(textColorB.value))
+        .toString();
+  }
+
+  textColorR.onInput.listen(updateTextColor);
+  textColorG.onInput.listen(updateTextColor);
+  textColorB.onInput.listen(updateTextColor);
+
+  void updateBackgroundColor([_]) {
+    var color = Color(int.parse(backgroundColorR.value),
+        int.parse(backgroundColorG.value), int.parse(backgroundColorB.value));
+    body.style.backgroundColor = color.toString();
+    var l = color.l;
+    var segmentColor =
+        Color.hsl(color.h, color.s, (l > 0.6) ? (l - 0.25) : (l + 0.25));
+    for (var s in segments) {
+      s.style.backgroundColor = segmentColor.toString();
+    }
+  }
+
+  backgroundColorR.onInput.listen(updateBackgroundColor);
+  backgroundColorG.onInput.listen(updateBackgroundColor);
+  backgroundColorB.onInput.listen(updateBackgroundColor);
 }
 
 Map<String, dynamic> generateJson() => {

@@ -12,9 +12,9 @@
 <body>
 
 <div id="container">
-    <h1>Sprite Set Editor</h1>
+    <h1 class="segment">Sprite Set Editor</h1>
 
-    <ul id="images">
+    <ul id="images" class="segment">
         <li><h2>Images</h2></li>
         <li><ul id="image-stage">
             <!--li><table>
@@ -33,22 +33,22 @@
             </table></li-->
         </ul></li>
         <li><input type="button" value="+" id="btn-addimage"></li>
-        <p>Width, height, and weight do not need to be specified.</p>
+        <li><p>Width, height, and weight do not need to be specified.</p></li>
     </ul>
 
-    <ul id="properties">
+    <ul id="properties" class="segment">
         <li><h2>Properties</h2></li>
         <li>name: <input type="text" value="Tacos!" id="name"></li>
-        <li>maxHorzVelocity: <input type="number" value="4" id="maxHorzVelocity"></li>
-        <li>minVertVelocity: <input type="number" value="5" id="minVertVelocity"></li>
-        <li>maxVertVelocity: <input type="number" value="10.3" id="maxVertVelocity"></li>
-        <li>maxAngularVelocity: <input type="number" value="3" id="maxAngularVelocity"></li>
-        <li>textColor: rgb(<input type="number" step="1" value="128" id="textColorR">, <input type="number" step="1" value="0" id="textColorG">, <input type="number" step="1" value="128" id="textColorB">)</li>
-        <li>backgroundColor: rgb(<input type="number" step="1" value="255" id="backgroundColorR">, <input type="number" step="1" value="255" id="backgroundColorG">, <input type="number" step="1" value="0" id="backgroundColorB">)</li>
-        <li>numTacos: <input type="number" step="1" value="32" id="numTacos"></li>
+        <li>maxHorzVelocity: <input type="number" value="4" step="0.1" min="0" id="maxHorzVelocity"></li>
+        <li>minVertVelocity: <input type="number" value="5" step="0.1" min="0" id="minVertVelocity"></li>
+        <li>maxVertVelocity: <input type="number" value="10.3" step="0.1" min="0" id="maxVertVelocity"></li>
+        <li>maxAngularVelocity: <input type="number" value="3" step="0.1" min="0" id="maxAngularVelocity"></li>
+        <li>textColor: rgb(<input type="number" step="1" min="0" max="255" value="128" id="textColorR">, <input type="number" step="1" min="0" max="255" value="0" id="textColorG">, <input type="number" step="1" min="0" max="255" value="128" id="textColorB">)</li>
+        <li>backgroundColor: rgb(<input type="number" step="1" min="0" max="255" value="255" id="backgroundColorR">, <input type="number" step="1" min="0" max="255" value="255" id="backgroundColorG">, <input type="number" step="1" min="0" max="255" value="0" id="backgroundColorB">)</li>
+        <li>numTacos: <input type="number" step="1" min="1" value="32" id="numTacos"></li>
     </ul>
 
-    <ul id="options">
+    <ul id="options" class="segment">
         <li><input type="button" value="Preview" id="btn-preview"></li>
         <li><a download="spriteset.json" id="download-link"><input type="button" value="Download JSON" id="btn-download"></a></li>
     </ul>
