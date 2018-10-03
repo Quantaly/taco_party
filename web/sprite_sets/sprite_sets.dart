@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:html';
 
@@ -7,7 +8,7 @@ import 'general.dart';
 
 import 'package:taco_party/taco_party.dart';
 
-SpriteInfo getSpriteSet(
+FutureOr<SpriteInfo> getSpriteSet(
     String className, dynamic data, Map<String, String> queryParameters) {
   switch (className) {
     case "pokemon":
@@ -39,6 +40,14 @@ SpriteInfo getSpriteSet(
     case "inline":
       return getSpriteSet(
           "general", jsonDecode(queryParameters["data"]), queryParameters);
+    case "async":
+      var text = querySelector("#text")..text = "Waiting...";
+      return Future(() async {
+        var result = getSpriteSet(
+            "general", jsonDecode((await window.onMessage.first).data), queryParameters);
+        text.text = "Loading...";
+        return result;
+      });
   }
   return DefaultSpriteInfo();
 }

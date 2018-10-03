@@ -8,14 +8,22 @@ import 'sprite_sets/default.dart';
 import 'sprite_sets/sprite_sets.dart';
 
 void main() async {
+  window.onMessage.listen((m) => print("${m.origin} ${m.data}"));
   var name = Uri.base.queryParameters["type"];
   SpriteInfo spriteInfo = DefaultSpriteInfo();
   if (name != null) {
     var request = await HttpRequest.request("sprite_sets/$name.json");
     if (request.status == 200) {
       var object = jsonDecode(request.responseText);
-      spriteInfo = getSpriteSet(
+      var maybeInfo = getSpriteSet(
           object["class"], object["data"], Uri.base.queryParameters);
+      if (maybeInfo is Future) {
+        spriteInfo = await maybeInfo;
+      } else {
+        spriteInfo = maybeInfo;
+      }
+    } else {
+      window.alert("Bad type parameter");
     }
   }
 
