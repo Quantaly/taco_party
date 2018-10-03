@@ -112,7 +112,7 @@ void main() {
     body.style.backgroundColor = color.toString();
     var l = color.l;
     var segmentColor =
-        Color.hsl(color.h, color.s, (l > 0.6) ? (l - 0.25) : (l + 0.25));
+        "hsl(${color.h}, ${(color.s * 100).round()}%, ${(((l > 0.7) ? (l - 0.2) : (l + 0.25)) * 100).round()}%)";
     for (var s in segments) {
       s.style.backgroundColor = segmentColor.toString();
     }
