@@ -4,6 +4,8 @@ import 'dart:html';
 
 import 'package:taco_party/taco_party.dart';
 
+Timer messageTimer;
+
 List<ImageContainer> _images = [];
 
 InputElement name;
@@ -79,18 +81,22 @@ class ImageContainer {
 }
 
 void main() {
-  window.onMessage.listen((m) => print("${m.origin} ${m.data}"));
+  window.onMessage.listen((m) => print("${m.origin} ${m.type} ${m.data}"));
   setupInputElements();
   var imageStage = querySelector("#image-stage");
   void addImage([_]) =>
       imageStage.append(Element.li()..append(ImageContainer().table));
   addImage();
+
   querySelector("#btn-addimage").onClick.listen(addImage);
   querySelector("#btn-preview").onClick.listen((_) async {
+    messageTimer?.cancel();
     var newWindow = window.open("../stage.html?type=async", "preview");
-    await Future.delayed(const Duration(milliseconds: 500));
-    newWindow.postMessage(jsonEncode(generateJson()["data"]), window.origin);
+    var data = jsonEncode(generateJson()["data"]);
+    messageTimer = Timer.periodic(const Duration(milliseconds: 100),
+        (_) => newWindow.postMessage(data, window.origin));
   });
+  window.onMessage.listen((_) => messageTimer?.cancel());
   querySelector("#btn-permalink").onClick.listen((_) => window.open(
       "../stage.html?type=inline&data=${Uri.encodeComponent(jsonEncode(generateJson()["data"]))}",
       "_blank"));

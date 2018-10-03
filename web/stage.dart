@@ -8,7 +8,7 @@ import 'sprite_sets/default.dart';
 import 'sprite_sets/sprite_sets.dart';
 
 void main() async {
-  window.onMessage.listen((m) => print("${m.origin} ${m.data}"));
+  window.onMessage.listen((m) => print("${m.origin} ${m.type} ${m.data}"));
   var name = Uri.base.queryParameters["type"];
   SpriteInfo spriteInfo = DefaultSpriteInfo();
   if (name != null) {

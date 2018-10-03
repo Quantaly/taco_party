@@ -43,8 +43,10 @@ FutureOr<SpriteInfo> getSpriteSet(
     case "async":
       var text = querySelector("#text")..text = "Waiting...";
       return Future(() async {
-        var result = getSpriteSet(
-            "general", jsonDecode((await window.onMessage.first).data), queryParameters);
+        var message = await window.onMessage.first;
+        (message.source as WindowBase).postMessage("yes good", window.origin);
+        var result =
+            getSpriteSet("general", jsonDecode(message.data), queryParameters);
         text.text = "Loading...";
         return result;
       });
