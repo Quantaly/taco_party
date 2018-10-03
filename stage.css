@@ -1,4 +1,4 @@
-html, body, {
+html, body {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -26,4 +26,13 @@ html, body, {
   font-size: 96pt;
   font-weight: bold;
   z-index: 413;
+}
+
+.rainbow {
+  animation: rainbow 1s linear infinite;
+}
+
+@keyframes rainbow {
+  from {filter: hue-rotate(0deg);}
+  to {filter: hue-rotate(360deg);}
 }

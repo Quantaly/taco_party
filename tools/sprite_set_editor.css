@@ -18,8 +18,8 @@ body {
   padding: 10px;
 }
 
-h1, h2, ul {
-  background-color: #ffff99;
+.segment {
+  background-color: #ffff80;
   margin: 0;
 }
 
