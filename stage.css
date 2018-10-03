@@ -27,6 +27,7 @@ html, body {
   font-weight: bold;
   z-index: 413;
 }
+<<<<<<< HEAD
 
 .rainbow {
   animation: rainbow 1s linear infinite;
@@ -36,3 +37,5 @@ html, body {
   from {filter: hue-rotate(0deg);}
   to {filter: hue-rotate(360deg);}
 }
+=======
+>>>>>>> 4f2ca47cf3e041220e9580ee9e63c58f1d0afaf2
