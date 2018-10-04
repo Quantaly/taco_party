@@ -13,8 +13,8 @@ InputElement maxHorzVelocity;
 InputElement minVertVelocity;
 InputElement maxVertVelocity;
 InputElement maxAngularVelocity;
-InputElement textColorR, textColorG, textColorB;
-InputElement backgroundColorR, backgroundColorG, backgroundColorB;
+InputElement textColor;
+InputElement backgroundColor;
 InputElement numTacos;
 
 class ImageContainer {
@@ -84,7 +84,7 @@ class ImageContainer {
 }
 
 void main() {
-  //window.onMessage.listen((m) => print("${m.origin} ${m.type} ${m.data}"));
+  window.onMessage.listen((m) => print("${m.origin} ${m.type} ${m.data}"));
   setupInputElements();
   var imageStage = querySelector("#image-stage");
   void addImage([_]) =>
@@ -107,31 +107,19 @@ void main() {
   var segments = querySelectorAll(".segment");
   //print(segments.length);
 
-  void updateTextColor([_]) {
-    title.style.color = Color(int.parse(textColorR.value),
-            int.parse(textColorG.value), int.parse(textColorB.value))
-        .toString();
-  }
+  textColor.onInput.listen((_) => title.style.color = textColor.value);
 
-  textColorR.onInput.listen(updateTextColor);
-  textColorG.onInput.listen(updateTextColor);
-  textColorB.onInput.listen(updateTextColor);
-
-  void updateBackgroundColor([_]) {
-    var color = Color(int.parse(backgroundColorR.value),
-        int.parse(backgroundColorG.value), int.parse(backgroundColorB.value));
-    body.style.backgroundColor = color.toString();
+  backgroundColor.onInput.listen((_) {
+    body.style.backgroundColor = backgroundColor.value;
+    var rgb = hexToRgb(backgroundColor.value);
+    var color = Color(rgb[0], rgb[1], rgb[2]);
     var l = color.l;
     var segmentColor =
         "hsl(${color.h}, ${(color.s * 100).round()}%, ${(((l > 0.7) ? (l - 0.2) : (l + 0.25)) * 100).round()}%)";
     for (var s in segments) {
       s.style.backgroundColor = segmentColor.toString();
     }
-  }
-
-  backgroundColorR.onInput.listen(updateBackgroundColor);
-  backgroundColorG.onInput.listen(updateBackgroundColor);
-  backgroundColorB.onInput.listen(updateBackgroundColor);
+  });
 }
 
 Map<String, dynamic> generateJson() => {
@@ -143,16 +131,8 @@ Map<String, dynamic> generateJson() => {
         "maxAngularVelocity": num.parse(maxAngularVelocity.value),
         "name": name.value,
         "images": _images.map((ic) => ic.toMap()).toList(growable: false),
-        "textColor": [
-          int.parse(textColorR.value),
-          int.parse(textColorG.value),
-          int.parse(textColorB.value)
-        ],
-        "backgroundColor": [
-          int.parse(backgroundColorR.value),
-          int.parse(backgroundColorG.value),
-          int.parse(backgroundColorB.value)
-        ],
+        "textColor": hexToRgb(textColor.value),
+        "backgroundColor": hexToRgb(backgroundColor.value),
         "numTacos": int.parse(numTacos.value)
       }
     };
@@ -163,11 +143,13 @@ void setupInputElements() {
   minVertVelocity = querySelector("#minVertVelocity");
   maxVertVelocity = querySelector("#maxVertVelocity");
   maxAngularVelocity = querySelector("#maxAngularVelocity");
-  textColorR = querySelector("#textColorR");
-  textColorG = querySelector("#textColorG");
-  textColorB = querySelector("#textColorB");
-  backgroundColorR = querySelector("#backgroundColorR");
-  backgroundColorG = querySelector("#backgroundColorG");
-  backgroundColorB = querySelector("#backgroundColorB");
+  textColor = querySelector("#textColor");
+  backgroundColor = querySelector("#backgroundColor");
   numTacos = querySelector("#numTacos");
 }
+
+List<int> hexToRgb(String hexCode) => [
+      int.parse(hexCode.substring(1, 3), radix: 16),
+      int.parse(hexCode.substring(3, 5), radix: 16),
+      int.parse(hexCode.substring(5, 7), radix: 16),
+    ];
