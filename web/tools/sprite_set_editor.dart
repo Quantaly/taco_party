@@ -84,7 +84,7 @@ class ImageContainer {
 }
 
 void main() {
-  window.onMessage.listen((m) => print("${m.origin} ${m.type} ${m.data}"));
+  //window.onMessage.listen((m) => print("${m.origin} ${m.type} ${m.data}"));
   setupInputElements();
   var imageStage = querySelector("#image-stage");
   void addImage([_]) =>
