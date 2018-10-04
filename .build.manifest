@@ -47,6 +47,7 @@ packages/kernel/binary/readme.md
 packages/kernel/target/readme.md
 packages/kernel/text/readme.md
 packages/pedantic/analysis_options.yaml
+sprite_sets/async.json
 sprite_sets/default.json
 sprite_sets/energyihs.json
 sprite_sets/inline.json
