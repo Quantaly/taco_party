@@ -4,7 +4,7 @@ import 'dart:html';
 
 import 'package:taco_party/taco_party.dart';
 
-Timer messageTimer;
+import 'async_stage_spawner.dart';
 
 List<ImageContainer> _images = [];
 
@@ -92,14 +92,9 @@ void main() {
   addImage();
 
   querySelector("#btn-addimage").onClick.listen(addImage);
-  querySelector("#btn-preview").onClick.listen((_) async {
-    messageTimer?.cancel();
-    var newWindow = window.open("../stage.html?type=async", "preview");
-    var data = jsonEncode(generateJson()["data"]);
-    messageTimer = Timer.periodic(const Duration(milliseconds: 100),
-        (_) => newWindow.postMessage(data, window.origin));
-  });
-  window.onMessage.listen((_) => messageTimer?.cancel());
+  var stageSpawner = AsyncStageSpawner("preview", "../stage.html");
+  querySelector("#btn-preview").onClick.listen(
+      (_) => stageSpawner.spawnStage(jsonEncode(generateJson()["data"])));
   querySelector("#btn-permalink").onClick.listen((_) => window.open(
       "../stage.html?type=inline&data=${Uri.encodeComponent(jsonEncode(generateJson()["data"]))}",
       "_blank"));
