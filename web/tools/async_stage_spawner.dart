@@ -12,10 +12,17 @@ class AsyncStageSpawner {
         .listen((_) => _messageTimer?.cancel());
   }
 
-  void spawnStage(String data) {
+  void spawnStage(String data, [String additionalParams = ""]) {
     _messageTimer?.cancel();
-    var newWindow = window.open("$pathToStage?type=async", name);
-    _messageTimer = Timer.periodic(const Duration(milliseconds: 100),
-        (_) => newWindow.postMessage(data, window.origin));
+    var newWindow =
+        window.open("$pathToStage?type=async$additionalParams", name);
+    _messageTimer = Timer.periodic(const Duration(milliseconds: 100), (t) {
+      try {
+        newWindow.postMessage(data, window.origin);
+      } on Error {
+        window.alert("Please allow pop-ups, refresh, and try again.");
+        t.cancel();
+      }
+    });
   }
 }
