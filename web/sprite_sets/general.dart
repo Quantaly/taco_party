@@ -46,7 +46,7 @@ class GeneralSpriteInfo implements SpriteInfo {
   }
 
   void _updateDims(ImageElement el) {
-    print("updating dims with ${el.width} x ${el.height}");
+    //print("updating dims with ${el.width} x ${el.height}");
     if (_maxWidth < el.width) _maxWidth = el.width;
     if (_maxHeight < el.height) _maxHeight = el.height;
     _maxHalfDiagonal = calcHalfDiagonal(_maxWidth, _maxHeight);

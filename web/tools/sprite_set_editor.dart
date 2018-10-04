@@ -29,12 +29,15 @@ class ImageContainer {
       : url = InputElement()..type = "url",
         width = InputElement()
           ..type = "number"
+          ..min = "1"
           ..classes.add("smol"),
         height = InputElement()
           ..type = "number"
+          ..min = "1"
           ..classes.add("smol"),
         weight = InputElement()
           ..type = "number"
+          ..min = "1"
           ..classes.add("smol"),
         remove = InputElement()
           ..type = "button"
@@ -81,7 +84,7 @@ class ImageContainer {
 }
 
 void main() {
-  window.onMessage.listen((m) => print("${m.origin} ${m.type} ${m.data}"));
+  //window.onMessage.listen((m) => print("${m.origin} ${m.type} ${m.data}"));
   setupInputElements();
   var imageStage = querySelector("#image-stage");
   void addImage([_]) =>
@@ -107,7 +110,7 @@ void main() {
   var body = querySelector("body");
   var title = querySelector("h1");
   var segments = querySelectorAll(".segment");
-  print(segments.length);
+  //print(segments.length);
 
   void updateTextColor([_]) {
     title.style.color = Color(int.parse(textColorR.value),
