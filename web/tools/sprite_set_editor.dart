@@ -44,9 +44,11 @@ class ImageContainer {
           ..value = "Remove",
         preview = ImageElement() {
     _images.add(this);
-    url.onChange.listen((_) => preview.src = url.value);
+    url.onChange.listen(updatePreview);
     remove.onClick.listen((_) => _images.remove(this));
   }
+
+  void updatePreview([_]) => preview.src = url.value;
 
   TableElement get table {
     var ret = TableElement();
@@ -87,14 +89,18 @@ void main() {
   //window.onMessage.listen((m) => print("${m.origin} ${m.type} ${m.data}"));
   setupInputElements();
   var imageStage = querySelector("#image-stage");
-  void addImage([_]) =>
-      imageStage.append(Element.li()..append(ImageContainer().table));
+  ImageContainer addImage([_]) {
+    var ret = ImageContainer();
+    imageStage.append(Element.li()..append(ret.table));
+    return ret;
+  }
+
   addImage();
 
   querySelector("#btn-addimage").onClick.listen(addImage);
   var stageSpawner = AsyncStageSpawner("preview", "../stage.html");
-  querySelector("#btn-preview").onClick.listen(
-      (_) => stageSpawner.spawnStage(jsonEncode(generateJson()["data"])));
+  querySelector("#btn-preview").onClick.listen((_) => stageSpawner.spawnStage(
+      jsonEncode(generateJson()["data"]), "&msg=Sample%20text"));
   querySelector("#btn-permalink").onClick.listen((_) => window.open(
       "../stage.html?type=inline&data=${Uri.encodeComponent(jsonEncode(generateJson()["data"]))}",
       "_blank"));
@@ -107,9 +113,10 @@ void main() {
   var segments = querySelectorAll(".segment");
   //print(segments.length);
 
-  textColor.onInput.listen((_) => title.style.color = textColor.value);
+  void updateTextColor([_]) => title.style.color = textColor.value;
+  textColor.onInput.listen(updateTextColor);
 
-  backgroundColor.onInput.listen((_) {
+  void updateBackgroundColor([_]) {
     body.style.backgroundColor = backgroundColor.value;
     var rgb = hexToRgb(backgroundColor.value);
     var color = Color(rgb[0], rgb[1], rgb[2]);
@@ -119,6 +126,49 @@ void main() {
     for (var s in segments) {
       s.style.backgroundColor = segmentColor.toString();
     }
+  }
+
+  backgroundColor.onInput.listen(updateBackgroundColor);
+
+  InputElement fileUpload = querySelector("#upload");
+  fileUpload.onInput.listen((_) {
+    var reader = FileReader();
+    reader.readAsText(fileUpload.files.first);
+    reader.onLoadEnd.first.then((_) {
+      var fileData = jsonDecode(reader.result);
+      if (fileData["class"] != "general") {
+        window.alert("Invalid file.");
+        return;
+      }
+
+      var data = fileData["data"];
+      maxHorzVelocity.value = data["maxHorzVelocity"].toString();
+      minVertVelocity.value = data["minVertVelocity"].toString();
+      maxVertVelocity.value = data["maxVertVelocity"].toString();
+      maxAngularVelocity.value = data["maxAngularVelocity"].toString();
+      name.value = data["name"];
+      textColor.value = rgbToHex(data["textColor"].cast<int>());
+      backgroundColor.value = rgbToHex(data["backgroundColor"].cast<int>());
+      numTacos.value = data["numTacos"].toString();
+
+      for (var image in _images) {
+        image.remove.click();
+      }
+
+      for (var imageData in data["images"]) {
+        var image = addImage()..url.value = imageData["src"];
+        if (imageData["width"] != null)
+          image.width.value = imageData["width"].toString();
+        if (imageData["height"] != null)
+          image.height.value = imageData["height"].toString();
+        if (imageData["weight"] != null)
+          image.weight.value = imageData["weight"].toString();
+        image.updatePreview();
+      }
+
+      updateTextColor();
+      updateBackgroundColor();
+    });
   });
 }
 
@@ -153,3 +203,7 @@ List<int> hexToRgb(String hexCode) => [
       int.parse(hexCode.substring(3, 5), radix: 16),
       int.parse(hexCode.substring(5, 7), radix: 16),
     ];
+
+String rgbToHex(List<int> rgb) => "#${rgb[0].toRadixString(16).padLeft(2, "0")}"
+    "${rgb[1].toRadixString(16).padLeft(2, "0")}"
+    "${rgb[2].toRadixString(16).padLeft(2, "0")}";

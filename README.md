@@ -6,7 +6,6 @@ This began as a quick and dirty contribution to a taco-themed birthday party (he
 
 ## To-do
 - Sound
-- Mobile friendliness
 - Game modes
   - Bullet hell
   - Space Invaders
