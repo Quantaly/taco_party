@@ -134,6 +134,7 @@ void main() {
   fileUpload.onInput.listen((_) {
     var reader = FileReader();
     reader.readAsText(fileUpload.files.first);
+    downloadLink.download = fileUpload.files.first.name;
     reader.onLoadEnd.first.then((_) {
       var fileData = jsonDecode(reader.result);
       if (fileData["class"] != "general") {
