@@ -23,9 +23,20 @@ html, body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 96pt;
+  font-size: 48pt;
   font-weight: bold;
   z-index: 413;
+}
+
+@media screen and (min-width: 600px) {
+  #text {
+    font-size: 72pt;
+  }
+  @media screen and (min-width: 900px) {
+    #text {
+      font-size: 96pt;
+    }
+  }
 }
 
 .rainbow {

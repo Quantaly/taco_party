@@ -48,10 +48,13 @@ packages/kernel/target/readme.md
 packages/kernel/text/readme.md
 packages/pedantic/analysis_options.yaml
 sprite_sets/async.json
+sprite_sets/dartlang.json
 sprite_sets/default.json
 sprite_sets/energyihs.json
 sprite_sets/inline.json
+sprite_sets/kotlin.json
 sprite_sets/minediamonds.json
+sprite_sets/monopocash.json
 sprite_sets/pokemon.json
 sprite_sets/tetris.json
 stage.css

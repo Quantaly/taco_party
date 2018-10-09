@@ -14,6 +14,8 @@
 <div id="container">
     <h1 class="segment">Sprite Set Editor</h1>
 
+    <input class="segment" id="upload" type="file" accept="application/json">
+
     <ul id="images" class="segment">
         <li><h2>Images</h2></li>
         <li><ul id="image-stage">
@@ -33,7 +35,7 @@
             </table></li-->
         </ul></li>
         <li><input type="button" value="+" id="btn-addimage"></li>
-        <li><p>Width, height, and weight do not need to be specified.</p></li>
+        <li><p>Width, height, and weight are optional.</p></li>
     </ul>
 
     <ul id="properties" class="segment">
@@ -43,8 +45,8 @@
         <li>minVertVelocity: <input type="number" value="5" step="0.1" min="0" id="minVertVelocity"></li>
         <li>maxVertVelocity: <input type="number" value="10.3" step="0.1" min="0" id="maxVertVelocity"></li>
         <li>maxAngularVelocity: <input type="number" value="3" step="0.1" min="0" id="maxAngularVelocity"></li>
-        <li>textColor: rgb(<input type="number" step="1" min="0" max="255" value="128" id="textColorR">, <input type="number" step="1" min="0" max="255" value="0" id="textColorG">, <input type="number" step="1" min="0" max="255" value="128" id="textColorB">)</li>
-        <li>backgroundColor: rgb(<input type="number" step="1" min="0" max="255" value="255" id="backgroundColorR">, <input type="number" step="1" min="0" max="255" value="255" id="backgroundColorG">, <input type="number" step="1" min="0" max="255" value="0" id="backgroundColorB">)</li>
+        <li>textColor: <input type="color" value="#800080" id="textColor"></li>
+        <li>backgroundColor: <input type="color" value="#ffff00" id="backgroundColor"></li>
         <li>numTacos: <input type="number" step="1" min="1" value="32" id="numTacos"></li>
     </ul>
 
