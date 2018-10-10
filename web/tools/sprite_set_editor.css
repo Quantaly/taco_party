@@ -70,7 +70,7 @@ li {
   padding: 15px;
 }
 
-.smol {
+.smol, #properties input {
   width: 60px;
 }
 
@@ -84,8 +84,8 @@ td img {
   grid-area: properties;
 }
 
-#properties input {
-  width: 60px;
+#sound input {
+  width: initial;
 }
 
 #options {

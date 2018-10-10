@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:html';
+import 'dart:web_audio';
 
 import 'package:taco_party/taco_party.dart';
 
@@ -16,6 +17,8 @@ InputElement maxAngularVelocity;
 InputElement textColor;
 InputElement backgroundColor;
 InputElement numTacos;
+InputElement soundCheckbox;
+InputElement soundUrl;
 
 class ImageContainer {
   final InputElement url;
@@ -151,6 +154,15 @@ void main() {
       textColor.value = rgbToHex(data["textColor"].cast<int>());
       backgroundColor.value = rgbToHex(data["backgroundColor"].cast<int>());
       numTacos.value = data["numTacos"].toString();
+      if (data["soundUrl"] != null) {
+        soundCheckbox.checked = true;
+        soundUrl.disabled = false;
+        soundUrl.value = data["soundUrl"];
+      } else {
+        soundCheckbox.checked = false;
+        soundUrl.disabled = true;
+        soundUrl.value = "";
+      }
 
       for (var image in _images) {
         image.remove.click();
@@ -171,22 +183,46 @@ void main() {
       updateBackgroundColor();
     });
   });
+
+  AudioContext context;
+  soundCheckbox.onInput.listen((_) {
+    context ??= AudioContext();
+    soundUrl.disabled = !soundCheckbox.checked;
+  });
+  soundUrl.disabled = !soundCheckbox.checked;
+  soundUrl.onChange.listen((_) {
+    context ??= AudioContext();
+    var request = HttpRequest()
+      ..open("GET", soundUrl.value, async: true)
+      ..responseType = "arraybuffer";
+    request.onLoad.first.then((_) async {
+      context.createBufferSource()
+        ..buffer = await context.decodeAudioData(request.response)
+        ..connectNode(context.destination)
+        ..start();
+    });
+    request.send();
+  });
 }
 
-Map<String, dynamic> generateJson() => {
-      "class": "general",
-      "data": {
-        "maxHorzVelocity": num.parse(maxHorzVelocity.value),
-        "minVertVelocity": num.parse(minVertVelocity.value),
-        "maxVertVelocity": num.parse(maxVertVelocity.value),
-        "maxAngularVelocity": num.parse(maxAngularVelocity.value),
-        "name": name.value,
-        "images": _images.map((ic) => ic.toMap()).toList(growable: false),
-        "textColor": hexToRgb(textColor.value),
-        "backgroundColor": hexToRgb(backgroundColor.value),
-        "numTacos": int.parse(numTacos.value)
-      }
-    };
+Map<String, dynamic> generateJson() {
+  var ret = {
+    "class": "general",
+    "data": {
+      "maxHorzVelocity": num.parse(maxHorzVelocity.value),
+      "minVertVelocity": num.parse(minVertVelocity.value),
+      "maxVertVelocity": num.parse(maxVertVelocity.value),
+      "maxAngularVelocity": num.parse(maxAngularVelocity.value),
+      "name": name.value,
+      "images": _images.map((ic) => ic.toMap()).toList(growable: false),
+      "textColor": hexToRgb(textColor.value),
+      "backgroundColor": hexToRgb(backgroundColor.value),
+      "numTacos": int.parse(numTacos.value),
+    }
+  };
+  if (soundCheckbox.checked) ret["soundUrl"] = soundUrl.value;
+  return ret;
+}
 
 void setupInputElements() {
   name = querySelector("#name");
@@ -197,6 +233,8 @@ void setupInputElements() {
   textColor = querySelector("#textColor");
   backgroundColor = querySelector("#backgroundColor");
   numTacos = querySelector("#numTacos");
+  soundCheckbox = querySelector("#soundCheckbox");
+  soundUrl = querySelector("#soundUrl");
 }
 
 List<int> hexToRgb(String hexCode) => [
