@@ -1,3 +1,7 @@
+## 2.1.2
+- Sound
+- Probably some other stuff also
+
 ## 2.1.0
 - Added sprite set creator
 
