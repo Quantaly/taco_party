@@ -8,13 +8,13 @@
     "name": "Energy!",
     "images": [
       {
-        "src": "images/energy_windmill.png"
+        "src": "assets/images/energy_windmill.png"
       },
       {
-        "src": "images/energy_platform.png"
+        "src": "assets/images/energy_platform.png"
       },
       {
-        "src": "images/energy_gears.png"
+        "src": "assets/images/energy_gears.png"
       }
     ],
     "textColor": [255, 142, 28],

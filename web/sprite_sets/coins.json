@@ -14,6 +14,6 @@
     "textColor": [253, 221, 200],
     "backgroundColor": [221, 89, 24],
     "numTacos": 32,
-    "soundUrl": "sounds/smb_coin.wav"
+    "soundUrl": "assets/sounds/smb_coin.wav"
   }
 }
