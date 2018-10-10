@@ -1,0 +1,19 @@
+{
+  "class": "general",
+  "data": {
+    "maxHorzVelocity": 4,
+    "minVertVelocity": 5,
+    "maxVertVelocity": 10.3,
+    "maxAngularVelocity": 3,
+    "name": "Coins!",
+    "images": [
+      {
+        "src": "https://vignette.wikia.nocookie.net/my-mario-list/images/6/6d/Coin.png/revision/latest?cb=20130113020535"
+      }
+    ],
+    "textColor": [253, 221, 200],
+    "backgroundColor": [221, 89, 24],
+    "numTacos": 32,
+    "soundUrl": "sounds/smb_coin.wav"
+  }
+}

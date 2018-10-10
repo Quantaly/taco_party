@@ -29,6 +29,8 @@ class GeneralSpriteInfo implements SpriteInfo {
 
   final int numTacos;
 
+  final String soundUrl;
+
   GeneralSpriteInfo(
       {this.maxHorzVelocity,
       this.minVertVelocity,
@@ -38,7 +40,8 @@ class GeneralSpriteInfo implements SpriteInfo {
       this.images,
       this.textColor,
       this.backgroundColor,
-      this.numTacos}) {
+      this.numTacos,
+      this.soundUrl}) {
     for (var image in images) {
       _updateDims(image);
       image.onLoad.listen((_) => _updateDims(image));

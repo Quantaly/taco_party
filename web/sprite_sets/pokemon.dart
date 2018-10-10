@@ -33,4 +33,6 @@ class PokemonSpriteInfo implements SpriteInfo {
   final num maxHalfDiagonal = calcHalfDiagonal(151, 151);
 
   final int numTacos = 151;
+
+  final String soundUrl = null;
 }

@@ -22,6 +22,8 @@ abstract class SpriteInfo {
   num get maxHalfDiagonal;
 
   int get numTacos;
+
+  String get soundUrl;
 }
 
 num toRadians(num degrees) => degrees / 360 * 2 * math.pi;

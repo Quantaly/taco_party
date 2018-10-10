@@ -26,4 +26,6 @@ class DefaultSpriteInfo implements SpriteInfo {
   final num maxHalfDiagonal = calcHalfDiagonal(240, 216);
 
   final int numTacos = 32;
+
+  final String soundUrl = null;
 }

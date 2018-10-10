@@ -34,6 +34,7 @@ FutureOr<SpriteInfo> getSpriteSet(
           backgroundColor: Color(data["backgroundColor"][0],
               data["backgroundColor"][1], data["backgroundColor"][2]),
           numTacos: data["numTacos"],
+          soundUrl: data["soundUrl"],
         );
       }
       break;

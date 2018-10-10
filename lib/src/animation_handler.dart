@@ -11,13 +11,28 @@ class AnimationHandler {
   final SpriteInfo spriteInfo;
 
   num _lastFrame = 0;
+  AudioHandler audioHandler;
 
   bool _started = false;
   List<ImageElement> images;
 
   AnimationHandler(this._canvas, SpriteInfo spriteInfo)
       : spriteInfo = spriteInfo,
-        _tacos = List(spriteInfo.numTacos);
+        _tacos = List(spriteInfo.numTacos) {
+    if (spriteInfo.soundUrl != null) {
+      var soundButton = querySelector("#btn-playsound");
+      soundButton
+        ..onClick.listen((_) {
+          soundButton.hidden = true;
+          var handler = AudioHandler(spriteInfo.soundUrl, spriteInfo.numTacos);
+          handler.readyFuture.then((_) {
+            audioHandler = handler;
+            handler.play();
+          });
+        })
+        ..hidden = false;
+    }
+  }
 
   Future<void> start() async {
     if (_started) throw StateError("The animation has already been started!");
@@ -53,6 +68,7 @@ class AnimationHandler {
       //print("t.y is ${t.y} and _canvas.height is ${_canvas.height}");
       if (t.y - spriteInfo.maxHalfDiagonal > _canvas.height) {
         _tacos[i] = newTaco();
+        audioHandler?.play();
         //print("new taco's image is ${_tacos[i].image}");
       }
       _tacos[i].render(context);
