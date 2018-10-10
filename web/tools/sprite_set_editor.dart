@@ -206,7 +206,7 @@ void main() {
 }
 
 Map<String, dynamic> generateJson() {
-  var ret = {
+  var ret = <String, dynamic>{
     "class": "general",
     "data": {
       "maxHorzVelocity": num.parse(maxHorzVelocity.value),
@@ -220,7 +220,7 @@ Map<String, dynamic> generateJson() {
       "numTacos": int.parse(numTacos.value),
     }
   };
-  if (soundCheckbox.checked) ret["soundUrl"] = soundUrl.value;
+  if (soundCheckbox.checked) ret["data"]["soundUrl"] = soundUrl.value;
   return ret;
 }
 
