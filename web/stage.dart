@@ -35,13 +35,15 @@ void main() async {
   body.style
     ..color = spriteInfo.textColor.toString()
     ..backgroundColor = spriteInfo.backgroundColor.toString();
-  switch (Uri.base.queryParameters["filter"]) {
-    case "invert":
-      body.style.filter = "invert(1)";
-      break;
-    case "rainbow":
-      body.classes.add("rainbow");
-      break;
+  if (Uri.base.queryParameters["filter"] != null) {
+    var filterHolder = querySelector("#filterHolder");
+    var content = querySelector("#content");
+    for (var filter in Uri.base.queryParameters["filter"].split(",")) {
+      var newEl = Element.div()..classes.add(filter);
+      content.append(newEl);
+      newEl.append(filterHolder);
+      filterHolder = newEl;
+    }
   }
 
   AnimationHandler(querySelector("#stage"), spriteInfo).start().then(

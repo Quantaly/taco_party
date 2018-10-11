@@ -40,7 +40,8 @@ String buildParameters() {
   if (msg.value.isNotEmpty)
     builder.write("&msg=${Uri.encodeComponent(msg.value)}");
   if (filter.value.isNotEmpty)
-    builder.write("&filter=${Uri.encodeComponent(filter.value)}");
+    builder.write(
+        "&filter=${Uri.encodeComponent(filter.selectedOptions.map((o) => o.value).join(","))}");
   return builder.toString();
 }
 
