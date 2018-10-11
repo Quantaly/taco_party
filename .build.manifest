@@ -1,8 +1,9 @@
 .packages
+assets/images/energy_gears.png
+assets/images/energy_platform.png
+assets/images/energy_windmill.png
+assets/sounds/smb_coin.wav
 directory.html
-images/energy_gears.png
-images/energy_platform.png
-images/energy_windmill.png
 index.css
 index.dart.js
 index.html
@@ -48,6 +49,7 @@ packages/kernel/target/readme.md
 packages/kernel/text/readme.md
 packages/pedantic/analysis_options.yaml
 sprite_sets/async.json
+sprite_sets/coins.json
 sprite_sets/dartlang.json
 sprite_sets/default.json
 sprite_sets/energyihs.json
