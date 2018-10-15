@@ -41,6 +41,7 @@
     ],
     "textColor": [205, 208, 80],
     "backgroundColor": [51, 235, 203],
-    "numTacos": 64
+    "numTacos": 64,
+    "soundUrl": "assets/sounds/mc_pop.ogg"
   }
 }
