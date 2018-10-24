@@ -165,7 +165,7 @@ void main() {
       }
 
       for (var image in _images) {
-        image.remove.click();
+        Future(() => image.remove.click());
       }
 
       for (var imageData in data["images"]) {
