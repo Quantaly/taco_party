@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:html';
 import 'dart:web_audio';
 
+import 'package:archive/archive.dart';
 import 'package:taco_party/taco_party.dart';
 
 import 'async_stage_spawner.dart';
@@ -19,6 +20,8 @@ InputElement backgroundColor;
 InputElement numTacos;
 InputElement soundCheckbox;
 InputElement soundUrl;
+
+ZLibEncoder zlibEncoder = ZLibEncoder();
 
 class ImageContainer {
   final InputElement url;
@@ -105,7 +108,8 @@ void main() {
   querySelector("#btn-preview").onClick.listen((_) => stageSpawner.spawnStage(
       jsonEncode(generateJson()["data"]), "&msg=Sample%20text"));
   querySelector("#btn-permalink").onClick.listen((_) => window.open(
-      "../stage.html?type=inline&data=${Uri.encodeComponent(jsonEncode(generateJson()["data"]))}",
+      "../stage.html?type=custom&data="
+      "${base64UrlEncode(zlibEncoder.encode(utf8.encode(jsonEncode(generateJson()["data"]))))}",
       "_blank"));
   var downloadLink = querySelector("#download-link") as AnchorElement;
   querySelector("#btn-download").onClick.listen((_) => downloadLink.href =

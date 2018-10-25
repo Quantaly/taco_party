@@ -6,6 +6,7 @@ import 'default.dart';
 import 'pokemon.dart';
 import 'general.dart';
 
+import 'package:archive/archive.dart';
 import 'package:taco_party/taco_party.dart';
 
 FutureOr<SpriteInfo> getSpriteSet(
@@ -41,6 +42,12 @@ FutureOr<SpriteInfo> getSpriteSet(
     case "inline":
       return getSpriteSet(
           "general", jsonDecode(queryParameters["data"]), queryParameters);
+    case "custom":
+      return getSpriteSet(
+          "general",
+          jsonDecode(utf8.decode(ZLibDecoder()
+              .decodeBytes(base64Decode(queryParameters["data"])))),
+          queryParameters);
     case "async":
       var text = querySelector("#text")..text = "Waiting...";
       return Future(() async {
