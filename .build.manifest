@@ -51,6 +51,7 @@ packages/kernel/text/readme.md
 packages/pedantic/analysis_options.yaml
 sprite_sets/async.json
 sprite_sets/coins.json
+sprite_sets/custom.json
 sprite_sets/dartlang.json
 sprite_sets/default.json
 sprite_sets/energyihs.json
