@@ -44,6 +44,7 @@ class ImageContainer {
         weight = InputElement()
           ..type = "number"
           ..min = "1"
+          ..placeholder = "1"
           ..classes.add("smol"),
         remove = InputElement()
           ..type = "button"
@@ -51,6 +52,10 @@ class ImageContainer {
         preview = ImageElement() {
     _images.add(this);
     url.onChange.listen(updatePreview);
+    preview.onLoad.listen((_) {
+      height.placeholder = preview.naturalHeight.toString();
+      width.placeholder = preview.naturalWidth.toString();
+    });
     remove.onClick.listen((_) => _images.remove(this));
   }
 
