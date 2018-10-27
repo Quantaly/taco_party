@@ -12,17 +12,18 @@ class AsyncStageSpawner {
         .listen((_) => _messageTimer?.cancel());
   }
 
-  void spawnStage(String data, [String additionalParams = ""]) {
+  void spawnStage(FutureOr<String> data, [String additionalParams = ""]) {
     _messageTimer?.cancel();
+    // this has to be done synchronously to still be inside of a user input event
     var newWindow =
         window.open("$pathToStage?type=async$additionalParams", name);
-    _messageTimer = Timer.periodic(const Duration(milliseconds: 100), (t) {
-      try {
+    Future.value(data).then((data) {
+      if (data == null) return;
+      _messageTimer = Timer.periodic(const Duration(milliseconds: 100), (t) {
         newWindow.postMessage(data, window.origin);
-      } on Error {
-        window.alert("Please allow pop-ups, refresh, and try again.");
-        t.cancel();
-      }
+      });
     });
   }
+
+  void cancelMessage() => _messageTimer.cancel();
 }

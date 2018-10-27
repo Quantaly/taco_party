@@ -9,6 +9,7 @@ InputElement msg;
 SelectElement filter;
 
 InputElement upload;
+InputElement uploadBtn;
 
 void main() {
   links.addAll(querySelectorAll(".stagelink"));
@@ -20,18 +21,19 @@ void main() {
 
   var stageSpawner = AsyncStageSpawner("uploaded", "stage.html");
   upload = querySelector("#upload")
-    ..onInput.listen((e) {
+    ..onInput.listen((_) => uploadBtn.disabled = false);
+  uploadBtn = querySelector("#uploadBtn")
+    ..onClick.listen((_) {
       var reader = FileReader();
       reader.readAsText(upload.files.first);
-      reader.onLoadEnd.first.then((_) {
+      stageSpawner.spawnStage(reader.onLoadEnd.first.then((_) {
         var fileData = jsonDecode(reader.result);
         if (fileData["class"] != "general") {
           window.alert("Invalid file.");
-          return;
+          return null;
         }
-        stageSpawner.spawnStage(
-            jsonEncode(fileData["data"]), buildParameters());
-      });
+        return jsonEncode(fileData["data"]);
+      }), buildParameters());
     });
 }
 
