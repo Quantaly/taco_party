@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'dart:html';
 import 'dart:web_audio';
 
-import 'package:archive/archive.dart';
 import 'package:taco_party/taco_party.dart';
 
 import 'async_stage_spawner.dart';
+import 'url_json.dart';
 
 List<ImageContainer> _images = [];
 
@@ -20,8 +20,6 @@ InputElement backgroundColor;
 InputElement numTacos;
 InputElement soundCheckbox;
 InputElement soundUrl;
-
-ZLibEncoder zlibEncoder = ZLibEncoder();
 
 class ImageContainer {
   final InputElement url;
@@ -114,7 +112,7 @@ void main() {
       jsonEncode(generateJson()["data"]), "&msg=Sample%20text"));
   querySelector("#btn-permalink").onClick.listen((_) => window.open(
       "../stage.html?type=custom&data="
-      "${base64UrlEncode(zlibEncoder.encode(utf8.encode(jsonEncode(generateJson()["data"]))))}",
+      "${urlJson.encode(generateJson()["data"])}",
       "_blank"));
   var downloadLink = querySelector("#download-link") as AnchorElement;
   querySelector("#btn-download").onClick.listen((_) => downloadLink.href =
@@ -133,14 +131,53 @@ void main() {
     var rgb = hexToRgb(backgroundColor.value);
     var color = Color(rgb[0], rgb[1], rgb[2]);
     var l = color.l;
-    var segmentColor =
-        "hsl(${color.h}, ${(color.s * 100).round()}%, ${(((l > 0.7) ? (l - 0.1) : (l + 0.25)) * 100).round()}%)";
+    var segmentColor = "hsl(${color.h}, "
+        "${(color.s * 100).round()}%, "
+        "${(((l > 0.7) ? (l - 0.1) : (l + 0.25)) * 100).round()}%)";
     for (var s in segments) {
       s.style.backgroundColor = segmentColor.toString();
     }
   }
 
   backgroundColor.onInput.listen(updateBackgroundColor);
+
+  void importContent(Map<String, dynamic> data) {
+    maxHorzVelocity.value = data["maxHorzVelocity"].toString();
+    minVertVelocity.value = data["minVertVelocity"].toString();
+    maxVertVelocity.value = data["maxVertVelocity"].toString();
+    maxAngularVelocity.value = data["maxAngularVelocity"].toString();
+    name.value = data["name"];
+    textColor.value = rgbToHex(data["textColor"].cast<int>());
+    backgroundColor.value = rgbToHex(data["backgroundColor"].cast<int>());
+    numTacos.value = data["numTacos"].toString();
+    if (data["soundUrl"] != null) {
+      soundCheckbox.checked = true;
+      soundUrl.disabled = false;
+      soundUrl.value = data["soundUrl"];
+    } else {
+      soundCheckbox.checked = false;
+      soundUrl.disabled = true;
+      soundUrl.value = "";
+    }
+
+    for (var image in _images) {
+      Future(() => image.remove.click());
+    }
+
+    for (var imageData in data["images"]) {
+      var image = addImage()..url.value = imageData["src"];
+      if (imageData["width"] != null)
+        image.width.value = imageData["width"].toString();
+      if (imageData["height"] != null)
+        image.height.value = imageData["height"].toString();
+      if (imageData["weight"] != null)
+        image.weight.value = imageData["weight"].toString();
+      image.updatePreview();
+    }
+
+    updateTextColor();
+    updateBackgroundColor();
+  }
 
   InputElement fileUpload = querySelector("#upload");
   fileUpload.onInput.listen((_) {
@@ -153,44 +190,23 @@ void main() {
         window.alert("Invalid file.");
         return;
       }
-
-      var data = fileData["data"];
-      maxHorzVelocity.value = data["maxHorzVelocity"].toString();
-      minVertVelocity.value = data["minVertVelocity"].toString();
-      maxVertVelocity.value = data["maxVertVelocity"].toString();
-      maxAngularVelocity.value = data["maxAngularVelocity"].toString();
-      name.value = data["name"];
-      textColor.value = rgbToHex(data["textColor"].cast<int>());
-      backgroundColor.value = rgbToHex(data["backgroundColor"].cast<int>());
-      numTacos.value = data["numTacos"].toString();
-      if (data["soundUrl"] != null) {
-        soundCheckbox.checked = true;
-        soundUrl.disabled = false;
-        soundUrl.value = data["soundUrl"];
-      } else {
-        soundCheckbox.checked = false;
-        soundUrl.disabled = true;
-        soundUrl.value = "";
-      }
-
-      for (var image in _images) {
-        Future(() => image.remove.click());
-      }
-
-      for (var imageData in data["images"]) {
-        var image = addImage()..url.value = imageData["src"];
-        if (imageData["width"] != null)
-          image.width.value = imageData["width"].toString();
-        if (imageData["height"] != null)
-          image.height.value = imageData["height"].toString();
-        if (imageData["weight"] != null)
-          image.weight.value = imageData["weight"].toString();
-        image.updatePreview();
-      }
-
-      updateTextColor();
-      updateBackgroundColor();
+      importContent(fileData["data"]);
     });
+  });
+  InputElement linkPaste = querySelector("#linkpaste");
+  linkPaste.onInput.listen((_) {
+    try {
+      var uri = Uri.parse(linkPaste.value);
+      if (uri.queryParameters["data"] == null) return;
+      switch (uri.queryParameters["type"]) {
+        case "inline": // legacy
+          importContent(jsonDecode(uri.queryParameters["data"]));
+          break;
+        case "custom":
+          importContent(urlJson.decode(uri.queryParameters["data"]));
+          break;
+      }
+    } on FormatException {}
   });
 
   AudioContext context;
