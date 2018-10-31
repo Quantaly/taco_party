@@ -27,7 +27,13 @@ void main() {
       var reader = FileReader();
       reader.readAsText(upload.files.first);
       stageSpawner.spawnStage(reader.onLoadEnd.first.then((_) {
-        var fileData = jsonDecode(reader.result);
+        Map<String, dynamic> fileData;
+        try {
+          fileData = jsonDecode(reader.result);
+        } on FormatException {
+          window.alert("Invalid file.");
+          return null;
+        }
         if (fileData["class"] != "general") {
           window.alert("Invalid file.");
           return null;

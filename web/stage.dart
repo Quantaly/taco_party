@@ -27,6 +27,12 @@ void main() async {
     }
   }
 
+  if (spriteInfo.images.isEmpty) {
+    window.alert("Bad sprite set: no images specified");
+    if (name == "async") window.close();
+    return;
+  }
+
   //print(Uri.base.queryParameters["data"]);
 
   querySelector("title").innerHtml = "Taco Party | ${spriteInfo.name}";

@@ -18,7 +18,10 @@ class AsyncStageSpawner {
     var newWindow =
         window.open("$pathToStage?type=async$additionalParams", name);
     Future.value(data).then((data) {
-      if (data == null) return;
+      if (data == null) {
+        newWindow.close();
+        return;
+      }
       _messageTimer = Timer.periodic(const Duration(milliseconds: 100), (t) {
         newWindow.postMessage(data, window.origin);
       });
