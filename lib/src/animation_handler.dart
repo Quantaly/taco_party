@@ -20,17 +20,18 @@ class AnimationHandler {
       : spriteInfo = spriteInfo,
         _tacos = List(spriteInfo.numTacos) {
     if (spriteInfo.soundUrl != null) {
-      var soundButton = querySelector("#btn-playsound");
-      soundButton
-        ..onClick.listen((_) {
-          soundButton.hidden = true;
-          var handler = AudioHandler(spriteInfo.soundUrl, spriteInfo.numTacos);
-          handler.readyFuture.then((_) {
-            audioHandler = handler;
-            handler.play();
-          });
-        })
-        ..hidden = false;
+      var soundButtons = querySelector("#sound-buttons")..hidden = false;
+      querySelector("#btn-playsound").onClick.listen((_) {
+        soundButtons.hidden = true;
+        var handler = AudioHandler(spriteInfo.soundUrl, spriteInfo.numTacos);
+        handler.readyFuture.then((_) {
+          audioHandler = handler;
+          handler.play();
+        });
+      });
+      querySelector("#btn-dismisssound")
+          .onClick
+          .listen((_) => soundButtons.hidden = true);
     }
   }
 
