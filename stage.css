@@ -44,7 +44,9 @@ div {
   }
 }
 
-#btn-playsound {
+#sound-buttons {
+  height: initial;
+  width: initial;
   position: fixed;
   margin: 0;
   left: 0;
