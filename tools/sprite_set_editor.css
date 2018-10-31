@@ -10,7 +10,7 @@ body {
   grid-template-rows: auto 50px auto auto auto;
   grid-template-areas:
     'header'
-    'upload'
+    'imports'
     'images'
     'properties'
     'options';
@@ -52,8 +52,8 @@ li {
   overflow: hidden;
 }
 
-#upload {
-  grid-area: upload;
+#imports {
+  grid-area: imports;
   padding: 15px;
 }
 
@@ -86,10 +86,10 @@ td img {
 @media screen and (min-width: 600px) {
   #container {
     grid-template-columns: 45% 45%;
-    grid-template-rows: 100px 50px auto auto;
+    grid-template-rows: 100px auto auto auto;
     grid-template-areas:
       'header header'
-      'images upload'
+      'images imports'
       'images properties'
       'images options';
   }
