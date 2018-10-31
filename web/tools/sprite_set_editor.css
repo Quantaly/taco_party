@@ -20,18 +20,6 @@ body {
   padding: 10px;
 }
 
-@media screen and (min-width: 600px) {
-  #container {
-    grid-template-columns: 45% 45%;
-    grid-template-rows: 100px 50px auto auto;
-    grid-template-areas:
-      'header header'
-      'images upload'
-      'images properties'
-      'images options';
-  }
-}
-
 .segment {
   background-color: #ffff80;
   margin: 0;
@@ -60,7 +48,6 @@ li {
 }
 
 #images {
-  border-radius: 0 0 0 10px;
   grid-area: images;
   overflow: hidden;
 }
@@ -89,9 +76,29 @@ td img {
 }
 
 #options {
-  border-radius: 0 0 10px 0;
+  border-radius: 0 0 10px 10px;
 }
 
 #options li {
   float: left;
+}
+
+@media screen and (min-width: 600px) {
+  #container {
+    grid-template-columns: 45% 45%;
+    grid-template-rows: 100px 50px auto auto;
+    grid-template-areas:
+      'header header'
+      'images upload'
+      'images properties'
+      'images options';
+  }
+
+  #images {
+    border-radius: 0 0 0 10px;
+  }
+
+  #options {
+    border-radius: 0 0 10px 0;
+  }
 }
