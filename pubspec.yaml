@@ -4,7 +4,7 @@ version: 2.1.2
 author: Kai Page <kaibug@gmail.com>
 
 environment:
-  sdk: '>=2.0.0 <3.0.0'
+  sdk: '>=2.1.0 <3.0.0'
 
 dependencies:
   archive: ^2.0.4
