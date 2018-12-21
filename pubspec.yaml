@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   archive: ^2.0.4
+  angular: ^5.0.0
 
 dev_dependencies:
   build_runner: ^0.10.0
