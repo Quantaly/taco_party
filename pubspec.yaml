@@ -7,9 +7,12 @@ environment:
   sdk: '>=2.1.0 <3.0.0'
 
 dependencies:
-  archive: ^2.0.4
-  angular: ^5.0.0
+  archive: ^2.0.5
+  angular: ^5.2.0
+  angular_router: ^2.0.0-alpha
 
 dev_dependencies:
-  build_runner: ^0.10.0
-  build_web_compilers: ^0.4.0
+  build_runner: ^1.1.2
+  build_web_compilers: ^1.0.0
+  # mostly here to stop the build from complaining, apparently angular wants me to actually test my code
+  test: ^1.5.1

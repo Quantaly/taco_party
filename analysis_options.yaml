@@ -1,6 +1,8 @@
 analyzer:
   errors:
     uri_has_not_been_generated: ignore
+  plugins:
+    - angular
 #   exclude:
 #     - path/to/excluded/files/**
 
@@ -17,3 +19,6 @@ linter:
     - await_only_futures
     - unnecessary_new
     - unnecessary_const
+    - curly_braces_in_flow_control_structures
+    - directives_ordering
+    - annotate_overrides
