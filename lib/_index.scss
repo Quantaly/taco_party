@@ -1,0 +1,29 @@
+@import "include-media/include-media";
+
+$default-background: yellow;
+$default-foreground: #ffff80;
+
+$breakpoints: (menu-cutoff: 600px, stage-mid: 600px, stage-big: 900px);
+
+$border-curve: 10px;
+
+%grid-base {
+  display: grid;
+  justify-content: center;
+  align-content: start;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+%grid-area-base {
+  background-color: $default-foreground;
+  margin: 0;
+  padding: 20px;
+}
+
+@mixin rounded-edges($corners) {
+  border-radius: if(index($corners, "top-left") != null, $border-curve, 0)
+                 if(index($corners, "top-right") != null, $border-curve, 0)
+                 if(index($corners, "bottom-right") != null, $border-curve, 0)
+                 if(index($corners, "bottom-left") != null, $border-curve, 0);
+}

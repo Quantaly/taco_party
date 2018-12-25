@@ -1,0 +1,116 @@
+@import "../../../index";
+
+#container {
+  display: grid;
+  justify-content: center;
+  align-content: start;
+  grid-gap: 10px;
+  padding: 10px;
+
+  @include media("<menu-cutoff") {
+    grid-template-columns: 90%;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+        'header'
+        'sprite-sets'
+        'options'
+        'links';
+  }
+
+  @include media(">=menu-cutoff") {
+    grid-template-columns: 45% 45%;
+    grid-template-rows: 100px auto auto;
+    grid-template-areas:
+        'header header'
+        'sprite-sets links'
+        'sprite-sets options';
+  }
+}
+
+h1 {
+  @extend %grid-area-base;
+  @include rounded-edges("top-left" "top-right");
+
+  font-size: 32px;
+  padding: 30px;
+  color: purple;
+  grid-area: header;
+  text-align: center;
+}
+
+h2 {
+  margin: 0;
+  font-size: 28px;
+}
+
+
+#sprite-sets {
+  @extend %grid-area-base;
+
+  grid-area: sprite-sets;
+
+  @include media("<menu-cutoff") {
+    // no rounded edges
+  }
+
+  @include media(">=menu-cutoff") {
+    @include rounded-edges("bottom-left");
+  }
+}
+
+#options {
+  @extend %grid-area-base;
+
+  grid-area: options;
+
+  @include media("<menu-cutoff") {
+    // no rounded edges
+  }
+
+  @include media(">=menu-cutoff") {
+    @include rounded-edges("bottom-right");
+  }
+}
+
+#links {
+  @extend %grid-area-base;
+
+  grid-area: links;
+  padding-bottom: 10px;
+
+  @include media("<menu-cutoff") {
+    @include rounded-edges("bottom-left" "bottom-right");
+  }
+
+  @include media(">=menu-cutoff") {
+    // no rounded edges
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  li {
+    display: inline-block;
+
+    a {
+      padding: 10px;
+    }
+  }
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  margin: auto;
+  padding: 10px;
+  font-size: 16pt;
+
+  a {
+    color: green;
+  }
+}
