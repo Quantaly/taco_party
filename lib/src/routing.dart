@@ -11,7 +11,7 @@ import 'screens/home/home.template.dart' as home_template;
 
 class Routes {
   static final home = RouteDefinition(
-    routePath: RoutePaths.home,
+    path: "home",
     component: home_template.HomeScreenComponentNgFactory,
     useAsDefault: true,
   );
@@ -19,8 +19,4 @@ class Routes {
   static final all = [
     home,
   ];
-}
-
-class RoutePaths {
-  static final home = RoutePath(path: "home");
 }

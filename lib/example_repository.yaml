@@ -1,0 +1,19 @@
+name: Example Repository
+header_color: "black"
+header_background_color: "#ffff80"
+borders_color: "black"
+body_background_color: "#ffff80"
+
+sprite_sets:
+- name: pokemon
+  display_name: Pokémon
+  url: "some-url://pokemon.json"
+  color: "green"
+- name: minediamonds
+  display_name: Minecraft Diamonds
+  url: "some-url://minediamonds.json"
+  color: "limegreen"
+- name: energyihs
+  display_name: Energy Institute
+  url: "some-url://energyihs.json"
+  color: "green"

@@ -22,3 +22,4 @@ linter:
     - curly_braces_in_flow_control_structures
     - directives_ordering
     - annotate_overrides
+    - prefer_final_locals
