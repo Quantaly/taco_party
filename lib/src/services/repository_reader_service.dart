@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:yaml/yaml.dart';
 
@@ -44,7 +46,19 @@ class RepositoryReaderService {
         final json = urlJson.decode(name);
         return SpriteSet.fromMap(json);
       default:
-        throw "Yeah... no. Maybe actually implement repositories first.";
+        return getSpriteSetForRepository(await getRepository(repository), name);
     }
+  }
+
+  Future<SpriteSet> getSpriteSetForRepository(
+      Repository repository, String name) async {
+    RepositorySpriteSetData data;
+    try {
+      data = repository.spriteSets.singleWhere((d) => d.name == name);
+    } on StateError {
+      return null;
+    }
+    final response = await _client.get(data.url);
+    return SpriteSet.fromMap(jsonDecode(response.body));
   }
 }

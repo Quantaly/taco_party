@@ -1,13 +1,9 @@
 @import "../../..";
 
 #container {
-  display: grid;
-  justify-content: center;
-  align-content: start;
-  grid-gap: 10px;
-  padding: 10px;
+  @extend %main-grid-base;
 
-  @include media("<menu-cutoff") {
+  @include media("<main-cutoff") {
     grid-template-columns: 90%;
     grid-template-rows: auto auto auto auto;
     grid-template-areas:
@@ -17,7 +13,7 @@
         'links';
   }
 
-  @include media(">=menu-cutoff") {
+  @include media(">=main-cutoff") {
     grid-template-columns: 45% 45%;
     grid-template-rows: 100px auto auto;
     grid-template-areas:
@@ -28,7 +24,7 @@
 }
 
 h1 {
-  @extend %grid-area-base;
+  @extend %main-grid-area-base;
   @include rounded-edges("top-left" "top-right");
 
   font-size: 32px;
@@ -44,45 +40,45 @@ h2 {
 }
 
 
-#sprite-sets {
-  @extend %grid-area-base;
+.sprite-sets {
+  @extend %main-grid-area-base;
 
   grid-area: sprite-sets;
 
-  @include media("<menu-cutoff") {
+  @include media("<main-cutoff") {
     // no rounded edges
   }
 
-  @include media(">=menu-cutoff") {
+  @include media(">=main-cutoff") {
     @include rounded-edges("bottom-left");
   }
 }
 
-#options {
-  @extend %grid-area-base;
+.options {
+  @extend %main-grid-area-base;
 
   grid-area: options;
 
-  @include media("<menu-cutoff") {
+  @include media("<main-cutoff") {
     // no rounded edges
   }
 
-  @include media(">=menu-cutoff") {
+  @include media(">=main-cutoff") {
     @include rounded-edges("bottom-right");
   }
 }
 
-#links {
-  @extend %grid-area-base;
+.links {
+  @extend %main-grid-area-base;
 
   grid-area: links;
   padding-bottom: 10px;
 
-  @include media("<menu-cutoff") {
+  @include media("<main-cutoff") {
     @include rounded-edges("bottom-left" "bottom-right");
   }
 
-  @include media(">=menu-cutoff") {
+  @include media(">=main-cutoff") {
     // no rounded edges
   }
 
@@ -103,6 +99,7 @@ h2 {
 
 ul {
   list-style-type: none;
+  padding-left: 10px;
 }
 
 li {
@@ -112,5 +109,9 @@ li {
 
   a {
     color: green;
+  }
+
+  aside {
+    font-size: 12px;
   }
 }

@@ -1,0 +1,52 @@
+@import "../../..";
+
+$button-size: 50px;
+$border-width: 5px;
+
+.content {
+  border: $border-width solid;
+  display: grid;
+
+  // partial table
+  grid-template-columns: auto $button-size;
+  grid-template-rows: auto;
+  grid-template-areas: 'title expand-toggle';
+}
+
+.content.full-table {
+  grid-template-columns: auto $button-size;
+  grid-template-rows: auto auto;
+  grid-template-areas: 'title expand-toggle'
+                       'list list';
+}
+
+h3 {
+  grid-area: title;
+  margin: 0;
+  vertical-align: middle;
+  padding: 10px 0 10px 15px;
+}
+
+.expand-toggle {
+  @include no-select;
+
+  grid-area: expand-toggle;
+  text-align: center;
+  vertical-align: middle;
+  font: ($button-size - 10px) bold;
+  cursor: pointer;
+  min-height: $button-size;
+}
+
+ul {
+  grid-area: list;
+  border-top: $border-width dashed;
+  border-color: inherit;
+
+  list-style-type: none;
+  padding: 10px 0 10px 15px;
+}
+
+li {
+  padding: 5px 0;
+}

@@ -3,11 +3,11 @@
 $default-background: yellow;
 $default-foreground: #ffff80;
 
-$breakpoints: (menu-cutoff: 600px, stage-mid: 600px, stage-big: 900px);
+$breakpoints: (main-cutoff: 600px, stage-mid: 600px, stage-big: 900px);
 
 $border-curve: 10px;
 
-%grid-base {
+%main-grid-base {
   display: grid;
   justify-content: center;
   align-content: start;
@@ -15,7 +15,7 @@ $border-curve: 10px;
   padding: 10px;
 }
 
-%grid-area-base {
+%main-grid-area-base {
   background-color: $default-foreground;
   margin: 0;
   padding: 20px;
@@ -26,4 +26,11 @@ $border-curve: 10px;
                  if(index($corners, "top-right") != null, $border-curve, 0)
                  if(index($corners, "bottom-right") != null, $border-curve, 0)
                  if(index($corners, "bottom-left") != null, $border-curve, 0);
+}
+
+@mixin no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

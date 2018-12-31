@@ -1,0 +1,21 @@
+<div class="content"
+     [class.full-table]="isExpanded"
+     [style.background-color]="repository.headerBackgroundColor"
+     [style.border-color]="repository.bordersColor">
+    <h3 [innerHTML]="repository.name"
+        [style.color]="repository.headerColor"></h3>
+    <div class="expand-toggle"
+         [innerHTML]="expandToggleDisplay"
+         role="button"
+         [attr.aria-label]="expandToggleAriaLabel"
+         (click)="isExpanded = !isExpanded"
+         [style.color]="repository.bordersColor"></div>
+    <ul *ngIf="isExpanded"
+        [style.background-color]="repository.bodyBackgroundColor">
+        <li *ngFor="let spriteSet of repository.spriteSets">
+            <a [innerHTML]="spriteSet.displayName"
+               [attr.href]="'http://example.com'"
+               [style.color]="spriteSet.color"></a>
+        </li>
+    </ul>
+</div>

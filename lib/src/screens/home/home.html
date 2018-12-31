@@ -1,24 +1,18 @@
 <div id="container">
     <h1>Taco Party</h1>
 
-    <div id="sprite-sets">
+    <div class="sprite-sets">
         <h2>Sprite Sets</h2>
         <ul>
-            <li>yeet</li>
-            <li>yeet</li>
-            <li>yeet</li>
-            <li>yeet</li>
-            <li>yeet</li>
-            <li>yeet</li>
-            <li>yeet</li>
-            <li>yeet</li>
-            <li>yeet</li>
-            <li>yeet</li>
-            <li>yeet</li>
+            <li><a href="http://example.com">Default</a></li>
+            <li>
+                <tp-repo *ngIf="repository != null" [repository]="repository"></tp-repo>
+            </li>
+            <li><aside>Add more repositories with the <a>repository manager</a>!</aside></li>
         </ul>
     </div>
 
-    <div id="options">
+    <div class="options">
         <h2>Options</h2>
         <ul>
             <li>yeet</li>
@@ -27,12 +21,12 @@
         </ul>
     </div>
 
-    <div id="links">
+    <div class="links">
         <h2>Links</h2>
         <ul>
             <li><a href="https://github.com/quantumAssembly/taco_party">GitHub Repo</a></li>
             <li><a>Sprite Set Editor</a></li>
-            <li><a>Repository Browser</a></li>
+            <li><a>Repository Manager</a></li>
         </ul>
     </div>
 </div>
