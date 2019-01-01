@@ -16,7 +16,7 @@ class SpriteSet {
   int get maxWidth => images.fold(0, (a, b) => math.max(a, b.width));
   int get maxHeight => images.fold(0, (a, b) => math.max(a, b.height));
   num get maxHalfDiagonal {
-    var x = maxWidth, y = maxHeight;
+    final x = maxWidth, y = maxHeight;
     return math.sqrt(x * x + y * y) / 2;
   }
 
@@ -40,7 +40,7 @@ class SpriteSet {
         maxHorzVelocity: source["max_horz_velocity"],
         minVertVelocity: source["min_vert_velocity"],
         maxVertVelocity: source["max_vert_velocity"],
-        maxAngularVelocity: source["max_angular_velocity"],
+        maxAngularVelocity: toRadians(source["max_angular_velocity"]),
         title: source["title"],
         images: (source["images"] as List)
             .cast<Map>()

@@ -1,0 +1,31 @@
+@import "../../shared";
+
+%main-grid-base {
+  display: grid;
+  justify-content: center;
+  align-content: start;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+%main-grid-area-base {
+  background-color: $default-foreground;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  @extend %main-grid-area-base;
+  @include rounded-edges("top-left" "top-right");
+
+  font-size: 32px;
+  padding: 30px;
+  color: purple;
+  grid-area: header;
+  text-align: center;
+}
+
+h2 {
+  margin: 0;
+  font-size: 28px;
+}

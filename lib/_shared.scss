@@ -3,23 +3,9 @@
 $default-background: yellow;
 $default-foreground: #ffff80;
 
-$breakpoints: (main-cutoff: 600px, stage-mid: 600px, stage-big: 900px);
+$breakpoints: (main-cutoff: 600px, stage-small: 600px, stage-big: 900px);
 
 $border-curve: 10px;
-
-%main-grid-base {
-  display: grid;
-  justify-content: center;
-  align-content: start;
-  grid-gap: 10px;
-  padding: 10px;
-}
-
-%main-grid-area-base {
-  background-color: $default-foreground;
-  margin: 0;
-  padding: 20px;
-}
 
 @mixin rounded-edges($corners) {
   border-radius: if(index($corners, "top-left") != null, $border-curve, 0)

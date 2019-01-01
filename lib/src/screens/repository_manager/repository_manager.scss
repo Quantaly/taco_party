@@ -1,0 +1,65 @@
+@import "../main-screens";
+
+:host {
+  @extend %main-grid-base;
+
+  @include media("<main-cutoff") {
+    grid-template-columns: 90%;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+        'header'
+        'subscribe-new'
+        'manage-existing';
+  }
+
+  @include media(">=main-cutoff") {
+    grid-template-columns: 45% 45%;
+    grid-template-rows: 100px auto;
+    grid-template-areas:
+        'header header'
+        'subscribe-new manage-existing';
+  }
+}
+
+.subscribe-new {
+  @extend %main-grid-area-base;
+
+  grid-area: subscribe-new;
+
+  @include media("<main-cutoff") {
+    // no rounded edges
+  }
+
+  @include media(">=main-cutoff") {
+    @include rounded-edges("bottom-left");
+  }
+}
+
+.manage-existing {
+  @extend %main-grid-area-base;
+
+  grid-area: manage-existing;
+
+  @include media("<main-cutoff") {
+    @include rounded-edges("bottom-left" "bottom-right");
+  }
+
+  @include media(">=main-cutoff") {
+    @include rounded-edges("bottom-right")
+  }
+}
+
+label {
+  display: none;
+}
+
+table {
+  margin: 7px;
+}
+
+//noinspection CssOptimizeSimilarProperties
+td {
+  border: 1px solid;
+  border-color: inherit;
+  padding: 2px 5px;
+}

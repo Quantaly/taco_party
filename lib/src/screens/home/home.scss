@@ -1,6 +1,6 @@
-@import "../../..";
+@import "../main-screens";
 
-#container {
+:host {
   @extend %main-grid-base;
 
   @include media("<main-cutoff") {
@@ -22,23 +22,6 @@
         'sprite-sets options';
   }
 }
-
-h1 {
-  @extend %main-grid-area-base;
-  @include rounded-edges("top-left" "top-right");
-
-  font-size: 32px;
-  padding: 30px;
-  color: purple;
-  grid-area: header;
-  text-align: center;
-}
-
-h2 {
-  margin: 0;
-  font-size: 28px;
-}
-
 
 .sprite-sets {
   @extend %main-grid-area-base;

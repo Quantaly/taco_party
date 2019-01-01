@@ -1,7 +1,7 @@
 name: Kai's Cool and Fun Sprite Sets
-header_color: "black"
-header_background_color: "#ffff80"
-borders_color: "black"
+header_color: "maroon"
+header_background_color: "limegreen"
+borders_color: "azure"
 body_background_color: "#ffff80"
 
 sprite_sets:

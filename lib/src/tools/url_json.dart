@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:archive/archive.dart';
+import 'string_base64.dart';
 
 const urlJson = UrlJsonCodec();
 
@@ -17,19 +17,17 @@ class UrlJsonCodec extends Codec<Object, String> {
 class _UrlJsonEncoder extends Converter<Object, String> {
   const _UrlJsonEncoder();
 
-  static final zLib = ZLibEncoder();
+  static const stringBase64 = StringBase64Encoder(compress: true);
 
   @override
-  String convert(Object input) =>
-      base64UrlEncode(zLib.encode(utf8.encode(jsonEncode(input))));
+  String convert(Object input) => stringBase64.encode(jsonEncode(input));
 }
 
 class _UrlJsonDecoder extends Converter<String, Object> {
   const _UrlJsonDecoder();
 
-  static final zLib = ZLibDecoder();
+  static const stringBase64 = StringBase64Decoder();
 
   @override
-  Object convert(String input) =>
-      jsonDecode(utf8.decode(zLib.decodeBytes(base64Decode(input))));
+  Object convert(String input) => jsonDecode(stringBase64.decode(input));
 }

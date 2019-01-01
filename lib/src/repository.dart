@@ -1,3 +1,5 @@
+import 'tools/string_base64.dart';
+
 class Repository {
   String name;
   String headerColor;
@@ -42,4 +44,16 @@ class RepositorySpriteSetData {
         url: source["url"],
         color: source["color"],
       );
+}
+
+const stringBase64Decoder = StringBase64Decoder();
+String normalizeRepositoryIdentifier(String identifier) {
+  if (identifier.startsWith(RegExp("https?:\\/\\/"))) return identifier;
+  try {
+    final ret = stringBase64Decoder.decode(identifier);
+    if (!ret.startsWith(RegExp("https?:\\/\\/"))) throw FormatException();
+    return ret;
+  } on FormatException {
+    throw FormatException("Malformed repository identifier");
+  }
 }

@@ -1,19 +1,25 @@
 import 'package:angular/angular.dart';
+import 'package:angular_router/angular_router.dart';
 
 import '../../components/repository_display/repository_display.dart';
 import '../../repository.dart';
+import '../../routing.dart';
 import '../../services/background_color_service.dart';
 import '../../services/repository_reader_service.dart';
 
 @Component(
-  selector: "tp-home",
+  selector: "tp-screens-home",
   templateUrl: "home.html",
   styleUrls: ["home.css"],
-  directives: [coreDirectives, RepositoryDisplayComponent],
+  directives: [
+    coreDirectives,
+    routerDirectives,
+    RepositoryDisplayComponent,
+  ],
 )
 class HomeScreenComponent implements OnInit {
-  BackgroundColorService _bgColor;
-  RepositoryReaderService _repoReader;
+  final BackgroundColorService _bgColor;
+  final RepositoryReaderService _repoReader;
 
   HomeScreenComponent(this._bgColor, this._repoReader);
 
@@ -26,4 +32,6 @@ class HomeScreenComponent implements OnInit {
         .getRepository("example_repository.yaml")
         .then((r) => repository = r);
   }
+
+  String get repoManagerLink => Routes.repositoryManager.toUrl();
 }

@@ -13,13 +13,6 @@ class RepositoryReaderService {
   RepositoryReaderService(this._client);
 
   Future<Repository> getRepository(String url) async {
-    if (!url.endsWith(".yaml")) {
-      if (!url.endsWith("/")) {
-        url = "$url/";
-      }
-      url = "${url}manifest.yaml";
-    }
-
     try {
       final response = await _client.get(url);
       final parsed = loadYamlDocument(response.body);
