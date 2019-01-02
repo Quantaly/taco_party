@@ -32,4 +32,8 @@
             </tr>
         </template>
     </table>
+    <aside *ngIf="subscriptions.contains(null)">
+        Some subscriptions not displayed here may be broken.
+        <button (click)="pruneBroken()">Prune Potential Broken Subscriptions</button>
+    </aside>
 </div>

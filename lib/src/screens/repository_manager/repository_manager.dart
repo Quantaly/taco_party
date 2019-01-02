@@ -78,4 +78,31 @@ class RepositoryManagerScreenComponent implements OnInit, OnDestroy {
     _lastLoad?.cancel();
     _lastLoad = _repoLoader.loadAsync().listen((list) => subscriptions = list);
   }
+
+  void pruneBroken() async {
+    if (subscriptions.length < 1) return;
+    final broken = <int>[];
+    final subUrls = List<String>.from(_repoSubscriptions);
+    for (var i = 0; i < subUrls.length; i++) {
+      if (subscriptions[i] == null) {
+        broken.add(i);
+      }
+    }
+    final confirmMsg = StringBuffer(
+        "The following URLs have not successfully loaded yet, and are assumed "
+        "to be broken:\n\n");
+    for (var i in broken) {
+      confirmMsg.writeln(subUrls[i]);
+    }
+    confirmMsg.writeln(
+        "\nIf you know one or more of these loads slowly, give it some more "
+        "time or make sure you have the URL copied down to resubscribe.");
+    confirmMsg.writeln("\nDelete these subscriptions?");
+    if (window.confirm(confirmMsg.toString())) {
+      for (var i in broken) {
+        _repoSubscriptions.removeAt(i);
+      }
+      loadSubscriptions();
+    }
+  }
 }
