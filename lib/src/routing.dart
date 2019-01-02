@@ -1,8 +1,8 @@
 import 'package:angular_router/angular_router.dart';
 
+import 'screens/bundle_manager/bundle_manager.template.dart'
+    as bundle_manager_template;
 import 'screens/home/home.template.dart' as home_template;
-import 'screens/repository_manager/repository_manager.template.dart'
-    as repository_manager_template;
 
 /*
  supposedly, putting the RoutePaths and RouteDefinitions in the same file is a
@@ -18,14 +18,13 @@ class Routes {
     useAsDefault: true,
   );
 
-  static final repositoryManager = RouteDefinition(
-    path: "tools/repository_manager",
-    component:
-        repository_manager_template.RepositoryManagerScreenComponentNgFactory,
+  static final bundleManager = RouteDefinition(
+    path: "tools/bundle_manager",
+    component: bundle_manager_template.BundleManagerScreenComponentNgFactory,
   );
 
   static final all = [
     home,
-    repositoryManager,
+    bundleManager,
   ];
 }

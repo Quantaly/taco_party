@@ -3,21 +3,21 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:yaml/yaml.dart';
 
-import '../repository.dart';
+import '../bundle.dart';
 import '../sprite_set.dart';
 import '../tools/url_json.dart';
 
-class RepositoryReaderService {
+class BundleReaderService {
   http.Client _client;
 
-  RepositoryReaderService(this._client);
+  BundleReaderService(this._client);
 
-  Future<Repository> getRepository(String url) async {
+  Future<Bundle> getBundle(String url) async {
     try {
       final response = await _client.get(url);
       final parsed = loadYamlDocument(response.body);
 
-      return Repository.fromMap(parsed.contents as YamlMap);
+      return Bundle.fromMap(parsed.contents as YamlMap);
     } on Object {
       // there are so many potential throws in this
       // that it's barely even worth trying to diagnose. TODO maybe someday
@@ -25,8 +25,8 @@ class RepositoryReaderService {
     }
   }
 
-  Future<SpriteSet> getSpriteSet(String repository, String name) async {
-    switch (repository) {
+  Future<SpriteSet> getSpriteSet(String bundle, String name) async {
+    switch (bundle) {
       case "default":
         switch (name) {
           // a little bit unnecessary, but communicates the intent here well
@@ -39,15 +39,14 @@ class RepositoryReaderService {
         final json = urlJson.decode(name);
         return SpriteSet.fromMap(json);
       default:
-        return getSpriteSetForRepository(await getRepository(repository), name);
+        return getSpriteSetForBundle(await getBundle(bundle), name);
     }
   }
 
-  Future<SpriteSet> getSpriteSetForRepository(
-      Repository repository, String name) async {
-    RepositorySpriteSetData data;
+  Future<SpriteSet> getSpriteSetForBundle(Bundle bundle, String name) async {
+    BundleSpriteSetData data;
     try {
-      data = repository.spriteSets.singleWhere((d) => d.name == name);
+      data = bundle.spriteSets.singleWhere((d) => d.name == name);
     } on StateError {
       return null;
     }

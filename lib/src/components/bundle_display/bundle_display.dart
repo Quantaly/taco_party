@@ -1,16 +1,16 @@
 import 'package:angular/angular.dart';
 
-import '../../repository.dart';
+import '../../bundle.dart';
 
 @Component(
-  selector: "tp-repo",
-  templateUrl: "repository_display.html",
-  styleUrls: ["repository_display.css"],
+  selector: "tp-bundle",
+  templateUrl: "bundle_display.html",
+  styleUrls: ["bundle_display.css"],
   directives: coreDirectives,
 )
-class RepositoryDisplayComponent {
+class BundleDisplayComponent {
   @Input()
-  Repository repository;
+  Bundle bundle;
 
   bool isExpanded = false;
 

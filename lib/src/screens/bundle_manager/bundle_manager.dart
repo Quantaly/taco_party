@@ -4,39 +4,39 @@ import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:stream_transform/stream_transform.dart' show debounce;
 
-import '../../repository.dart';
+import '../../bundle.dart';
 import '../../services/background_color_service.dart';
-import '../../services/repository_mass_loader_service.dart';
-import '../../services/repository_reader_service.dart';
-import '../../services/subscribed_repositories_service.dart';
+import '../../services/bundle_mass_loader_service.dart';
+import '../../services/bundle_reader_service.dart';
+import '../../services/subscribed_bundles_service.dart';
 
 @Component(
-  selector: "tp-screens-repomanager",
-  templateUrl: "repository_manager.html",
-  styleUrls: ["repository_manager.css"],
+  selector: "tp-screens-bundlemanager",
+  templateUrl: "bundle_manager.html",
+  styleUrls: ["bundle_manager.css"],
   directives: [coreDirectives],
 )
-class RepositoryManagerScreenComponent implements OnInit, OnDestroy {
+class BundleManagerScreenComponent implements OnInit, OnDestroy {
   final BackgroundColorService _bgColor;
-  final RepositoryMassLoaderService _repoLoader;
-  final RepositoryReaderService _repoReader;
-  final SubscribedRepositoriesService _repoSubscriptions;
-  RepositoryManagerScreenComponent(this._bgColor, this._repoLoader,
-      this._repoReader, this._repoSubscriptions);
+  final BundleMassLoaderService _bundleLoader;
+  final BundleReaderService _bundleReader;
+  final SubscribedBundlesService _bundleSubscriptions;
+  BundleManagerScreenComponent(this._bgColor, this._bundleLoader,
+      this._bundleReader, this._bundleSubscriptions);
 
-  Repository subscribeTo;
+  Bundle subscribeTo;
   bool canSubscribe;
 
-  int _lastFindRepositoryCall = 0;
-  StreamController<String> findRepositoryController;
-  void _findRepository(String identifier) async {
-    final thisCall = ++_lastFindRepositoryCall;
+  int _lastFindBundleCall = 0;
+  StreamController<String> findBundleController;
+  void _findBundle(String identifier) async {
+    final thisCall = ++_lastFindBundleCall;
     try {
-      identifier = normalizeRepositoryIdentifier(identifier);
-      final repo = await _repoReader.getRepository(identifier);
-      if (_lastFindRepositoryCall == thisCall) {
-        subscribeTo = repo;
-        canSubscribe = !_repoSubscriptions.contains(identifier);
+      identifier = normalizeBundleIdentifier(identifier);
+      final bundle = await _bundleReader.getBundle(identifier);
+      if (_lastFindBundleCall == thisCall) {
+        subscribeTo = bundle;
+        canSubscribe = !_bundleSubscriptions.contains(identifier);
       }
     } on FormatException {
       subscribeTo = null;
@@ -44,7 +44,7 @@ class RepositoryManagerScreenComponent implements OnInit, OnDestroy {
   }
 
   void subscribe(InputElement input) {
-    _repoSubscriptions.add(input.value);
+    _bundleSubscriptions.add(input.value);
     input.value = "";
     subscribeTo = null;
     canSubscribe = false;
@@ -52,37 +52,38 @@ class RepositoryManagerScreenComponent implements OnInit, OnDestroy {
   }
 
   void unsubscribe(int index) {
-    _repoSubscriptions.removeAt(index);
+    _bundleSubscriptions.removeAt(index);
     loadSubscriptions();
   }
 
-  List<Repository> subscriptions = [];
+  List<Bundle> subscriptions = [];
 
   @override
   void ngOnInit() {
     _bgColor.backgroundColor = "yellow";
-    findRepositoryController = StreamController()
+    findBundleController = StreamController()
       ..stream
           .transform(debounce(const Duration(milliseconds: 300)))
-          .listen(_findRepository);
+          .listen(_findBundle);
     loadSubscriptions();
   }
 
   @override
   void ngOnDestroy() {
-    findRepositoryController.close();
+    findBundleController.close();
   }
 
   StreamSubscription _lastLoad;
   Future<void> loadSubscriptions() async {
     _lastLoad?.cancel();
-    _lastLoad = _repoLoader.loadAsync().listen((list) => subscriptions = list);
+    _lastLoad =
+        _bundleLoader.loadAsync().listen((list) => subscriptions = list);
   }
 
   void pruneBroken() async {
     if (subscriptions.length < 1) return;
     final broken = <int>[];
-    final subUrls = List<String>.from(_repoSubscriptions);
+    final subUrls = List<String>.from(_bundleSubscriptions);
     for (var i = 0; i < subUrls.length; i++) {
       if (subscriptions[i] == null) {
         broken.add(i);
@@ -100,7 +101,7 @@ class RepositoryManagerScreenComponent implements OnInit, OnDestroy {
     confirmMsg.writeln("\nDelete these subscriptions?");
     if (window.confirm(confirmMsg.toString())) {
       for (var i in broken) {
-        _repoSubscriptions.removeAt(i);
+        _bundleSubscriptions.removeAt(i);
       }
       loadSubscriptions();
     }

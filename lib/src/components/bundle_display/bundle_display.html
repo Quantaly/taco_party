@@ -1,18 +1,18 @@
 <div class="content"
      [class.full-table]="isExpanded"
-     [style.background-color]="repository.headerBackgroundColor"
-     [style.border-color]="repository.bordersColor">
-    <h3 [innerHTML]="repository.name"
-        [style.color]="repository.headerColor"></h3>
+     [style.background-color]="bundle.headerBackgroundColor"
+     [style.border-color]="bundle.bordersColor">
+    <h3 [innerHTML]="bundle.name"
+        [style.color]="bundle.headerColor"></h3>
     <div class="expand-toggle"
          [innerHTML]="expandToggleDisplay"
          role="button"
          [attr.aria-label]="expandToggleAriaLabel"
          (click)="isExpanded = !isExpanded"
-         [style.color]="repository.bordersColor"></div>
+         [style.color]="bundle.bordersColor"></div>
     <ul *ngIf="isExpanded"
-        [style.background-color]="repository.bodyBackgroundColor">
-        <li *ngFor="let spriteSet of repository.spriteSets">
+        [style.background-color]="bundle.bodyBackgroundColor">
+        <li *ngFor="let spriteSet of bundle.spriteSets">
             <a [innerHTML]="spriteSet.displayName"
                [attr.href]="'http://example.com'"
                [style.color]="spriteSet.color"></a>

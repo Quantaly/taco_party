@@ -4,10 +4,10 @@
     <h2>Sprite Sets</h2>
     <ul>
         <li><a href="http://example.com">Default</a></li>
-        <li *ngFor="let repository of repositories">
-            <tp-repo *ngIf="repository != null" [repository]="repository"></tp-repo>
+        <li *ngFor="let bundle of bundles">
+            <tp-bundle *ngIf="bundle != null" [bundle]="bundle"></tp-bundle>
         </li>
-        <li><aside>Add more with the <a [routerLink]="repoManagerLink">repository manager</a>!</aside></li>
+        <li><aside>Add more with the <a [routerLink]="bundleManagerLink">bundle manager</a>!</aside></li>
     </ul>
 </div>
 
@@ -23,8 +23,8 @@
 <div class="links">
     <h2>Links</h2>
     <ul>
-        <li><a href="https://github.com/quantumAssembly/taco_party">GitHub Repo</a></li>
         <li><a>Sprite Set Editor</a></li>
-        <li><a [routerLink]="repoManagerLink">Repository Manager</a></li>
+        <li><a [routerLink]="bundleManagerLink">Bundle Manager</a></li>
+        <li><a href="https://github.com/quantumAssembly/taco_party">GitHub Repo</a></li>
     </ul>
 </div>

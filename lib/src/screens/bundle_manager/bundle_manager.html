@@ -1,16 +1,16 @@
-<h1>Repository Manager</h1>
+<h1>Bundle Manager</h1>
 
 <div class="subscribe-new">
     <h2>Subscribe</h2>
     <p>Enter here:</p>
     <ul>
-        <li>the URL to a repository YAML file, or</li>
-        <li>the repository identifier from a stage URL</li> <!-- TODO maybe just a stage URL -->
+        <li>the URL to a bundle YAML file, or</li>
+        <li>the bundle identifier from a stage URL</li> <!-- TODO maybe just a stage URL -->
     </ul>
-    <label for="subscribe-input">Repository</label>
+    <label for="subscribe-input">Bundle</label>
     <input #subscribeInput
            id="subscribe-input"
-           (input)="findRepositoryController.add(subscribeInput.value)">
+           (input)="findBundleController.add(subscribeInput.value)">
     <div *ngIf="subscribeTo != null">
         <span [innerHTML]="subscribeTo.name"></span>
         <button *ngIf="canSubscribe"
@@ -22,12 +22,12 @@
 <div class="manage-existing">
     <h2>Manage Subscriptions</h2>
     <table>
-        <template ngFor let-repository [ngForOf]="subscriptions" let-i="index">
-            <tr *ngIf="repository != null"
-                [style.color]="repository.headerColor"
-                [style.background-color]="repository.headerBackgroundColor"
-                [style.border-color]="repository.bordersColor">
-                <td [innerHTML]="repository.name"></td>
+        <template ngFor let-bundle [ngForOf]="subscriptions" let-i="index">
+            <tr *ngIf="bundle != null"
+                [style.color]="bundle.headerColor"
+                [style.background-color]="bundle.headerBackgroundColor"
+                [style.border-color]="bundle.bordersColor">
+                <td [innerHTML]="bundle.name"></td>
                 <td><button (click)="unsubscribe(i)">Unsubscribe</button></td>
             </tr>
         </template>

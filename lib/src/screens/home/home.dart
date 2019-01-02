@@ -1,11 +1,11 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
-import '../../components/repository_display/repository_display.dart';
-import '../../repository.dart';
+import '../../components/bundle_display/bundle_display.dart';
+import '../../bundle.dart';
 import '../../routing.dart';
 import '../../services/background_color_service.dart';
-import '../../services/repository_mass_loader_service.dart';
+import '../../services/bundle_mass_loader_service.dart';
 
 @Component(
   selector: "tp-screens-home",
@@ -14,22 +14,22 @@ import '../../services/repository_mass_loader_service.dart';
   directives: [
     coreDirectives,
     routerDirectives,
-    RepositoryDisplayComponent,
+    BundleDisplayComponent,
   ],
 )
 class HomeScreenComponent implements OnInit {
   final BackgroundColorService _bgColor;
-  final RepositoryMassLoaderService _repoLoader;
+  final BundleMassLoaderService _bundleLoader;
 
-  HomeScreenComponent(this._bgColor, this._repoLoader);
+  HomeScreenComponent(this._bgColor, this._bundleLoader);
 
-  List<Repository> repositories = [];
+  List<Bundle> bundles = [];
 
   @override
   void ngOnInit() {
     _bgColor.backgroundColor = "yellow";
-    _repoLoader.loadAsync().listen((list) => repositories = list);
+    _bundleLoader.loadAsync().listen((list) => bundles = list);
   }
 
-  String get repoManagerLink => Routes.repositoryManager.toUrl();
+  String get bundleManagerLink => Routes.bundleManager.toUrl();
 }

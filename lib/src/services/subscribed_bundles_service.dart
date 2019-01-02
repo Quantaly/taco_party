@@ -2,8 +2,8 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:html';
 
-class SubscribedRepositoriesService with ListMixin<String> {
-  static const _storageKey = "taco_party:subscribedRepositories";
+class SubscribedBundlesService with ListMixin<String> {
+  static const _storageKey = "taco_party:subscribedBundles";
 
   List<String> get _storedList {
     if (!window.localStorage.containsKey(_storageKey)) {
