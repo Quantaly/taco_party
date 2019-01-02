@@ -10,7 +10,7 @@
     <label for="subscribe-input">Repository</label>
     <input #subscribeInput
            id="subscribe-input"
-           (input)="findRepository(subscribeInput.value)">
+           (input)="findRepositoryController.add(subscribeInput.value)">
     <div *ngIf="subscribeTo != null">
         <span [innerHTML]="subscribeTo.name"></span>
         <button *ngIf="canSubscribe"
@@ -21,13 +21,15 @@
 
 <div class="manage-existing">
     <h2>Manage Subscriptions</h2>
-    <table *ngIf="subscriptions != null">
-        <tr *ngFor="let repository of subscriptions; let i=index"
-            [style.color]="repository.headerColor"
-            [style.background-color]="repository.headerBackgroundColor"
-            [style.border-color]="repository.bordersColor">
-            <td [innerHTML]="repository.name"></td>
-            <td><button (click)="unsubscribe(i)">Unsubscribe</button></td>
-        </tr>
+    <table>
+        <template ngFor let-repository [ngForOf]="subscriptions" let-i="index">
+            <tr *ngIf="repository != null"
+                [style.color]="repository.headerColor"
+                [style.background-color]="repository.headerBackgroundColor"
+                [style.border-color]="repository.bordersColor">
+                <td [innerHTML]="repository.name"></td>
+                <td><button (click)="unsubscribe(i)">Unsubscribe</button></td>
+            </tr>
+        </template>
     </table>
 </div>

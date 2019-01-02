@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
+import 'package:stream_transform/stream_transform.dart' show debounce;
 
 import '../../repository.dart';
 import '../../services/background_color_service.dart';
+import '../../services/repository_mass_loader_service.dart';
 import '../../services/repository_reader_service.dart';
 import '../../services/subscribed_repositories_service.dart';
 
@@ -13,18 +16,20 @@ import '../../services/subscribed_repositories_service.dart';
   styleUrls: ["repository_manager.css"],
   directives: [coreDirectives],
 )
-class RepositoryManagerScreenComponent implements OnInit {
+class RepositoryManagerScreenComponent implements OnInit, OnDestroy {
   final BackgroundColorService _bgColor;
+  final RepositoryMassLoaderService _repoLoader;
   final RepositoryReaderService _repoReader;
   final SubscribedRepositoriesService _repoSubscriptions;
-  RepositoryManagerScreenComponent(
-      this._bgColor, this._repoReader, this._repoSubscriptions);
+  RepositoryManagerScreenComponent(this._bgColor, this._repoLoader,
+      this._repoReader, this._repoSubscriptions);
 
   Repository subscribeTo;
   bool canSubscribe;
 
   int _lastFindRepositoryCall = 0;
-  void findRepository(String identifier) async {
+  StreamController<String> findRepositoryController;
+  void _findRepository(String identifier) async {
     final thisCall = ++_lastFindRepositoryCall;
     try {
       identifier = normalizeRepositoryIdentifier(identifier);
@@ -51,16 +56,26 @@ class RepositoryManagerScreenComponent implements OnInit {
     loadSubscriptions();
   }
 
-  List<Repository> subscriptions;
+  List<Repository> subscriptions = [];
 
   @override
   void ngOnInit() {
     _bgColor.backgroundColor = "yellow";
+    findRepositoryController = StreamController()
+      ..stream
+          .transform(debounce(const Duration(milliseconds: 300)))
+          .listen(_findRepository);
     loadSubscriptions();
   }
 
+  @override
+  void ngOnDestroy() {
+    findRepositoryController.close();
+  }
+
+  StreamSubscription _lastLoad;
   Future<void> loadSubscriptions() async {
-    subscriptions =
-        await Future.wait(_repoSubscriptions.map(_repoReader.getRepository));
+    _lastLoad?.cancel();
+    _lastLoad = _repoLoader.loadAsync().listen((list) => subscriptions = list);
   }
 }

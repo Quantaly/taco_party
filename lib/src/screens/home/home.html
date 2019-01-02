@@ -4,7 +4,7 @@
     <h2>Sprite Sets</h2>
     <ul>
         <li><a href="http://example.com">Default</a></li>
-        <li>
+        <li *ngFor="let repository of repositories">
             <tp-repo *ngIf="repository != null" [repository]="repository"></tp-repo>
         </li>
         <li><aside>Add more with the <a [routerLink]="repoManagerLink">repository manager</a>!</aside></li>
