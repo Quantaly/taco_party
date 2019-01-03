@@ -3,7 +3,7 @@
 <div class="sprite-sets">
     <h2>Sprite Sets</h2>
     <ul>
-        <li><a href="http://example.com">Default</a></li>
+        <li><a [routerLink]="defaultSpriteSetLink">Default</a></li>
         <li *ngFor="let bundle of bundles">
             <tp-bundle *ngIf="bundle != null" [bundle]="bundle"></tp-bundle>
         </li>

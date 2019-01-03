@@ -31,5 +31,6 @@ class HomeScreenComponent implements OnInit {
     _bundleLoader.loadAsync().listen((list) => bundles = list);
   }
 
+  String get defaultSpriteSetLink => Routes.stageNoArgs.toUrl();
   String get bundleManagerLink => Routes.bundleManager.toUrl();
 }

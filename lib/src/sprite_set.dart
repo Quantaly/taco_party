@@ -12,8 +12,8 @@ class SpriteSet {
 
   List<ImageData> images;
 
-  String textColor;
-  String backgroundColor;
+  List<int> textColor;
+  List<int> backgroundColor;
 
   int get maxWidth => images.fold(0, (a, b) => math.max(a, b.width));
   int get maxHeight => images.fold(0, (a, b) => math.max(a, b.height));
@@ -57,13 +57,11 @@ class SpriteSet {
       );
 
   // not sure what i'll do with this, but could be good to know.
-  static final Expando<bool> _legacy = Expando("legacy");
-  bool get isLegacy => _legacy[this] ?? false;
+  bool _isLegacy;
+  bool get isLegacy => _isLegacy;
   static SpriteSet _checkLegacy(Map source) {
     if (source["class"] == "general") {
-      final ret = fromMap(source["data"]);
-      _legacy[ret] = true;
-      return ret;
+      return fromMap(source["data"]).._isLegacy = true;
     } else if (source["class"] != null) {
       throw ParseException("Inconvertible legacy format");
     }
@@ -84,8 +82,8 @@ class SpriteSet {
           ),
         ],
         title: "Tacos!",
-        textColor: "purple",
-        backgroundColor: "yellow",
+        textColor: const [0x80, 0x00, 0x80], // purple
+        backgroundColor: const [0xff, 0xff, 0x00], // yellow
         numTacos: 32,
       );
 }

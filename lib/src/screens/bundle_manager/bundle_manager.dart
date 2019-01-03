@@ -9,6 +9,7 @@ import '../../services/background_color_service.dart';
 import '../../services/bundle_mass_loader_service.dart';
 import '../../services/bundle_reader_service.dart';
 import '../../services/subscribed_bundles_service.dart';
+import '../../tools/range.dart';
 
 @Component(
   selector: "tp-screens-bundlemanager",
@@ -84,7 +85,7 @@ class BundleManagerScreenComponent implements OnInit, OnDestroy {
     if (subscriptions.length < 1) return;
     final broken = <int>[];
     final subUrls = List<String>.from(_bundleSubscriptions);
-    for (var i = 0; i < subUrls.length; i++) {
+    for (var i in range(subUrls.length)) {
       if (subscriptions[i] == null) {
         broken.add(i);
       }

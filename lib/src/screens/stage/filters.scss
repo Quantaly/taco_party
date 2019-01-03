@@ -1,0 +1,16 @@
+.filter-hicontrast {
+  filter: contrast(200%);
+}
+
+.filter-invert {
+  filter: invert(1);
+}
+
+.filter-rainbow {
+  animation: rainbow 1s linear infinite;
+}
+
+@keyframes rainbow {
+  from {filter: hue-rotate(0deg);}
+  to {filter: hue-rotate(360deg);}
+}

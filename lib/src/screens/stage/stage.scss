@@ -1,0 +1,54 @@
+@import "../../../shared";
+
+%fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+}
+
+%fixed-full-screen {
+  @extend %fixed;
+
+  width: 100%;
+  height: 100%;
+}
+
+.canvas-container {
+  @extend %fixed-full-screen;
+
+  div {
+    @extend %fixed-full-screen;
+  }
+
+  span {
+    @extend %fixed-full-screen;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    z-index: 413;
+
+    @include media("<stage-small") {
+      font-size: 48pt;
+    }
+
+    @include media(">=stage-small", "<stage-big") {
+      font-size: 72pt;
+    }
+
+    @include media(">=stage-big") {
+      font-size: 96pt;
+    }
+  }
+}
+
+canvas {
+  @extend %fixed;
+}
+
+.image-container {
+  display: none;
+}

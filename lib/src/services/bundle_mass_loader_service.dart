@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import '../bundle.dart';
+import '../tools/range.dart';
 import 'bundle_reader_service.dart';
 import 'subscribed_bundles_service.dart';
 
@@ -19,7 +20,7 @@ class BundleMassLoaderService {
     final subs = List.from(_bundleSubscriptions);
     final list = List<Bundle>(subs.length);
     final futures = List<Future>(subs.length);
-    for (var i = 0; i < subs.length; i++) {
+    for (var i in range(subs.length)) {
       futures[i] = _bundleReader.getBundle(subs[i])
         ..then((bundle) {
           list[i] = bundle;
