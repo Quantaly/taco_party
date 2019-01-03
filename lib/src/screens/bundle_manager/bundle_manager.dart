@@ -56,7 +56,7 @@ class BundleManagerScreenComponent implements OnInit, OnDestroy {
     loadSubscriptions();
   }
 
-  List<Bundle> subscriptions = [];
+  List<Bundle> subscriptions = const [];
 
   @override
   void ngOnInit() {

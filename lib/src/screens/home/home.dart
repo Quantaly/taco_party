@@ -1,8 +1,8 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
-import '../../components/bundle_display/bundle_display.dart';
 import '../../bundle.dart';
+import '../../components/bundle_display/bundle_display.dart';
 import '../../routing.dart';
 import '../../services/background_color_service.dart';
 import '../../services/bundle_mass_loader_service.dart';
@@ -23,7 +23,7 @@ class HomeScreenComponent implements OnInit {
 
   HomeScreenComponent(this._bgColor, this._bundleLoader);
 
-  List<Bundle> bundles = [];
+  List<Bundle> bundles = const [];
 
   @override
   void ngOnInit() {

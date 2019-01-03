@@ -46,11 +46,13 @@ class BundleSpriteSetData {
       );
 }
 
-const stringBase64Decoder = StringBase64Decoder();
+const _specialBundleNames = ["default", "permalink"];
+const _stringBase64Decoder = StringBase64Decoder();
 String normalizeBundleIdentifier(String identifier) {
+  if (_specialBundleNames.contains(identifier)) return identifier;
   if (identifier.startsWith(RegExp("https?:\\/\\/"))) return identifier;
   try {
-    final ret = stringBase64Decoder.decode(identifier);
+    final ret = _stringBase64Decoder.decode(identifier);
     if (!ret.startsWith(RegExp("https?:\\/\\/"))) throw FormatException();
     return ret;
   } on FormatException {

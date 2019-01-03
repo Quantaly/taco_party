@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'errors.dart';
+
 class SpriteSet {
   num maxHorzVelocity;
   num minVertVelocity;
@@ -36,7 +38,9 @@ class SpriteSet {
       this.numTacos,
       this.soundUrl});
 
-  static SpriteSet fromMap(Map source) => SpriteSet(
+  static SpriteSet fromMap(Map source) =>
+      _checkLegacy(source) ??
+      SpriteSet(
         maxHorzVelocity: source["max_horz_velocity"],
         minVertVelocity: source["min_vert_velocity"],
         maxVertVelocity: source["max_vert_velocity"],
@@ -51,6 +55,20 @@ class SpriteSet {
         numTacos: source["numTacos"],
         soundUrl: source["soundUrl"],
       );
+
+  // not sure what i'll do with this, but could be good to know.
+  static final Expando<bool> _legacy = Expando("legacy");
+  bool get isLegacy => _legacy[this] ?? false;
+  static SpriteSet _checkLegacy(Map source) {
+    if (source["class"] == "general") {
+      final ret = fromMap(source["data"]);
+      _legacy[ret] = true;
+      return ret;
+    } else if (source["class"] != null) {
+      throw ParseException("Inconvertible legacy format");
+    }
+    return null;
+  }
 
   static SpriteSet get defaultSpriteSet => SpriteSet(
         maxHorzVelocity: 4,

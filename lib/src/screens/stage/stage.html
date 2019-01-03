@@ -1,0 +1,23 @@
+<div #imageContainer
+     class="image-container"></div>
+<div class="canvas-container">
+    <!-- TODO automate filter layers - less divs, more flexibility, like before Angular -->
+    <!--div [class.filter-hicontrast]="filters['hicontrast']">
+        <div [class.filter-invert]="filters['invert']">
+            <div [class.filter-rainbow]="filters['rainbow']">
+                <canvas #stage></canvas>
+            </div>
+        </div>
+    </div-->
+    <canvas #stage></canvas>
+</div>
+<!--div class="controls">
+    <div *ngIf="displaySoundControl">This sprite set has a sound effect.
+        <button>Play Sound</button>
+        <button>Dismiss</button>
+    </div>
+    <div *ngIf="displaySubscribeControl">Subscribe to bundle "{{bundleName}}"?
+        <button>Subscribe</button>
+        <button>Dismiss</button>
+    </div>
+</div-->
