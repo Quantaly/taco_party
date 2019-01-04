@@ -79,6 +79,7 @@ class BundleManagerScreenComponent implements OnInit, OnDestroy {
   StreamSubscription _lastLoad;
   Future<void> loadSubscriptions() async {
     _lastLoad?.cancel();
+    subscriptions = const [];
     _lastLoad =
         _bundleLoader.loadAsync().listen((list) => subscriptions = list);
   }

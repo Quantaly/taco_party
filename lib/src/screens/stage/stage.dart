@@ -8,6 +8,7 @@ import '../../routing.dart';
 import '../../services/bundle_reader_service.dart';
 import '../../services/page_meta_service.dart';
 import '../../services/subscribed_bundles_service.dart';
+import '../../tools/color_utils.dart';
 
 @Component(
   selector: "tp-screens-stage",
@@ -29,15 +30,15 @@ class StageScreenComponent implements OnActivate, OnDestroy {
 
   String textContent = "Loading...";
   String textColor = "purple";
+  String controlPanelColor = "#ffff80";
 
   WebRenderController _renderController;
-  String bundle, spriteSetName;
+  String bundle, spriteSetName, bundleName;
   Map<String, String> queryParameters;
 
-  bool get displaySubscribeControl =>
-      bundle != null &&
-      bundle != "internal" &&
-      !_subscribedBundles.contains(bundle);
+  bool displaySubscribeControl = false;
+
+  bool get displayControls => displaySubscribeControl;
 
   @override
   void onActivate(_, RouterState current) async {
@@ -45,21 +46,46 @@ class StageScreenComponent implements OnActivate, OnDestroy {
     // being activated twice.
     ngOnDestroy();
 
-    bundle = Routes.getStageBundle(current.parameters) ?? "internal";
-    spriteSetName = Routes.getStageSpriteSet(current.parameters) ?? "default";
+    try {
+      bundle = Routes.getStageBundle(current.parameters);
+      spriteSetName = Routes.getStageSpriteSet(current.parameters);
+    } on Error {
+      // it *says* it's a TypeError, but I don't catch it when I specify
+      bundle = "internal";
+      spriteSetName = "default";
+    }
     queryParameters = current.queryParameters;
 
     final spriteSet = await _bundleReader.getSpriteSet(bundle, spriteSetName);
+    if (spriteSet.bundle != null) {
+      bundleName = spriteSet.bundle.name;
+    }
+    textColor = _listToColor(spriteSet.textColor);
+    controlPanelColor = augmentColor(spriteSet.backgroundColor);
     _pageMeta
       ..backgroundColor = _listToColor(spriteSet.backgroundColor)
       ..title = "Taco Party | ${spriteSet.name}";
-    textColor = _listToColor(spriteSet.textColor);
     _renderController = WebRenderController(spriteSet, imageContainer, stage);
     await _renderController.load();
 
-    print('StageScreenComponent.onActivate');
     textContent = queryParameters["msg"] ?? "";
+
+    if (bundle != "internal" &&
+        bundle != "permalink" &&
+        !_subscribedBundles.contains(bundle)) {
+      displaySubscribeControl = true;
+    }
+
     _renderController.start();
+  }
+
+  void subscribeToCurrentBundle() {
+    displaySubscribeControl = false;
+    if (bundle == null ||
+        bundle == "internal" ||
+        bundle == "permalink" ||
+        _subscribedBundles.contains(bundle)) return;
+    _subscribedBundles.add(bundle);
   }
 
   @override

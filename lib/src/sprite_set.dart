@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'bundle.dart';
 import 'errors.dart';
 
 class SpriteSet {
@@ -19,20 +20,24 @@ class SpriteSet {
 
   String soundUrl;
 
-  SpriteSet(
-      {this.maxHorzVelocity,
-      this.minVertVelocity,
-      this.maxVertVelocity,
-      this.maxAngularVelocity,
-      this.name,
-      this.images,
-      this.textColor,
-      this.backgroundColor,
-      this.numTacos,
-      this.soundUrl});
+  Bundle bundle;
 
-  static SpriteSet fromMap(Map source) =>
-      _checkLegacy(source) ??
+  SpriteSet({
+    this.maxHorzVelocity,
+    this.minVertVelocity,
+    this.maxVertVelocity,
+    this.maxAngularVelocity,
+    this.name,
+    this.images,
+    this.textColor,
+    this.backgroundColor,
+    this.numTacos,
+    this.soundUrl,
+    this.bundle,
+  });
+
+  static SpriteSet fromMap(Map source, [Bundle bundle]) =>
+      _checkLegacy(source, bundle) ??
       SpriteSet(
         maxHorzVelocity: source["maxHorzVelocity"],
         minVertVelocity: source["minVertVelocity"],
@@ -47,14 +52,15 @@ class SpriteSet {
         backgroundColor: (source["backgroundColor"] as List).cast(),
         numTacos: source["numTacos"],
         soundUrl: source["soundUrl"],
+        bundle: bundle,
       );
 
   // not sure what i'll do with this, but could be good to know.
   bool _isLegacy;
   bool get isLegacy => _isLegacy;
-  static SpriteSet _checkLegacy(Map source) {
+  static SpriteSet _checkLegacy(Map source, Bundle bundle) {
     if (source["class"] == "general") {
-      return fromMap(source["data"]).._isLegacy = true;
+      return fromMap(source["data"], bundle).._isLegacy = true;
     } else if (source["class"] != null) {
       throw ParseException("Inconvertible legacy format");
     }

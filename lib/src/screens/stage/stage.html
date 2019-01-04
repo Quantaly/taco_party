@@ -13,13 +13,16 @@
     <p [innerHTML]="textContent"
        [style.color]="textColor"></p>
 </div>
-<div class="controls">
+<div *ngIf="displayControls"
+     class="controls"
+     [style.border-color]="textColor"
+     [style.background-color]="controlPanelColor">
     <!--div *ngIf="displaySoundControl">This sprite set has a sound effect.
         <button>Play Sound</button>
         <button>Dismiss</button>
     </div-->
-    <div *ngIf="displaySubscribeControl">Subscribe to bundle "{{bundle}}"?
-        <button>Subscribe</button>
-        <button>Dismiss</button>
+    <div *ngIf="displaySubscribeControl">Subscribe to bundle "{{bundleName}}"?
+        <button (click)="subscribeToCurrentBundle()">Subscribe</button>
+        <button (click)="displaySubscribeControl = false">Dismiss</button>
     </div>
 </div>

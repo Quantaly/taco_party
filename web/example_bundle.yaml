@@ -17,3 +17,7 @@ sprite_sets:
   display_name: Tetris
   url: "https://quantumassembly.github.io/taco_party/sprite_sets/tetris.json"
   color: "green"
+- name: dartlang
+  display_name: Dart
+  url: "https://quantumassembly.github.io/taco_party/sprite_sets/dartlang.json"
+  color: "green"

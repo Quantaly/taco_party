@@ -51,6 +51,6 @@ class BundleReaderService {
       return null;
     }
     final response = await _client.get(data.url);
-    return SpriteSet.fromMap(jsonDecode(response.body));
+    return SpriteSet.fromMap(jsonDecode(response.body), bundle);
   }
 }

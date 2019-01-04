@@ -29,7 +29,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-weight: bold;
-    z-index: 413;
+    z-index: 400;
 
     @include media("<stage-small") {
       font-size: 48pt;
@@ -51,4 +51,14 @@ canvas {
 
 .image-container {
   display: none;
+}
+
+.controls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin: 2px;
+  border: 4px double;
+  padding: 2px;
+  z-index: 401;
 }
