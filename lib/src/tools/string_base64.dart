@@ -15,7 +15,8 @@ class StringBase64Encoder extends Converter<String, String> {
   String convert(String input) {
     var bytes = utf8.encode(input);
     if (compress) {
-      bytes = zLib.encode(bytes)..addAll(_zLibAddendum);
+      bytes =
+          zLib.encode(bytes).followedBy(_zLibAddendum).toList(growable: false);
     }
     if (urlSafe) {
       return base64UrlEncode(bytes);

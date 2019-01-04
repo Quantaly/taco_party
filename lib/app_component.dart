@@ -2,9 +2,9 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
 import 'src/routing.dart';
-import 'src/services/background_color_service.dart';
 import 'src/services/bundle_mass_loader_service.dart';
 import 'src/services/bundle_reader_service.dart';
+import 'src/services/page_meta_service.dart';
 import 'src/services/subscribed_bundles_service.dart';
 
 @Component(
@@ -12,7 +12,7 @@ import 'src/services/subscribed_bundles_service.dart';
   templateUrl: 'app_component.html',
   directives: [routerDirectives],
   providers: [
-    ClassProvider(BackgroundColorService),
+    ClassProvider(PageMetaService),
     ClassProvider(BundleMassLoaderService),
     ClassProvider(BundleReaderService),
     ClassProvider(SubscribedBundlesService),

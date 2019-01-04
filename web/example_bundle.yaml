@@ -1,19 +1,19 @@
 name: Kai's Cool and Fun Sprite Sets
-header_color: "maroon"
-header_background_color: "limegreen"
-borders_color: "azure"
+header_color: "black"
+header_background_color: "#ffff80"
+borders_color: "black"
 body_background_color: "#ffff80"
 
 sprite_sets:
-- name: pokemon
-  display_name: Pokémon
-  url: "some-url://pokemon.json"
+- name: monopocash
+  display_name: Monopoly Money
+  url: "https://quantumassembly.github.io/taco_party/sprite_sets/monopocash.json"
   color: "green"
 - name: minediamonds
   display_name: Minecraft Diamonds
-  url: "some-url://minediamonds.json"
+  url: "https://quantumassembly.github.io/taco_party/sprite_sets/minediamonds.json"
   color: "limegreen"
-- name: energyihs
-  display_name: Energy Institute
-  url: "some-url://energyihs.json"
+- name: tetris
+  display_name: Tetris
+  url: "https://quantumassembly.github.io/taco_party/sprite_sets/tetris.json"
   color: "green"

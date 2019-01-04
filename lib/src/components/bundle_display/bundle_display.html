@@ -14,7 +14,7 @@
         [style.background-color]="bundle.bodyBackgroundColor">
         <li *ngFor="let spriteSet of bundle.spriteSets">
             <a [innerHTML]="spriteSet.displayName"
-               [attr.href]="'http://example.com'"
+               [routerLink]="stageLink(spriteSet.name)"
                [style.color]="spriteSet.color"></a>
         </li>
     </ul>

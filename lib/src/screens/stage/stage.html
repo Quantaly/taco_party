@@ -10,15 +10,16 @@
         </div>
     </div-->
     <canvas #stage></canvas>
-    <span [innerHTML]="textContent"></span>
+    <p [innerHTML]="textContent"
+       [style.color]="textColor"></p>
 </div>
-<!--div class="controls">
-    <div *ngIf="displaySoundControl">This sprite set has a sound effect.
+<div class="controls">
+    <!--div *ngIf="displaySoundControl">This sprite set has a sound effect.
         <button>Play Sound</button>
         <button>Dismiss</button>
-    </div>
-    <div *ngIf="displaySubscribeControl">Subscribe to bundle "{{bundleName}}"?
+    </div-->
+    <div *ngIf="displaySubscribeControl">Subscribe to bundle "{{bundle}}"?
         <button>Subscribe</button>
         <button>Dismiss</button>
     </div>
-</div-->
+</div>

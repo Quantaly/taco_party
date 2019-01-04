@@ -25,7 +25,7 @@ class AnimationHandler {
 
   AnimationHandler(this._renderController)
       : _tacos = List(_renderController.spriteSet.numTacos),
-        _maxHalfDiagonal = _renderController.spriteSet.maxHalfDiagonal, // cache
+        _maxHalfDiagonal = _renderController.maxImageHalfDiagonal, // cache
         imageWeightMap = _makeWeightMap(_renderController.spriteSet.images);
 
   static List<int> _makeWeightMap(List<ImageData> images) {

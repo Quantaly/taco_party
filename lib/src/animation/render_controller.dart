@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import '../sprite_set.dart';
 import 'taco.dart';
 
@@ -15,4 +13,8 @@ abstract class RenderController {
 
   int get canvasWidth;
   int get canvasHeight;
+
+  int get maxImageWidth;
+  int get maxImageHeight;
+  num get maxImageHalfDiagonal;
 }

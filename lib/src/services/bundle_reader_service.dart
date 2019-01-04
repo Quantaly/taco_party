@@ -17,7 +17,7 @@ class BundleReaderService {
       final response = await _client.get(url);
       final parsed = loadYamlDocument(response.body);
 
-      return Bundle.fromMap(parsed.contents as YamlMap);
+      return Bundle.fromMap(parsed.contents as YamlMap, url);
     } on Object {
       // there are so many potential throws in this
       // that it's barely even worth trying to diagnose. TODO maybe someday
@@ -27,10 +27,10 @@ class BundleReaderService {
 
   Future<SpriteSet> getSpriteSet(String bundle, String name) async {
     switch (bundle) {
-      case "default":
+      case "internal":
         switch (name) {
-          // a little bit unnecessary, but communicates the intent here well
-          case "tacos":
+          case "async-preview":
+            throw "Hahahaha. Implement previews first, dunkass.";
           default:
             return SpriteSet.defaultSpriteSet;
         }

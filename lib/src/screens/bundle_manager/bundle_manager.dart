@@ -5,9 +5,9 @@ import 'package:angular/angular.dart';
 import 'package:stream_transform/stream_transform.dart' show debounce;
 
 import '../../bundle.dart';
-import '../../services/background_color_service.dart';
 import '../../services/bundle_mass_loader_service.dart';
 import '../../services/bundle_reader_service.dart';
+import '../../services/page_meta_service.dart';
 import '../../services/subscribed_bundles_service.dart';
 import '../../tools/range.dart';
 
@@ -18,11 +18,11 @@ import '../../tools/range.dart';
   directives: [coreDirectives],
 )
 class BundleManagerScreenComponent implements OnInit, OnDestroy {
-  final BackgroundColorService _bgColor;
+  final PageMetaService _pageMeta;
   final BundleMassLoaderService _bundleLoader;
   final BundleReaderService _bundleReader;
   final SubscribedBundlesService _bundleSubscriptions;
-  BundleManagerScreenComponent(this._bgColor, this._bundleLoader,
+  BundleManagerScreenComponent(this._pageMeta, this._bundleLoader,
       this._bundleReader, this._bundleSubscriptions);
 
   Bundle subscribeTo;
@@ -61,7 +61,9 @@ class BundleManagerScreenComponent implements OnInit, OnDestroy {
 
   @override
   void ngOnInit() {
-    _bgColor.backgroundColor = "yellow";
+    _pageMeta
+      ..backgroundColor = "yellow"
+      ..title = "Taco Party | Bundle Manager";
     findBundleController = StreamController()
       ..stream
           .transform(debounce(const Duration(milliseconds: 300)))

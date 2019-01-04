@@ -7,17 +7,21 @@ class Bundle {
   String bordersColor;
   String bodyBackgroundColor;
 
+  String url;
+
   List<BundleSpriteSetData> spriteSets;
 
-  Bundle(
-      {this.name,
-      this.headerColor,
-      this.headerBackgroundColor,
-      this.bordersColor,
-      this.bodyBackgroundColor,
-      this.spriteSets});
+  Bundle({
+    this.name,
+    this.headerColor,
+    this.headerBackgroundColor,
+    this.bordersColor,
+    this.bodyBackgroundColor,
+    this.spriteSets,
+    this.url,
+  });
 
-  static Bundle fromMap(Map source) => Bundle(
+  static Bundle fromMap(Map source, [String url]) => Bundle(
         name: source["name"],
         headerColor: source["header_color"],
         headerBackgroundColor: source["header_background_color"],
@@ -27,6 +31,7 @@ class Bundle {
             .cast<Map>()
             .map(BundleSpriteSetData.fromMap)
             .toList(growable: false),
+        url: url,
       );
 }
 
@@ -46,7 +51,7 @@ class BundleSpriteSetData {
       );
 }
 
-const _specialBundleNames = ["default", "permalink"];
+const _specialBundleNames = ["internal", "permalink"];
 const _stringBase64Decoder = StringBase64Decoder();
 String normalizeBundleIdentifier(String identifier) {
   if (_specialBundleNames.contains(identifier)) return identifier;

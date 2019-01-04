@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:html';
+import 'dart:math' as math;
 
 import '../../sprite_set.dart';
 import '../../tools/range.dart';
@@ -34,6 +35,13 @@ class WebRenderController extends RenderController {
   int get canvasWidth => _canvasWidth;
 
   @override
+  int maxImageHeight;
+  @override
+  int maxImageWidth;
+  @override
+  num maxImageHalfDiagonal;
+
+  @override
   Future<void> load() async {
     switch (_status) {
       case _Status.initial:
@@ -50,11 +58,19 @@ class WebRenderController extends RenderController {
     for (var i in range(spriteSet.images.length)) {
       final imageData = spriteSet.images[i];
       final image = ImageElement(
-          src: imageData.url, width: imageData.width, height: imageData.height);
+          src: imageData.src, width: imageData.width, height: imageData.height);
       _images[i] = image;
-      _imageContainer.append(image);
       futures[i] = image.onLoad.first;
+      _imageContainer.append(image);
     }
+    await Future.wait(futures);
+
+    maxImageHeight = _images.fold(0, (a, b) => math.max(a, b.height));
+    maxImageWidth = _images.fold(0, (a, b) => math.max(a, b.width));
+    maxImageHalfDiagonal = math.sqrt(
+            maxImageHeight * maxImageHeight + maxImageWidth * maxImageWidth) /
+        2;
+
     _status = _Status.loaded;
   }
 

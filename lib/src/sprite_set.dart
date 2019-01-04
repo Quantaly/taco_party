@@ -8,19 +8,12 @@ class SpriteSet {
   num maxVertVelocity;
   num maxAngularVelocity;
 
-  String title;
+  String name;
 
   List<ImageData> images;
 
   List<int> textColor;
   List<int> backgroundColor;
-
-  int get maxWidth => images.fold(0, (a, b) => math.max(a, b.width));
-  int get maxHeight => images.fold(0, (a, b) => math.max(a, b.height));
-  num get maxHalfDiagonal {
-    final x = maxWidth, y = maxHeight;
-    return math.sqrt(x * x + y * y) / 2;
-  }
 
   int numTacos;
 
@@ -31,7 +24,7 @@ class SpriteSet {
       this.minVertVelocity,
       this.maxVertVelocity,
       this.maxAngularVelocity,
-      this.title,
+      this.name,
       this.images,
       this.textColor,
       this.backgroundColor,
@@ -41,17 +34,17 @@ class SpriteSet {
   static SpriteSet fromMap(Map source) =>
       _checkLegacy(source) ??
       SpriteSet(
-        maxHorzVelocity: source["max_horz_velocity"],
-        minVertVelocity: source["min_vert_velocity"],
-        maxVertVelocity: source["max_vert_velocity"],
-        maxAngularVelocity: toRadians(source["max_angular_velocity"]),
-        title: source["title"],
+        maxHorzVelocity: source["maxHorzVelocity"],
+        minVertVelocity: source["minVertVelocity"],
+        maxVertVelocity: source["maxVertVelocity"],
+        maxAngularVelocity: toRadians(source["maxAngularVelocity"]),
+        name: source["name"],
         images: (source["images"] as List)
             .cast<Map>()
             .map(ImageData.fromMap)
             .toList(growable: false),
-        textColor: source["textColor"],
-        backgroundColor: source["backgroundColor"],
+        textColor: (source["textColor"] as List).cast(),
+        backgroundColor: (source["backgroundColor"] as List).cast(),
         numTacos: source["numTacos"],
         soundUrl: source["soundUrl"],
       );
@@ -75,13 +68,13 @@ class SpriteSet {
         maxAngularVelocity: toRadians(3),
         images: [
           ImageData(
-            url:
+            src:
                 "https://openclipart.org/image/2400px/svg_to_png/151201/taco.png",
             width: 240,
             height: 216,
           ),
         ],
-        title: "Tacos!",
+        name: "Tacos!",
         textColor: const [0x80, 0x00, 0x80], // purple
         backgroundColor: const [0xff, 0xff, 0x00], // yellow
         numTacos: 32,
@@ -89,15 +82,15 @@ class SpriteSet {
 }
 
 class ImageData {
-  String url;
+  String src;
   int width;
   int height;
   int weight;
 
-  ImageData({this.url, this.width, this.height, this.weight});
+  ImageData({this.src, this.width, this.height, this.weight});
 
   static ImageData fromMap(Map source) => ImageData(
-        url: source["url"],
+        src: source["src"],
         width: source["width"],
         height: source["height"],
         weight: source["weight"],

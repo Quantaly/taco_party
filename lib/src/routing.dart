@@ -30,6 +30,9 @@ class Routes {
     path: "stage",
     component: stage_template.StageScreenComponentNgFactory,
   );
+  static String stageLink(String bundle, String spriteSet,
+          [Map<String, String> queryParameters]) =>
+      stage.toUrl({_stageBundle: bundle, _stageSpriteSet: spriteSet});
 
   static String getStageBundle(Map<String, String> parameters) =>
       normalizeBundleIdentifier(parameters[_stageBundle]);
