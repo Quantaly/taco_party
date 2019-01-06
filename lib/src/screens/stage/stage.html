@@ -17,10 +17,10 @@
      class="controls"
      [style.border-color]="textColor"
      [style.background-color]="controlPanelColor">
-    <!--div *ngIf="displaySoundControl">This sprite set has a sound effect.
-        <button>Play Sound</button>
-        <button>Dismiss</button>
-    </div-->
+    <div *ngIf="displaySoundControl">This sprite set has a sound effect.
+        <button (click)="startSound()">Play Sound</button>
+        <button (click)="soundControlDismissed = true">Dismiss</button>
+    </div>
     <div *ngIf="displaySubscribeControl">Subscribe to bundle "{{bundleName}}"?
         <button (click)="subscribeToCurrentBundle()">Subscribe</button>
         <button (click)="displaySubscribeControl = false">Dismiss</button>

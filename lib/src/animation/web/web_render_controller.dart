@@ -6,21 +6,26 @@ import '../../sprite_set.dart';
 import '../../tools/range.dart';
 import '../animation_handler.dart';
 import '../render_controller.dart';
+import '../sound_controller.dart';
 import '../taco.dart';
+import 'web_sound_controller.dart';
 
-class WebRenderController extends RenderController {
+class WebRenderController implements RenderController {
   final Element _imageContainer;
   final CanvasElement _canvas;
   final CanvasRenderingContext2D _context2d;
   final List<ImageElement> _images;
 
-  WebRenderController(SpriteSet spriteSet, this._imageContainer, this._canvas)
+  @override
+  final SpriteSet spriteSet;
+
+  WebRenderController(this.spriteSet, this._imageContainer, this._canvas)
       : _context2d = _canvas.context2D,
-        _images = List(spriteSet.images.length),
-        super(spriteSet);
+        _images = List(spriteSet.images.length);
 
   StreamSubscription<Event> _resizeSubscription;
   AnimationHandler _animationHandler;
+  SoundController _soundController;
 
   _Status _status = _Status.initial;
 
@@ -40,6 +45,10 @@ class WebRenderController extends RenderController {
   int maxImageWidth;
   @override
   num maxImageHalfDiagonal;
+
+  bool _soundReady;
+  @override
+  bool get soundReady => _soundReady;
 
   @override
   Future<void> load() async {
@@ -93,6 +102,13 @@ class WebRenderController extends RenderController {
     _resizeSubscription = window.onResize.listen(_adjustCanvasSize);
     _animationHandler = AnimationHandler(this)..setUp();
     _runFrame(0);
+
+    if (spriteSet.soundUrl != null) {
+      _soundController = WebSoundController(spriteSet.soundUrl)
+        ..load().then((success) {
+          _soundReady = success;
+        }).catchError((_) {});
+    }
   }
 
   void _adjustCanvasSize([_]) {
@@ -120,12 +136,12 @@ class WebRenderController extends RenderController {
 
   @override
   void stop() {
-    if (_status == _Status.stopped) {
-      throw StateError("Already stopped.");
-    }
+    if (_status == _Status.stopped) throw StateError("Already stopped.");
     _status = _Status.stopped;
     _resizeSubscription?.cancel();
     _animationHandler?.tearDown();
+    _soundReady = false;
+    _soundController?.stop();
   }
 
   @override
@@ -160,6 +176,15 @@ class WebRenderController extends RenderController {
       ..scale(3, 3)
       ..strokeText("x: ${x.round()}    y: ${y.round()}", 10, 10)*/
       ..restore();
+  }
+
+  @override
+  void startSound() {
+    if (!soundReady) throw StateError("soundReady must be true.");
+    _soundReady = false;
+    _soundController.start();
+    _soundController.playSound();
+    _animationHandler.tacoCreationStream.listen(_soundController.playSound);
   }
 }
 

@@ -11,7 +11,7 @@ sprite_sets:
   color: "green"
 - name: minediamonds
   display_name: Minecraft Diamonds
-  url: "https://quantumassembly.github.io/taco_party/sprite_sets/minediamonds.json"
+  url: "minediamonds.json"
   color: "limegreen"
 - name: tetris
   display_name: Tetris

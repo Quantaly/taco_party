@@ -38,7 +38,11 @@ class StageScreenComponent implements OnActivate, OnDestroy {
 
   bool displaySubscribeControl = false;
 
-  bool get displayControls => displaySubscribeControl;
+  bool soundControlDismissed = false;
+  bool get displaySoundControl =>
+      !soundControlDismissed && (_renderController?.soundReady ?? false);
+
+  bool get displayControls => displaySubscribeControl || displaySoundControl;
 
   @override
   void onActivate(_, RouterState current) async {
@@ -50,6 +54,7 @@ class StageScreenComponent implements OnActivate, OnDestroy {
       bundle = Routes.getStageBundle(current.parameters);
       spriteSetName = Routes.getStageSpriteSet(current.parameters);
     } on Error {
+      // the parameters weren't there
       // it *says* it's a TypeError, but I don't catch it when I specify
       bundle = "internal";
       spriteSetName = "default";
@@ -87,6 +92,8 @@ class StageScreenComponent implements OnActivate, OnDestroy {
         _subscribedBundles.contains(bundle)) return;
     _subscribedBundles.add(bundle);
   }
+
+  void startSound() => _renderController.startSound();
 
   @override
   void ngOnDestroy() {

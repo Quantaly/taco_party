@@ -6,7 +6,7 @@ import '../tools/range.dart';
 import 'render_controller.dart';
 import 'taco.dart';
 
-const animSpeed = 16; // ms between frames
+const animSpeed = 1000 ~/ 60; // ms between frames
 // hilariously enough, it turns out that Chrome (at least) fires animation
 // frames at 60 fps anyway.
 

@@ -2,9 +2,7 @@ import '../sprite_set.dart';
 import 'taco.dart';
 
 abstract class RenderController {
-  final SpriteSet spriteSet;
-
-  RenderController(this.spriteSet);
+  SpriteSet get spriteSet;
 
   Future<void> load();
   void start();
@@ -17,4 +15,7 @@ abstract class RenderController {
   int get maxImageWidth;
   int get maxImageHeight;
   num get maxImageHalfDiagonal;
+
+  bool get soundReady;
+  void startSound();
 }
