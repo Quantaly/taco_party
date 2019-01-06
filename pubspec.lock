@@ -29,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.2"
+  angular_forms:
+    dependency: "direct main"
+    description:
+      name: angular_forms
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.1"
   angular_router:
     dependency: "direct main"
     description:
@@ -303,7 +310,7 @@ packages:
     source: hosted
     version: "0.12.3+1"
   meta:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: meta
       url: "https://pub.dartlang.org"

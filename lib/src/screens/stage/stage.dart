@@ -35,6 +35,7 @@ class StageScreenComponent implements OnActivate, OnDestroy {
   WebRenderController _renderController;
   String bundle, spriteSetName, bundleName;
   Map<String, String> queryParameters;
+  Filters filters = const Filters([]);
 
   bool displaySubscribeControl = false;
 
@@ -74,6 +75,9 @@ class StageScreenComponent implements OnActivate, OnDestroy {
     await _renderController.load();
 
     textContent = queryParameters["msg"] ?? "";
+    try {
+      filters = Filters(queryParameters["filter"].split(","));
+    } on Error {}
 
     if (bundle != "internal" &&
         bundle != "permalink" &&
@@ -102,4 +106,11 @@ class StageScreenComponent implements OnActivate, OnDestroy {
 
   static String _listToColor(List<int> list) =>
       "rgb(${list[0]}, ${list[1]}, ${list[2]})";
+}
+
+class Filters {
+  final List<String> filters;
+  const Filters(this.filters);
+
+  bool operator[] (String name) => filters.contains(name);
 }

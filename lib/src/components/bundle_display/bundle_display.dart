@@ -17,6 +17,9 @@ class BundleDisplayComponent {
   @Input()
   Bundle bundle;
 
+  @Input()
+  String queryString;
+
   bool isExpanded = false;
 
   String get expandToggleDisplay => isExpanded ? "&ndash;" : "+";
@@ -26,5 +29,5 @@ class BundleDisplayComponent {
 
   String get bundleIdentifier => _stringBase64.encode(bundle.url);
   String stageLink(String spriteSetName) =>
-      Routes.stageLink(bundleIdentifier, spriteSetName);
+      Routes.stageLink(bundleIdentifier, spriteSetName) + (queryString ?? "");
 }
