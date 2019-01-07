@@ -112,5 +112,5 @@ class Filters {
   final List<String> filters;
   const Filters(this.filters);
 
-  bool operator[] (String name) => filters.contains(name);
+  bool operator [](String name) => filters.contains(name);
 }

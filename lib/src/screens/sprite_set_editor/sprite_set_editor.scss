@@ -1,0 +1,84 @@
+@import "../main-screens";
+
+:host {
+  @extend %main-grid-base;
+
+  @include media("<main-cutoff") {
+    grid-template-columns: 90%;
+    grid-template-rows: auto 50px auto auto auto;
+    grid-template-areas:
+        "header"
+        "open"
+        "images"
+        "properties"
+        "options";
+  }
+
+  @include media(">=main-cutoff") {
+    grid-template-columns: 45% 45%;
+    grid-template-rows: 100px auto auto auto;
+    grid-template-areas:
+        "header header"
+        "images open"
+        "images properties"
+        "images options";
+  }
+}
+
+.open {
+  @extend %main-grid-area-base;
+
+  grid-area: open;
+  padding: 15px;
+
+  // no rounded edges ever
+}
+
+.images {
+  @extend %main-grid-area-base;
+
+  grid-area: images;
+  overflow: hidden;
+
+  @include media("<main-cutoff") {
+    // no rounded edges
+  }
+
+  @include media(">=main-cutoff") {
+    @include rounded-edges("bottom-left");
+  }
+}
+
+.properties {
+  @extend %main-grid-area-base;
+
+  grid-area: properties;
+
+  // no rounded edges ever
+}
+
+.options {
+  @extend %main-grid-area-base;
+
+  grid-area: options;
+
+  @include media("<main-cutoff") {
+    @include rounded-edges("bottom-left" "bottom-right");
+  }
+
+  @include media(">=main-cutoff") {
+    @include rounded-edges("bottom-right");
+  }
+}
+
+input.smol {
+  width: 60px;
+}
+
+ul {
+  margin-bottom: 0;
+}
+
+li {
+  padding: 2px 0px;
+}

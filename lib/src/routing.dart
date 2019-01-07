@@ -4,6 +4,8 @@ import 'bundle.dart';
 import 'screens/bundle_manager/bundle_manager.template.dart'
     as bundle_manager_template;
 import 'screens/home/home.template.dart' as home_template;
+import 'screens/sprite_set_editor/sprite_set_editor.template.dart'
+    as sprite_set_editor_template;
 import 'screens/stage/stage.template.dart' as stage_template;
 
 /*
@@ -39,6 +41,12 @@ class Routes {
   static String getStageSpriteSet(Map<String, String> parameters) =>
       parameters[_stageSpriteSet];
 
+  static final spriteSetEditor = RouteDefinition(
+    path: "tools/sprite_set_editor",
+    component:
+        sprite_set_editor_template.SpriteSetEditorScreenComponentNgFactory,
+  );
+
   static final bundleManager = RouteDefinition(
     path: "tools/bundle_manager",
     component: bundle_manager_template.BundleManagerScreenComponentNgFactory,
@@ -48,6 +56,7 @@ class Routes {
     home,
     stage,
     stageNoArgs,
+    spriteSetEditor,
     bundleManager,
   ];
 }

@@ -37,7 +37,8 @@ class HomeScreenComponent implements OnInit {
   }
 
   String get defaultSpriteSetLink => Routes.stageNoArgs.toUrl() + queryString;
-  String get bundleManagerLink => Routes.bundleManager.toUrl();
+  final String spriteSetEditorLink = Routes.spriteSetEditor.toUrl();
+  final String bundleManagerLink = Routes.bundleManager.toUrl();
 
   String message;
   String filter;

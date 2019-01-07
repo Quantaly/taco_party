@@ -16,8 +16,11 @@
 <div class="options">
     <h2>Options</h2>
     <ul>
-        <li>Message: <input [(ngModel)]="message"></li>
-        <li>Filter: <select [(ngModel)]="filter"> <!-- TODO multiple, which ngModel doesn't like -->
+        <li><label for="message-input">Message</label>:
+            <input id="message-input" [(ngModel)]="message">
+        </li>
+        <li><label for="filter-input">Filter</label>:
+            <select id="filter-input" [(ngModel)]="filter"> <!-- TODO multiple, which ngModel doesn't like -->
             <option value="invert">Inverted</option>
             <option value="rainbow">Rainbow</option>
             <option value="hicontrast">High Contrast</option>
@@ -28,7 +31,7 @@
 <div class="links">
     <h2>Links</h2>
     <ul>
-        <li><a>Sprite Set Editor</a></li>
+        <li><a [routerLink]="spriteSetEditorLink">Sprite Set Editor</a></li>
         <li><a [routerLink]="bundleManagerLink">Bundle Manager</a></li>
         <li><a href="https://github.com/quantumAssembly/taco_party">GitHub Repo</a></li>
     </ul>

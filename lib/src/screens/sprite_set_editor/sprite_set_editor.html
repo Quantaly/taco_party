@@ -1,0 +1,81 @@
+<h1>Sprite Set Editor</h1>
+
+<div class="open">
+    <h2>Open</h2>
+    <ul>
+        <li><label for="open-json">Import JSON</label>:
+            <input id="open-json" type="file">
+        </li>
+        <li><label for="open-link">Paste Link</label>:
+            <input id="open-link" type="url">
+        </li>
+    </ul>
+</div>
+
+<div class="images">
+    <h2>Images</h2>
+    <ul>
+        <li>yeet</li>
+    </ul>
+</div>
+
+<div class="properties">
+    <h2>Properties</h2>
+    <ul>
+        <li><label for="pty-name">name</label>:
+            <input id="pty-name"
+                   class="smol"
+                   type="text"
+                   [(ngModel)]="spriteSet.name">
+        </li>
+        <li><label for="pty-maxHorzVelocity">maxHorzVelocity</label>:
+            <input id="pty-maxHorzVelocity"
+                   class="smol"
+                   type="number"
+                   [(ngModel)]="spriteSet.maxHorzVelocity">
+        </li>
+        <li><label for="pty-minVertVelocity">minVertVelocity</label>:
+            <input id="pty-minVertVelocity"
+                   class="smol"
+                   type="number"
+                   [(ngModel)]="spriteSet.minVertVelocity">
+        </li>
+        <li><label for="pty-maxVertVelocity">maxVertVelocity</label>:
+            <input id="pty-maxVertVelocity"
+                   class="smol"
+                   type="number"
+                   [(ngModel)]="spriteSet.maxVertVelocity">
+        </li>
+        <li><label for="pty-maxAngularVelocity">maxAngularVelocity</label>:
+            <input id="pty-maxAngularVelocity"
+                   class="smol"
+                   type="number"
+                   [(ngModel)]="spriteSet.maxAngularVelocity">
+        </li>
+        <li><label for="pty-textColor">textColor</label>:
+            <input id="pty-textColor"
+                   class="smol"
+                   type="color"
+                   [(ngModel)]="spriteSet.textColor">
+        </li>
+        <li><label for="pty-backgroundColor">backgroundColor</label>:
+            <input id="pty-backgroundColor"
+                   class="smol"
+                   type="color"
+                   [(ngModel)]="spriteSet.backgroundColor">
+        </li>
+        <li><label for="pty-numTacos">numTacos</label>:
+            <input id="pty-numTacos"
+                   class="smol"
+                   type="number"
+                   [(ngModel)]="spriteSet.numTacos">
+        </li>
+    </ul>
+</div>
+
+<div class="options">
+    <h2>Options</h2>
+    <ul>
+        <li>yeet</li>
+    </ul>
+</div>
