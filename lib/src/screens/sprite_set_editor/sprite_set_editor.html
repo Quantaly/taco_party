@@ -1,6 +1,8 @@
-<h1>Sprite Set Editor</h1>
+<h1 [style.color]="textColor"
+    [style.background-color]="foregroundColor">Sprite Set Editor</h1>
 
-<div class="open">
+<div class="open"
+     [style.background-color]="foregroundColor">
     <h2>Open</h2>
     <ul>
         <li><label for="open-json">Import JSON</label>:
@@ -12,14 +14,66 @@
     </ul>
 </div>
 
-<div class="images">
+<div class="images"
+     [style.background-color]="foregroundColor">
     <h2>Images</h2>
     <ul>
-        <li>yeet</li>
+        <li *ngFor="let image of images; let i=index">
+            <table>
+                <tr>
+                    <td colspan="2">
+                        <label [attr.for]="'img$i-src'">URL</label>:
+                        <input id="img{{i}}-src"
+                               type="url"
+                               [(ngModel)]="image.src">
+                    </td>
+                    <td rowspan="3">
+                        <img #preview
+                             [src]="image.src">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label [attr.for]="'img$i-width'">Width</label>:
+                        <input id="img{{i}}-width"
+                               type="number"
+                               min="1"
+                               [placeholder]="castToImage(preview).naturalHeight"
+                               class="smol"
+                               [(ngModel)]="image.width">
+                    </td>
+                    <td>
+                        <label [attr.for]="'img$i-height'">Height</label>:
+                        <input id="img{{i}}-height"
+                               type="number"
+                               min="1"
+                               [placeholder]="castToImage(preview).naturalWidth"
+                               class="smol"
+                               [(ngModel)]="image.height">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label [attr.for]="'img$i-weight'">Weight</label>:
+                        <input id="img{{i}}-weight"
+                               type="number"
+                               min="1"
+                               placeholder="1"
+                               class="smol"
+                               [(ngModel)]="image.weight">
+                    </td>
+                    <td>
+                        <button (click)="images.removeAt(i)">Remove</button>
+                    </td>
+                </tr>
+            </table>
+        </li>
     </ul>
+    <button (click)="addImage()">Add Image</button>
 </div>
 
-<div class="properties">
+<div class="properties"
+     [style.background-color]="foregroundColor">
     <h2>Properties</h2>
     <ul>
         <li><label for="pty-name">name</label>:
@@ -70,10 +124,22 @@
                    type="number"
                    [(ngModel)]="numTacos">
         </li>
+        <li><label for="pty-soundUrl">soundUrl</label>:
+            <label for="pty-soundEnabled"
+                   style="display: none">soundEnabled</label>
+            <input id="pty-soundEnabled"
+                   type="checkbox"
+                   [(ngModel)]="soundEnabled">
+            <input id="pty-soundUrl"
+                   type="url"
+                   [disabled]="!soundEnabled"
+                   [(ngModel)]="soundUrl">
+        </li>
     </ul>
 </div>
 
-<div class="options">
+<div class="options"
+     [style.background-color]="foregroundColor">
     <h2>Options</h2>
     <ul>
         <li>yeet</li>

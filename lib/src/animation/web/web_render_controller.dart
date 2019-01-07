@@ -131,7 +131,8 @@ class WebRenderController implements RenderController {
     if (delta - _lastFrame > animSpeed) {
       _lastFrame = delta;
       _context2d
-        ..setFillColorRgb(_backgroundColor.r, _backgroundColor.g, _backgroundColor.b)
+        ..setFillColorRgb(
+            _backgroundColor.r, _backgroundColor.g, _backgroundColor.b)
         ..fillRect(0, 0, canvasWidth, canvasHeight);
       _animationHandler.runFrame();
     }
