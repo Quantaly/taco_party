@@ -66,10 +66,10 @@ class StageScreenComponent implements OnActivate, OnDestroy {
     if (spriteSet.bundle != null) {
       bundleName = spriteSet.bundle.name;
     }
-    textColor = _listToColor(spriteSet.textColor);
-    controlPanelColor = augmentColor(spriteSet.backgroundColor);
+    textColor = spriteSet.textColor.toHexColor().toCssString();
+    controlPanelColor = augmentColor(spriteSet.backgroundColor).toCssString();
     _pageMeta
-      ..backgroundColor = _listToColor(spriteSet.backgroundColor)
+      ..backgroundColor = spriteSet.backgroundColor.toHexColor().toCssString()
       ..title = "Taco Party | ${spriteSet.name}";
     _renderController = WebRenderController(spriteSet, imageContainer, stage);
     await _renderController.load();

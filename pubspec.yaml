@@ -15,6 +15,7 @@ dependencies:
   yaml: ^2.1.15
   stream_transform: ^0.0.14
   angular_forms: ^2.1.1
+  color: ^2.1.1
 
 dev_dependencies:
   build_runner: ^1.1.2

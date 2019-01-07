@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'package:color/color.dart';
+
 import 'bundle.dart';
 import 'errors.dart';
 
@@ -13,8 +15,8 @@ class SpriteSet {
 
   List<ImageData> images;
 
-  List<int> textColor;
-  List<int> backgroundColor;
+  Color textColor;
+  Color backgroundColor;
 
   int numTacos;
 
@@ -48,12 +50,26 @@ class SpriteSet {
             .cast<Map>()
             .map(ImageData.fromMap)
             .toList(growable: false),
-        textColor: (source["textColor"] as List).cast(),
-        backgroundColor: (source["backgroundColor"] as List).cast(),
+        textColor: _parseColor(source["textColor"]),
+        backgroundColor: _parseColor(source["backgroundColor"]),
         numTacos: source["numTacos"],
         soundUrl: source["soundUrl"],
         bundle: bundle,
       );
+
+  static Color _parseColor(thing) {
+    if (thing is List) {
+      return RgbColor(thing[0], thing[1], thing[2]);
+    } else if (thing is String) {
+      if (thing.startsWith("#")) {
+        return HexColor(thing.substring(1));
+      } else {
+        return RgbColor.namedColors[thing];
+      }
+    } else {
+      throw ParseException("Bad color format");
+    }
+  }
 
   // not sure what i'll do with this, but could be good to know.
   bool _isLegacy;
@@ -81,8 +97,8 @@ class SpriteSet {
           ),
         ],
         name: "Tacos!",
-        textColor: const [0x80, 0x00, 0x80], // purple
-        backgroundColor: const [0xff, 0xff, 0x00], // yellow
+        textColor: RgbColor.namedColors["purple"],
+        backgroundColor: RgbColor.namedColors["yellow"],
         numTacos: 32,
       );
 }

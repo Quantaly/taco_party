@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:html';
 import 'dart:math' as math;
 
+import 'package:color/color.dart';
+
 import '../../sprite_set.dart';
 import '../../tools/range.dart';
 import '../animation_handler.dart';
@@ -26,6 +28,8 @@ class WebRenderController implements RenderController {
   StreamSubscription<Event> _resizeSubscription;
   AnimationHandler _animationHandler;
   SoundController _soundController;
+
+  RgbColor _backgroundColor;
 
   _Status _status = _Status.initial;
 
@@ -101,6 +105,7 @@ class WebRenderController implements RenderController {
     _adjustCanvasSize();
     _resizeSubscription = window.onResize.listen(_adjustCanvasSize);
     _animationHandler = AnimationHandler(this)..setUp();
+    _backgroundColor = spriteSet.backgroundColor.toRgbColor();
     _runFrame(0);
 
     if (spriteSet.soundUrl != null) {
@@ -126,8 +131,7 @@ class WebRenderController implements RenderController {
     if (delta - _lastFrame > animSpeed) {
       _lastFrame = delta;
       _context2d
-        ..setFillColorRgb(spriteSet.backgroundColor[0],
-            spriteSet.backgroundColor[1], spriteSet.backgroundColor[2])
+        ..setFillColorRgb(_backgroundColor.r, _backgroundColor.g, _backgroundColor.b)
         ..fillRect(0, 0, canvasWidth, canvasHeight);
       _animationHandler.runFrame();
     }
