@@ -1,56 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+  <head>
     <title>Taco Party</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="icon" href="https://openclipart.org/image/2400px/svg_to_png/151201/taco.png">
-    <script defer src="index.dart.js" type="application/javascript"></script>
-</head>
-<body>
-
-<div id="container">
-    <h1>Taco Party by quantumAssembly</h1>
-
-    <div id="links">
-        <h2>Links</h2>
-        <ul>
-            <li><a href="tools/sprite_set_editor.html">Sprite Set Creator</a></li>
-            <li><a href="https://github.com/quantumAssembly/taco_party">GitHub Repo</a></li>
-        </ul>
-    </div>
-
-    <div id="types">
-        <h2>Sprite Sets</h2>
-        <ul>
-            <li><a class="stagelink" id="default">Tacos</a></li>
-            <li><a class="stagelink" id="pokemon">Pokémon</a></li>
-            <li class="soundfile"><a class="stagelink" id="minediamonds">Minecraft Diamonds</a></li>
-            <li><a class="stagelink" id="energyihs">Energy Institute</a></li>
-            <li><a class="stagelink" id="tetris">Tetris</a></li>
-            <li><a class="stagelink" id="monopocash">Monopoly Money</a></li>
-            <li><a class="stagelink" id="dartlang">Dart</a> / <a class="stagelink" id="kotlin">Kotlin</a></li>
-            <li class="soundfile"><a class="stagelink" id="coins">Mario Coins</a></li>
-            <li><a class="stagelink" id="hellokitty">Hello Kitty</a></li>
-            <li>Import JSON: <input type="file" accept="application/json" id="upload"><input disabled type="button" value="Go!" id="uploadBtn"></li>
-        </ul>
-        <aside>*sound available</aside>
-    </div>
-
-    <div id="params">
-        <h2>Options</h2>
-        <ul>
-            <li>Message: <input type="text" id="msg"></li>
-            <li>Filter: <select id="filter" multiple>
-                <option value="invert">Inverted</option>
-                <option value="rainbow">Rainbow</option>
-                <option value="hicontrast">High Contrast</option>
-            </select></li>
-        </ul>
-    </div>
-</div>
-
-</body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <base href="/taco_party/">
+    <script defer src="main.dart.js"></script>
+  </head>
+  <body>
+    <tp-app>Loading...</tp-app>
+    <noscript>
+        <p>This is kind of a big oof, but you don't seem to have JavaScript enabled.</p>
+        <p>
+            Taco Party is a JavaScript-powered animation
+            <span style="display: none">(technically Dart-powered but who's counting) </span>
+            and so you really need JavaScript enabled in order to use this website.
+        </p>
+        <p>Like, at all.</p>
+    </noscript>
+  </body>
 </html>

@@ -1,0 +1,47 @@
+{
+  "class": "general",
+  "data": {
+    "maxHorzVelocity": 4,
+    "minVertVelocity": 5,
+    "maxVertVelocity": 10.3,
+    "maxAngularVelocity": 3,
+    "name": "Diamonds!",
+    "images": [
+      {
+        "src": "https://c-6rtwjumjzx7877x24i6z0u8q9bufd8px2ehqtzikwtsyx2esjy.g00.gamepedia.com/g00/3_c-6rnsjhwfky.lfrjujinf.htr_/c-6RTWJUMJZX77x24myyux78x3ax2fx2fi6z0u8q9bufd8p.hqtzikwtsy.sjyx2frnsjhwfky_lfrjujinfx2fjx2fjfx2fInfrtsi.uslx3fajwx78ntsx3dh4g5kkf1f6f640f2030686014689gi09_$/$/$/$/$?i10c.ua=1&i10c.dv=14",
+        "height": 75,
+        "width": 75,
+        "weight": 7
+      },
+      {
+        "src": "https://d1u5p3l4wpay3k.cloudfront.net/minecraft_gamepedia/e/e8/Diamond_Axe.png?version=c78af3f3bac639516e6e452e4281ce02",
+        "height": 75,
+        "width": 75
+      },
+      {
+        "src": "https://c-6rtwjumjzx7877x24i6z0u8q9bufd8px2ehqtzikwtsyx2esjy.g00.gamepedia.com/g00/3_c-6rnsjhwfky.lfrjujinf.htr_/c-6RTWJUMJZX77x24myyux78x3ax2fx2fi6z0u8q9bufd8p.hqtzikwtsy.sjyx2frnsjhwfky_lfrjujinfx2f5x2f59x2fInfrtsi_Mtj.uslx3fajwx78ntsx3d3j416ih3k0ji9173hj202564142hhk0g_$/$/$/$/$?i10c.ua=1&i10c.dv=14",
+        "height": 75,
+        "width": 75
+      },
+      {
+        "src": "https://c-6rtwjumjzx7877x24i6z0u8q9bufd8px2ehqtzikwtsyx2esjy.g00.gamepedia.com/g00/3_c-6rnsjhwfky.lfrjujinf.htr_/c-6RTWJUMJZX77x24myyux78x3ax2fx2fi6z0u8q9bufd8p.hqtzikwtsy.sjyx2frnsjhwfky_lfrjujinfx2f0x2f09x2fInfrtsi_Unhpfcj.uslx3fajwx78ntsx3dk6f3g1ki45j3j06j02i7f08i8kjf009i_$/$/$/$/$?i10c.ua=1&i10c.dv=14",
+        "height": 75,
+        "width": 75
+      },
+      {
+        "src": "https://c-6rtwjumjzx7877x24i6z0u8q9bufd8px2ehqtzikwtsyx2esjy.g00.gamepedia.com/g00/3_c-6rnsjhwfky.lfrjujinf.htr_/c-6RTWJUMJZX77x24myyux78x3ax2fx2fi6z0u8q9bufd8p.hqtzikwtsy.sjyx2frnsjhwfky_lfrjujinfx2fgx2fgkx2fInfrtsi_Xmtajq.uslx3fajwx78ntsx3dkg815h0h4k1ffg8f351kj25722106ff1_$/$/$/$/$?i10c.ua=1&i10c.dv=14",
+        "height": 75,
+        "width": 75
+      },
+      {
+        "src": "https://c-6rtwjumjzx7877x24i6z0u8q9bufd8px2ehqtzikwtsyx2esjy.g00.gamepedia.com/g00/3_c-6rnsjhwfky.lfrjujinf.htr_/c-6RTWJUMJZX77x24myyux78x3ax2fx2fi6z0u8q9bufd8p.hqtzikwtsy.sjyx2frnsjhwfky_lfrjujinfx2ffx2ff5x2fInfrtsi_Xbtwi.uslx3fajwx78ntsx3d13589hj27h83fgh4i4k631fgifh66f48_$/$/$/$/$?i10c.ua=1&i10c.dv=14",
+        "height": 80,
+        "width": 80
+      }
+    ],
+    "textColor": [205, 208, 80],
+    "backgroundColor": [51, 235, 203],
+    "numTacos": 64,
+    "soundUrl": "https://quantumassembly.github.io/taco_party/assets/sounds/mc_pop.ogg"
+  }
+}
