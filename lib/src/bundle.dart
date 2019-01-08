@@ -7,9 +7,11 @@ class Bundle {
   String bordersColor;
   String bodyBackgroundColor;
 
-  String url;
-
   List<BundleSpriteSetData> spriteSets;
+
+  bool promptSubscribe;
+
+  String url;
 
   Bundle({
     this.name,
@@ -18,6 +20,7 @@ class Bundle {
     this.bordersColor,
     this.bodyBackgroundColor,
     this.spriteSets,
+    this.promptSubscribe,
     this.url,
   });
 
@@ -31,6 +34,7 @@ class Bundle {
             .cast<Map>()
             .map(BundleSpriteSetData.fromMap)
             .toList(growable: false),
+        promptSubscribe: source["prompt_subscribe"],
         url: url,
       );
 }

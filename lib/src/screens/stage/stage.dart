@@ -81,7 +81,8 @@ class StageScreenComponent implements OnActivate, OnDestroy {
 
     if (bundle != "internal" &&
         bundle != "permalink" &&
-        !_subscribedBundles.contains(bundle)) {
+        !_subscribedBundles.contains(bundle) &&
+        (spriteSet.bundle.promptSubscribe ?? true)) {
       displaySubscribeControl = true;
     }
 
@@ -103,9 +104,6 @@ class StageScreenComponent implements OnActivate, OnDestroy {
   void ngOnDestroy() {
     _renderController?.stop();
   }
-
-  static String _listToColor(List<int> list) =>
-      "rgb(${list[0]}, ${list[1]}, ${list[2]})";
 }
 
 class Filters {

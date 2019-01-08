@@ -1,3 +1,8 @@
+## 3.0.0
+- Import external sprite set bundles
+- Numerous internal improvements (read: remade the whole bloody thing with Angular)
+- Known bug: only one filter can be selected from the home screen
+
 ## 2.1.2
 - Sound
 - Probably some other stuff also

@@ -33,7 +33,8 @@ class BundleReaderService {
       case "internal":
         switch (name) {
           case "async":
-            final message = await window.onMessage.where((m) => m.data is String).first;
+            final message =
+                await window.onMessage.where((m) => m.data is String).first;
             (message.source as WindowBase).postMessage(
                 "taco_party::async::${window.name}", window.origin);
             return SpriteSet.fromMap(jsonDecode(message.data));

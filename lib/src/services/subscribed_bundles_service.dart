@@ -4,17 +4,20 @@ import 'dart:html';
 
 class SubscribedBundlesService with ListMixin<String> {
   static const _storageKey = "taco_party:subscribedBundles";
+  static const _defaultList = [
+    "https://quantumassembly.github.io/taco_party_official_bundle/bundle.yaml"
+  ];
 
   List<String> get _storedList {
     if (!window.localStorage.containsKey(_storageKey)) {
-      _storedList = [];
-      return [];
+      _storedList = _defaultList;
+      return _defaultList;
     }
     try {
       return (jsonDecode(window.localStorage[_storageKey]) as List).cast();
     } on FormatException {
-      _storedList = [];
-      return [];
+      _storedList = _defaultList;
+      return _defaultList;
     }
   }
 

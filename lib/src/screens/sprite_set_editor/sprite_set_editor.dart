@@ -74,7 +74,8 @@ class SpriteSetEditorScreenComponent implements OnInit, OnDestroy {
     copySpriteSet(SpriteSet.defaultSpriteSet);
     images = [SpriteSetImageData()];
     _previewSpawner = AsyncStageSpawner("preview",
-        _location.prepareExternalUrl(Routes.stageLink("internal", "async")))..init();
+        _location.prepareExternalUrl(Routes.stageLink("internal", "async")))
+      ..init();
   }
 
   void copySpriteSet(SpriteSet values) {
