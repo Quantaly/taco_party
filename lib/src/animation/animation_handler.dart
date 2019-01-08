@@ -28,7 +28,7 @@ class AnimationHandler {
         _maxHalfDiagonal = _renderController.maxImageHalfDiagonal, // cache
         imageWeightMap = _makeWeightMap(_renderController.spriteSet.images);
 
-  static List<int> _makeWeightMap(List<ImageData> images) {
+  static List<int> _makeWeightMap(List<SpriteSetImageData> images) {
     final ret = <int>[];
     for (int i = 0; i < images.length; i++) {
       ret.addAll(_returnCount(images[i].weight ?? 1, i));

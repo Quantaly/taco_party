@@ -83,7 +83,28 @@ li {
   padding: 2px 0px;
 }
 
-td img {
-  max-width: 150px;
-  max-height: 150px;
+table {
+  padding: 5px 0px;
+}
+
+td {
+  padding: 3px;
+
+  img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+}
+
+.image-border {
+  border-bottom: 1px dotted;
+}
+
+.options li {
+  display: inline-block;
+  padding: 2px;
+}
+
+.download-link {
+  display: none;
 }

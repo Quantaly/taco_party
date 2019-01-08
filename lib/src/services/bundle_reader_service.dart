@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:http/http.dart' as http;
 import 'package:yaml/yaml.dart';
@@ -6,6 +7,8 @@ import 'package:yaml/yaml.dart';
 import '../bundle.dart';
 import '../sprite_set.dart';
 import '../tools/url_json.dart';
+
+export '../bundle.dart' show normalizeBundleIdentifier;
 
 class BundleReaderService {
   http.Client _client;
@@ -29,8 +32,11 @@ class BundleReaderService {
     switch (bundle) {
       case "internal":
         switch (name) {
-          case "async-preview":
-            throw "Hahahaha. Implement previews first, dunkass.";
+          case "async":
+            final message = await window.onMessage.where((m) => m.data is String).first;
+            (message.source as WindowBase).postMessage(
+                "taco_party::async::${window.name}", window.origin);
+            return SpriteSet.fromMap(jsonDecode(message.data));
           default:
             return SpriteSet.defaultSpriteSet;
         }

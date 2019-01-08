@@ -6,10 +6,16 @@
     <h2>Open</h2>
     <ul>
         <li><label for="open-json">Import JSON</label>:
-            <input id="open-json" type="file">
+            <input #openJson
+                   id="open-json"
+                   type="file"
+                   (input)="processJsonImport(openJson.files.first)">
         </li>
         <li><label for="open-link">Paste Link</label>:
-            <input id="open-link" type="url">
+            <input #openLink
+                   id="open-link"
+                   type="url"
+                   (input)="processLinkImport(openLink.value)">
         </li>
     </ul>
 </div>
@@ -18,8 +24,9 @@
      [style.background-color]="foregroundColor">
     <h2>Images</h2>
     <ul>
-        <li *ngFor="let image of images; let i=index">
-            <table>
+        <li *ngFor="let image of images; let i=index; let last=last">
+            <table [class.image-border]="!last"
+                   [style.border-color]="textColor">
                 <tr>
                     <td colspan="2">
                         <label [attr.for]="'img$i-src'">URL</label>:
@@ -142,6 +149,12 @@
      [style.background-color]="foregroundColor">
     <h2>Options</h2>
     <ul>
-        <li>yeet</li>
+        <li><button (click)="preview()">Preview</button></li>
+        <li><button (click)="getPermalink()">Get Permalink</button></li>
+        <li><button (click)="downloadJson(downloadLink)">Download JSON</button></li>
     </ul>
 </div>
+
+<a #downloadLink
+   class="download-link"
+   download="spriteset.json"></a>

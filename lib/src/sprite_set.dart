@@ -13,7 +13,7 @@ class SpriteSet {
 
   String name;
 
-  List<ImageData> images;
+  List<SpriteSetImageData> images;
 
   Color textColor;
   Color backgroundColor;
@@ -48,7 +48,7 @@ class SpriteSet {
         name: source["name"],
         images: (source["images"] as List)
             .cast<Map>()
-            .map(ImageData.fromMap)
+            .map(SpriteSetImageData.fromMap)
             .toList(growable: false),
         textColor: _parseColor(source["textColor"]),
         backgroundColor: _parseColor(source["backgroundColor"]),
@@ -89,7 +89,7 @@ class SpriteSet {
         maxVertVelocity: 10.3,
         maxAngularVelocity: toRadians(3),
         images: [
-          ImageData(
+          SpriteSetImageData(
             src:
                 "https://openclipart.org/image/2400px/svg_to_png/151201/taco.png",
             width: 240,
@@ -103,15 +103,15 @@ class SpriteSet {
       );
 }
 
-class ImageData {
+class SpriteSetImageData {
   String src;
   int width;
   int height;
   int weight;
 
-  ImageData({this.src, this.width, this.height, this.weight});
+  SpriteSetImageData({this.src, this.width, this.height, this.weight});
 
-  static ImageData fromMap(Map source) => ImageData(
+  static SpriteSetImageData fromMap(Map source) => SpriteSetImageData(
         src: source["src"],
         width: source["width"],
         height: source["height"],
