@@ -31,10 +31,19 @@
         </li>
         <li><label for="filter-input">Filter</label>:
             <select id="filter-input" [(ngModel)]="filter"> <!-- TODO multiple, which ngModel doesn't like -->
-            <option value="invert">Inverted</option>
-            <option value="rainbow">Rainbow</option>
-            <option value="hicontrast">High Contrast</option>
-        </select></li>
+                <option value="invert">Inverted</option>
+                <option value="rainbow">Rainbow</option>
+                <option value="hicontrast">High Contrast</option>
+            </select>
+        </li>
+        <li><label for="trails-input">Motion Trails</label>:
+            <select id="trails-input" [(ngModel)]="backgroundOpacity">
+                <option value="">None</option>
+                <option value="0.5">Low</option>
+                <option value="0.25">Mid</option>
+                <option value="0.125">High</option>
+            </select>
+        </li>
     </ul>
 </div>
 

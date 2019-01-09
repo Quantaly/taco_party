@@ -71,7 +71,13 @@ class StageScreenComponent implements OnActivate, OnDestroy {
     _pageMeta
       ..backgroundColor = spriteSet.backgroundColor.toHexColor().toCssString()
       ..title = "Taco Party | ${spriteSet.name}";
-    _renderController = WebRenderController(spriteSet, imageContainer, stage);
+
+    var backgroundOpacity = 1.0;
+    try {
+      backgroundOpacity = num.parse(queryParameters["bgOpacity"]);
+    } on Object {}
+
+    _renderController = WebRenderController(spriteSet, imageContainer, stage, backgroundOpacity);
     await _renderController.load();
 
     textContent = queryParameters["msg"] ?? "";

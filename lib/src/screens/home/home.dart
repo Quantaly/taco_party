@@ -49,9 +49,11 @@ class HomeScreenComponent implements OnInit, OnDestroy {
 
   String message;
   String filter;
+  String backgroundOpacity;
   String get queryString => makeQueryString({
         "msg": message,
         "filter": filter,
+        "bgOpacity": backgroundOpacity,
       }..removeWhere((k, v) => v == "" || v == null));
 
   String fileData;

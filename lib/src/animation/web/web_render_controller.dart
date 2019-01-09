@@ -17,11 +17,12 @@ class WebRenderController implements RenderController {
   final CanvasElement _canvas;
   final CanvasRenderingContext2D _context2d;
   final List<ImageElement> _images;
+  final num _backgroundOpacity;
 
   @override
   final SpriteSet spriteSet;
 
-  WebRenderController(this.spriteSet, this._imageContainer, this._canvas)
+  WebRenderController(this.spriteSet, this._imageContainer, this._canvas, [this._backgroundOpacity = 1])
       : _context2d = _canvas.context2D,
         _images = List(spriteSet.images.length);
 
@@ -132,7 +133,7 @@ class WebRenderController implements RenderController {
       _lastFrame = delta;
       _context2d
         ..setFillColorRgb(
-            _backgroundColor.r, _backgroundColor.g, _backgroundColor.b)
+            _backgroundColor.r, _backgroundColor.g, _backgroundColor.b, _backgroundOpacity)
         ..fillRect(0, 0, canvasWidth, canvasHeight);
       _animationHandler.runFrame();
     }
