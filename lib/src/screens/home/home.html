@@ -9,6 +9,16 @@
                        [bundle]="bundle"
                        [queryString]="queryString"></tp-bundle>
         </li>
+        <li>
+            <label for="open-json">Import JSON</label>:
+            <input #openJson
+                   id="open-json"
+                   type="file"
+                   (input)="processJsonImport(openJson.files.first)">
+            <button [disabled]="fileData == null"
+                    (click)="openFile()">Go!</button>
+
+        </li>
         <li><aside>Add more with the <a [routerLink]="bundleManagerLink">bundle manager</a>!</aside></li>
     </ul>
 </div>
