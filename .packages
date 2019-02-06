@@ -12,6 +12,7 @@ bazel_worker:packages/bazel_worker/
 boolean_selector:packages/boolean_selector/
 build:packages/build/
 build_config:packages/build_config/
+build_daemon:packages/build_daemon/
 build_modules:packages/build_modules/
 build_resolvers:packages/build_resolvers/
 build_runner:packages/build_runner/
@@ -41,6 +42,7 @@ io:packages/io/
 js:packages/js/
 json_annotation:packages/json_annotation/
 json_rpc_2:packages/json_rpc_2/
+json_serializable:packages/json_serializable/
 kernel:packages/kernel/
 logging:packages/logging/
 matcher:packages/matcher/
