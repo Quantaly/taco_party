@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import '../sprite_set.dart';
+import '../data_repr/sprite_set.dart';
 import '../tools/range.dart';
 import 'render_controller.dart';
 import 'taco.dart';

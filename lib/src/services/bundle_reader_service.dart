@@ -4,11 +4,11 @@ import 'dart:html';
 import 'package:http/http.dart' as http;
 import 'package:yaml/yaml.dart';
 
-import '../bundle.dart';
-import '../sprite_set.dart';
+import '../data_repr/bundle.dart';
+import '../data_repr/sprite_set.dart';
 import '../tools/url_json.dart';
 
-export '../bundle.dart' show normalizeBundleIdentifier;
+export '../data_repr/bundle.dart' show normalizeBundleIdentifier;
 
 class BundleReaderService {
   http.Client _client;
@@ -20,8 +20,8 @@ class BundleReaderService {
       final response = await _client.get(url);
       final parsed = loadYamlDocument(response.body);
 
-      return Bundle.fromMap(parsed.contents as YamlMap, url);
-    } on Object {
+      return Bundle.fromJson(sanitizeYaml(parsed), url);
+    } on Bundle {
       // there are so many potential throws in this
       // that it's barely even worth trying to diagnose. TODO maybe someday
       return null;
@@ -37,14 +37,14 @@ class BundleReaderService {
                 await window.onMessage.where((m) => m.data is String).first;
             (message.source as WindowBase).postMessage(
                 "taco_party::async::${window.name}", window.origin);
-            return SpriteSet.fromMap(jsonDecode(message.data));
+            return SpriteSet.fromJson(jsonDecode(message.data));
           default:
             return SpriteSet.defaultSpriteSet;
         }
         break;
       case "permalink":
         final json = urlJson.decode(name);
-        return SpriteSet.fromMap(json);
+        return SpriteSet.fromJson(json);
       default:
         return getSpriteSetForBundle(await getBundle(bundle), name);
     }
@@ -58,6 +58,12 @@ class BundleReaderService {
       return null;
     }
     final response = await _client.get(data.url);
-    return SpriteSet.fromMap(jsonDecode(response.body), bundle);
+    return SpriteSet.fromJson(jsonDecode(response.body), bundle);
   }
 }
+
+// TODO find a better way
+Map<String, dynamic> sanitizeYaml(YamlDocument document) =>
+    jsonDecode(jsonEncode(document.contents, toEncodable: _sanitizeNode));
+
+Object _sanitizeNode(Object node) => (node as YamlNode).value;

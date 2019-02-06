@@ -1,16 +1,29 @@
-import 'tools/string_base64.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+import '../tools/string_base64.dart';
+
+part 'bundle.g.dart';
+
+@JsonSerializable(createToJson: false)
 class Bundle {
+  @JsonKey(name: "name")
   String name;
+  @JsonKey(name: "header_color")
   String headerColor;
+  @JsonKey(name: "header_background_color")
   String headerBackgroundColor;
+  @JsonKey(name: "borders_color")
   String bordersColor;
+  @JsonKey(name: "body_background_color")
   String bodyBackgroundColor;
 
+  @JsonKey(name: "sprite_sets")
   List<BundleSpriteSetData> spriteSets;
 
+  @JsonKey(name: "prompt_subscribe", defaultValue: false)
   bool promptSubscribe;
 
+  @JsonKey(ignore: true)
   String url;
 
   Bundle({
@@ -24,35 +37,27 @@ class Bundle {
     this.url,
   });
 
-  static Bundle fromMap(Map source, [String url]) => Bundle(
-        name: source["name"],
-        headerColor: source["header_color"],
-        headerBackgroundColor: source["header_background_color"],
-        bordersColor: source["borders_color"],
-        bodyBackgroundColor: source["body_background_color"],
-        spriteSets: (source["sprite_sets"] as List)
-            .cast<Map>()
-            .map(BundleSpriteSetData.fromMap)
-            .toList(growable: false),
-        promptSubscribe: source["prompt_subscribe"],
-        url: url,
-      );
+  // sigh... would have called it fromMap
+  // but this is what I get for using a JSON package to parse YAML
+  factory Bundle.fromJson(Map<String, dynamic> map, [String url]) =>
+      _$BundleFromJson(map)..url = url;
 }
 
+@JsonSerializable(createToJson: false)
 class BundleSpriteSetData {
+  @JsonKey(name: "name")
   String name;
+  @JsonKey(name: "display_name")
   String displayName;
+  @JsonKey(name: "url")
   String url;
+  @JsonKey(name: "color")
   String color;
 
   BundleSpriteSetData({this.name, this.displayName, this.url, this.color});
 
-  static BundleSpriteSetData fromMap(Map source) => BundleSpriteSetData(
-        name: source["name"],
-        displayName: source["display_name"],
-        url: source["url"],
-        color: source["color"],
-      );
+  factory BundleSpriteSetData.fromJson(Map<String, dynamic> map) =>
+      _$BundleSpriteSetDataFromJson(map);
 }
 
 const _specialBundleNames = ["internal", "permalink"];

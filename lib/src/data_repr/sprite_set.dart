@@ -1,27 +1,36 @@
 import 'dart:math' as math;
 
 import 'package:color/color.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+import '../errors.dart';
 import 'bundle.dart';
-import 'errors.dart';
 
+part 'sprite_set.g.dart';
+
+@JsonSerializable()
 class SpriteSet {
   num maxHorzVelocity;
   num minVertVelocity;
   num maxVertVelocity;
+  @JsonKey(fromJson: toRadians, toJson: toDegrees)
   num maxAngularVelocity;
 
   String name;
 
   List<SpriteSetImageData> images;
 
+  @JsonKey(fromJson: _parseColor, toJson: _encodeColor)
   Color textColor;
+  @JsonKey(fromJson: _parseColor, toJson: _encodeColor)
   Color backgroundColor;
 
   int numTacos;
 
+  @JsonKey(includeIfNull: false)
   String soundUrl;
 
+  @JsonKey(ignore: true)
   Bundle bundle;
 
   SpriteSet({
@@ -38,24 +47,10 @@ class SpriteSet {
     this.bundle,
   });
 
-  static SpriteSet fromMap(Map source, [Bundle bundle]) =>
-      _checkLegacy(source, bundle) ??
-      SpriteSet(
-        maxHorzVelocity: source["maxHorzVelocity"],
-        minVertVelocity: source["minVertVelocity"],
-        maxVertVelocity: source["maxVertVelocity"],
-        maxAngularVelocity: toRadians(source["maxAngularVelocity"]),
-        name: source["name"],
-        images: (source["images"] as List)
-            .cast<Map>()
-            .map(SpriteSetImageData.fromMap)
-            .toList(growable: false),
-        textColor: _parseColor(source["textColor"]),
-        backgroundColor: _parseColor(source["backgroundColor"]),
-        numTacos: source["numTacos"],
-        soundUrl: source["soundUrl"],
-        bundle: bundle,
-      );
+  factory SpriteSet.fromJson(Map<String, dynamic> map, [Bundle bundle]) =>
+      _$SpriteSetFromJson(map)..bundle = bundle;
+
+  Map<String, dynamic> toJson() => _$SpriteSetToJson(this);
 
   static Color _parseColor(thing) {
     if (thing is List) {
@@ -71,17 +66,7 @@ class SpriteSet {
     }
   }
 
-  // not sure what i'll do with this, but could be good to know.
-  bool _isLegacy;
-  bool get isLegacy => _isLegacy;
-  static SpriteSet _checkLegacy(Map source, Bundle bundle) {
-    if (source["class"] == "general") {
-      return fromMap(source["data"], bundle).._isLegacy = true;
-    } else if (source["class"] != null) {
-      throw ParseException("Inconvertible legacy format");
-    }
-    return null;
-  }
+  static String _encodeColor(Color color) => color.toHexColor().toCssString();
 
   static SpriteSet get defaultSpriteSet => SpriteSet(
         maxHorzVelocity: 4,
@@ -103,20 +88,23 @@ class SpriteSet {
       );
 }
 
+@JsonSerializable()
 class SpriteSetImageData {
   String src;
+  @JsonKey(includeIfNull: false)
   int width;
+  @JsonKey(includeIfNull: false)
   int height;
+  @JsonKey(includeIfNull: false)
   int weight;
 
   SpriteSetImageData({this.src, this.width, this.height, this.weight});
 
-  static SpriteSetImageData fromMap(Map source) => SpriteSetImageData(
-        src: source["src"],
-        width: source["width"],
-        height: source["height"],
-        weight: source["weight"],
-      );
+  factory SpriteSetImageData.fromJson(Map<String, dynamic> map) =>
+      _$SpriteSetImageDataFromJson(map);
+
+  Map<String, dynamic> toJson() => _$SpriteSetImageDataToJson(this);
 }
 
 num toRadians(num degrees) => degrees / 360 * 2 * math.pi;
+num toDegrees(num radians) => radians * 360 / 2 / math.pi;

@@ -77,7 +77,8 @@ class StageScreenComponent implements OnActivate, OnDestroy {
       backgroundOpacity = num.parse(queryParameters["bgOpacity"]);
     } on Object {}
 
-    _renderController = WebRenderController(spriteSet, imageContainer, stage, backgroundOpacity);
+    _renderController = WebRenderController(
+        spriteSet, imageContainer, stage, backgroundOpacity);
     await _renderController.load();
 
     textContent = queryParameters["msg"] ?? "";

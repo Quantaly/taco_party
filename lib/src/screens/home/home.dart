@@ -4,8 +4,8 @@ import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
 
-import '../../bundle.dart';
 import '../../components/bundle_display/bundle_display.dart';
+import '../../data_repr/bundle.dart';
 import '../../routing.dart';
 import '../../services/bundle_mass_loader_service.dart';
 import '../../services/page_meta_service.dart';
@@ -40,7 +40,9 @@ class HomeScreenComponent implements OnInit, OnDestroy {
       ..backgroundColor = "yellow"
       ..title = "Taco Party";
     _bundleLoader.loadAsync().listen((list) => bundles = list);
-    _stageSpawner = AsyncStageSpawner("_blank", _location.prepareExternalUrl(Routes.stageLink("internal", "async")))..init();
+    _stageSpawner = AsyncStageSpawner("_blank",
+        _location.prepareExternalUrl(Routes.stageLink("internal", "async")))
+      ..init();
   }
 
   String get defaultSpriteSetLink => Routes.stageNoArgs.toUrl() + queryString;

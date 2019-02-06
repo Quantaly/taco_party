@@ -1,6 +1,6 @@
 import 'package:angular_router/angular_router.dart';
 
-import 'bundle.dart';
+import 'data_repr/bundle.dart';
 import 'screens/bundle_manager/bundle_manager.template.dart'
     as bundle_manager_template;
 import 'screens/home/home.template.dart' as home_template;

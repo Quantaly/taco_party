@@ -282,7 +282,7 @@ packages:
     source: hosted
     version: "0.6.1+1"
   json_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: json_annotation
       url: "https://pub.dartlang.org"
@@ -295,6 +295,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.9"
+  json_serializable:
+    dependency: "direct dev"
+    description:
+      name: json_serializable
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   kernel:
     dependency: transitive
     description:
@@ -422,7 +429,7 @@ packages:
     source: hosted
     version: "1.15.2"
   sass_builder:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: sass_builder
       url: "https://pub.dartlang.org"

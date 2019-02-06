@@ -1,4 +1,4 @@
-import '../sprite_set.dart';
+import '../data_repr/sprite_set.dart';
 import 'taco.dart';
 
 abstract class RenderController {

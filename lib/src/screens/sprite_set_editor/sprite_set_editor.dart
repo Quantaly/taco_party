@@ -7,10 +7,10 @@ import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:color/color.dart';
 
+import '../../data_repr/sprite_set.dart';
 import '../../routing.dart';
 import '../../services/bundle_reader_service.dart';
 import '../../services/page_meta_service.dart';
-import '../../sprite_set.dart';
 import '../../tools/async_stage_spawner.dart';
 import '../../tools/color_utils.dart';
 import '../../tools/string_base64.dart';
@@ -101,7 +101,7 @@ class SpriteSetEditorScreenComponent implements OnInit, OnDestroy {
     reader.readAsText(inputFile);
     await reader.onLoadEnd.first;
     try {
-      copySpriteSet(SpriteSet.fromMap(jsonDecode(reader.result)));
+      copySpriteSet(SpriteSet.fromJson(jsonDecode(reader.result)));
     } on Object {
       window.alert("Invalid file.");
     }

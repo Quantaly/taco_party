@@ -4,7 +4,7 @@ import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:stream_transform/stream_transform.dart' show debounce;
 
-import '../../bundle.dart';
+import '../../data_repr/bundle.dart';
 import '../../services/bundle_mass_loader_service.dart';
 import '../../services/bundle_reader_service.dart';
 import '../../services/page_meta_service.dart';

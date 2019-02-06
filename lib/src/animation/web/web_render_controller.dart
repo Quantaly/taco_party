@@ -4,7 +4,7 @@ import 'dart:math' as math;
 
 import 'package:color/color.dart';
 
-import '../../sprite_set.dart';
+import '../../data_repr/sprite_set.dart';
 import '../../tools/range.dart';
 import '../animation_handler.dart';
 import '../render_controller.dart';
@@ -22,7 +22,8 @@ class WebRenderController implements RenderController {
   @override
   final SpriteSet spriteSet;
 
-  WebRenderController(this.spriteSet, this._imageContainer, this._canvas, [this._backgroundOpacity = 1])
+  WebRenderController(this.spriteSet, this._imageContainer, this._canvas,
+      [this._backgroundOpacity = 1])
       : _context2d = _canvas.context2D,
         _images = List(spriteSet.images.length);
 
@@ -132,8 +133,8 @@ class WebRenderController implements RenderController {
     if (delta - _lastFrame > animSpeed) {
       _lastFrame = delta;
       _context2d
-        ..setFillColorRgb(
-            _backgroundColor.r, _backgroundColor.g, _backgroundColor.b, _backgroundOpacity)
+        ..setFillColorRgb(_backgroundColor.r, _backgroundColor.g,
+            _backgroundColor.b, _backgroundOpacity)
         ..fillRect(0, 0, canvasWidth, canvasHeight);
       _animationHandler.runFrame();
     }

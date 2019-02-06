@@ -7,19 +7,21 @@ environment:
   sdk: '>=2.1.0 <3.0.0'
 
 dependencies:
-  archive: ^2.0.5
   angular: ^5.2.0
-  angular_router: ^2.0.0-alpha
-  sass_builder: ^2.1.2
-  http: ^0.12.0
-  yaml: ^2.1.15
-  stream_transform: ^0.0.14
   angular_forms: ^2.1.1
+  angular_router: ^2.0.0-alpha
+  archive: ^2.0.5
   color: ^2.1.1
+  http: ^0.12.0
+  json_annotation: ^2.0.0
+  stream_transform: ^0.0.14
+  yaml: ^2.1.15
 
 dev_dependencies:
   build_runner: ^1.1.2
   build_web_compilers: ^1.0.0
+  json_serializable: ^2.0.2
+  sass_builder: ^2.1.2
 
   # mostly here to stop the build from complaining, apparently angular wants me to actually test my code
   test: ^1.5.1

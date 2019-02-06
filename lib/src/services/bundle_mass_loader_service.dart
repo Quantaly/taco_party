@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../bundle.dart';
+import '../data_repr/bundle.dart';
 import '../tools/range.dart';
 import 'bundle_reader_service.dart';
 import 'subscribed_bundles_service.dart';

@@ -1,7 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
-import '../../bundle.dart';
+import '../../data_repr/bundle.dart';
 import '../../routing.dart';
 import '../../tools/string_base64.dart';
 
