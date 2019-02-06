@@ -40,7 +40,7 @@ class AsyncStageSpawner {
     // this has to be done synchronously to still be inside of a user input event
     // actually maybe not, as of Dart 2
     // but I'm too lazy to rewrite it with async/await
-    var newWindow = window.open("$asyncStageLink$queryString", name);
+    final newWindow = window.open("$asyncStageLink$queryString", name);
     Future.value(data).then((data) {
       if (data == null) {
         newWindow.close();
