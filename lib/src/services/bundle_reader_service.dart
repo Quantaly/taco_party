@@ -20,7 +20,7 @@ class BundleReaderService {
       final response = await _client.get(url);
       final parsed = loadYamlDocument(response.body);
 
-      return Bundle.fromJson(sanitizeYaml(parsed), url);
+      return Bundle.fromJson(flattenYaml(parsed), url);
     } on Bundle {
       // there are so many potential throws in this
       // that it's barely even worth trying to diagnose. TODO maybe someday
@@ -62,8 +62,18 @@ class BundleReaderService {
   }
 }
 
-// TODO find a better way
-Map<String, dynamic> sanitizeYaml(YamlDocument document) =>
-    jsonDecode(jsonEncode(document.contents, toEncodable: _sanitizeNode));
-
-Object _sanitizeNode(Object node) => (node as YamlNode).value;
+// bluuuuh this is what i get for parsing yaml with a json lib...
+flattenYaml(node) {
+  if (node is YamlDocument) {
+    return flattenYaml(node.contents);
+  } else if (node is YamlScalar) {
+    return node.value;
+  } else if (node is YamlList) {
+    return node.map(flattenYaml).toList();
+  } else if (node is YamlMap) {
+    return node
+        .map((k, v) => MapEntry(flattenYaml(k), flattenYaml(v)))
+        .cast<String, dynamic>();
+  }
+  return node;
+}
