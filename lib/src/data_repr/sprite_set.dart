@@ -48,7 +48,7 @@ class SpriteSet {
   });
 
   factory SpriteSet.fromJson(Map<String, dynamic> map, [Bundle bundle]) =>
-      _$SpriteSetFromJson(map)..bundle = bundle;
+      _$SpriteSetFromJson(map["data"] ?? map)..bundle = bundle;
 
   Map<String, dynamic> toJson() => _$SpriteSetToJson(this);
 
