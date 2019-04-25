@@ -4,23 +4,17 @@ import '../tools/string_base64.dart';
 
 part 'bundle.g.dart';
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: false, fieldRename: FieldRename.snake)
 class Bundle {
-  @JsonKey(name: "name")
   String name;
-  @JsonKey(name: "header_color")
   String headerColor;
-  @JsonKey(name: "header_background_color")
   String headerBackgroundColor;
-  @JsonKey(name: "borders_color")
   String bordersColor;
-  @JsonKey(name: "body_background_color")
   String bodyBackgroundColor;
 
-  @JsonKey(name: "sprite_sets")
   List<BundleSpriteSetData> spriteSets;
 
-  @JsonKey(name: "prompt_subscribe", defaultValue: false)
+  @JsonKey(defaultValue: false)
   bool promptSubscribe;
 
   @JsonKey(ignore: true)
@@ -43,15 +37,11 @@ class Bundle {
       _$BundleFromJson(map)..url = url;
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: false, fieldRename: FieldRename.snake)
 class BundleSpriteSetData {
-  @JsonKey(name: "name")
   String name;
-  @JsonKey(name: "display_name")
   String displayName;
-  @JsonKey(name: "url")
   String url;
-  @JsonKey(name: "color")
   String color;
 
   BundleSpriteSetData({this.name, this.displayName, this.url, this.color});
