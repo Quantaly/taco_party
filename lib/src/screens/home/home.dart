@@ -58,6 +58,10 @@ class HomeScreenComponent implements OnInit, OnDestroy {
         "bgOpacity": backgroundOpacity,
       }..removeWhere((k, v) => v == "" || v == null));
 
+  void onFilterInput(SelectElement filterInput) {
+    filter = filterInput.selectedOptions.map((sel) => sel.value).join(",");
+  }
+
   String fileData;
   void processJsonImport(File inputFile) async {
     final reader = FileReader();
