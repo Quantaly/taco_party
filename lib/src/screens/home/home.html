@@ -30,7 +30,7 @@
             <input id="message-input" [(ngModel)]="message">
         </li>
         <li><label for="filter-input">Filter</label>:
-            <select multiple id="filter-input" #filterInput (input)="onFilterInput(filterInput)"> <!-- TODO multiple, which ngModel doesn't like -->
+            <select multiple id="filter-input" #filterInput (input)="onFilterInput(filterInput)">
                 <option value="invert">Inverted</option>
                 <option value="rainbow">Rainbow</option>
                 <option value="hicontrast">High Contrast</option>
