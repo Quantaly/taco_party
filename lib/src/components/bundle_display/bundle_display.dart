@@ -23,7 +23,8 @@ class BundleDisplayComponent {
   bool isExpanded = false;
 
   String get expandToggleDisplay => isExpanded ? "&ndash;" : "+";
-  String get expandToggleAriaLabel => isExpanded ? "contract" : "expand";
+  String get expandToggleAriaLabel =>
+      (isExpanded ? "Collapse " : "Expand ") + bundle.name;
 
   String get listDisplay => isExpanded ? "initial" : "none";
 

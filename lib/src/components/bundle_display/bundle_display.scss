@@ -36,6 +36,9 @@ h3 {
   font: ($button-size - 10px) bold;
   cursor: pointer;
   min-height: $button-size;
+
+  border: none;
+  background: inherit;
 }
 
 ul {

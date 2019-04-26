@@ -4,12 +4,11 @@
      [style.border-color]="bundle.bordersColor">
     <h3 [innerHTML]="bundle.name"
         [style.color]="bundle.headerColor"></h3>
-    <div class="expand-toggle"
+    <button class="expand-toggle"
          [innerHTML]="expandToggleDisplay"
-         role="button"
          [attr.aria-label]="expandToggleAriaLabel"
          (click)="isExpanded = !isExpanded"
-         [style.color]="bundle.bordersColor"></div>
+         [style.color]="bundle.bordersColor"></button>
     <ul *ngIf="isExpanded"
         [style.background-color]="bundle.bodyBackgroundColor">
         <li *ngFor="let spriteSet of bundle.spriteSets">
