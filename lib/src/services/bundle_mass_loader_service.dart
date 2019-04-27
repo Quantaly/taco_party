@@ -1,9 +1,6 @@
 import 'dart:async';
 
-import '../data_repr/bundle.dart';
-import '../tools/range.dart';
-import 'bundle_reader_service.dart';
-import 'subscribed_bundles_service.dart';
+import 'package:taco_party/everything.g.dart';
 
 class BundleMassLoaderService {
   final BundleReaderService _bundleReader;

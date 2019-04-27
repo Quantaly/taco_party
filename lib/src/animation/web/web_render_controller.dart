@@ -4,13 +4,7 @@ import 'dart:math' as math;
 
 import 'package:color/color.dart';
 
-import '../../data_repr/sprite_set.dart';
-import '../../tools/range.dart';
-import '../animation_handler.dart';
-import '../render_controller.dart';
-import '../sound_controller.dart';
-import '../taco.dart';
-import 'web_sound_controller.dart';
+import 'package:taco_party/everything.g.dart';
 
 class WebRenderController implements RenderController {
   final Element _imageContainer;

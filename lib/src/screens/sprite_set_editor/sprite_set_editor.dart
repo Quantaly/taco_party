@@ -7,14 +7,7 @@ import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:color/color.dart';
 
-import '../../data_repr/sprite_set.dart';
-import '../../routing.dart';
-import '../../services/bundle_reader_service.dart';
-import '../../services/page_meta_service.dart';
-import '../../tools/async_stage_spawner.dart';
-import '../../tools/color_utils.dart';
-import '../../tools/string_base64.dart';
-import '../../tools/url_json.dart';
+import 'package:taco_party/everything.g.dart';
 
 @Component(
   selector: "tp-screens-spriteseteditor",

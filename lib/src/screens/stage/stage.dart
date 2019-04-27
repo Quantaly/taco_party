@@ -3,12 +3,7 @@ import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
-import '../../animation/web/web_render_controller.dart';
-import '../../routing.dart';
-import '../../services/bundle_reader_service.dart';
-import '../../services/page_meta_service.dart';
-import '../../services/subscribed_bundles_service.dart';
-import '../../tools/color_utils.dart';
+import 'package:taco_party/everything.g.dart';
 
 @Component(
   selector: "tp-screens-stage",

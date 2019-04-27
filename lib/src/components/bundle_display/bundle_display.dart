@@ -1,9 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
-import '../../data_repr/bundle.dart';
-import '../../routing.dart';
-import '../../tools/string_base64.dart';
+import 'package:taco_party/everything.g.dart';
 
 @Component(
   selector: "tp-bundle",

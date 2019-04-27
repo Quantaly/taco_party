@@ -3,8 +3,7 @@ import 'dart:math' as math;
 import 'package:color/color.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../errors.dart';
-import 'bundle.dart';
+import 'package:taco_party/everything.g.dart';
 
 part 'sprite_set.g.dart';
 

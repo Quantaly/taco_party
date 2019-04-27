@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import '../data_repr/sprite_set.dart';
+import 'package:taco_party/everything.g.dart';
 
 class Taco {
   static final _rand = math.Random();

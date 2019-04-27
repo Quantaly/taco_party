@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../tools/string_base64.dart';
+import 'package:taco_party/everything.g.dart';
 
 part 'bundle.g.dart';
 

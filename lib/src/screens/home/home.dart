@@ -4,13 +4,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
 
-import '../../components/bundle_display/bundle_display.dart';
-import '../../data_repr/bundle.dart';
-import '../../routing.dart';
-import '../../services/bundle_mass_loader_service.dart';
-import '../../services/page_meta_service.dart';
-import '../../tools/async_stage_spawner.dart';
-import '../../tools/query_string.dart';
+import 'package:taco_party/everything.g.dart';
 
 @Component(
   selector: "tp-screens-home",

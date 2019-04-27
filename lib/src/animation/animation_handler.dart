@@ -1,10 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import '../data_repr/sprite_set.dart';
-import '../tools/range.dart';
-import 'render_controller.dart';
-import 'taco.dart';
+import 'package:taco_party/everything.g.dart';
 
 const animSpeed = 1000 ~/ 60; // ms between frames
 // hilariously enough, it turns out that Chrome (at least) fires animation

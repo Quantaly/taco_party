@@ -1,5 +1,4 @@
-import '../data_repr/sprite_set.dart';
-import 'taco.dart';
+import 'package:taco_party/everything.g.dart';
 
 abstract class RenderController {
   SpriteSet get spriteSet;

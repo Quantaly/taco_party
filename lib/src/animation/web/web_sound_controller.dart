@@ -3,7 +3,7 @@ import 'dart:web_audio';
 
 import 'package:http/http.dart' as http;
 
-import '../sound_controller.dart';
+import 'package:taco_party/everything.g.dart';
 
 class WebSoundController implements SoundController {
   String _url;

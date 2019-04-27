@@ -4,11 +4,7 @@ import 'dart:html';
 import 'package:http/http.dart' as http;
 import 'package:yaml/yaml.dart';
 
-import '../data_repr/bundle.dart';
-import '../data_repr/sprite_set.dart';
-import '../tools/url_json.dart';
-
-export '../data_repr/bundle.dart' show normalizeBundleIdentifier;
+import 'package:taco_party/everything.g.dart';
 
 class BundleReaderService {
   http.Client _client;

@@ -4,12 +4,7 @@ import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:stream_transform/stream_transform.dart' show debounce;
 
-import '../../data_repr/bundle.dart';
-import '../../services/bundle_mass_loader_service.dart';
-import '../../services/bundle_reader_service.dart';
-import '../../services/page_meta_service.dart';
-import '../../services/subscribed_bundles_service.dart';
-import '../../tools/range.dart';
+import 'package:taco_party/everything.g.dart';
 
 @Component(
   selector: "tp-screens-bundlemanager",
