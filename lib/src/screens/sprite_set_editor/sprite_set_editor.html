@@ -45,7 +45,7 @@
                         <input id="img{{i}}-width"
                                type="number"
                                min="1"
-                               [placeholder]="castToImage(preview).naturalHeight.toString()"
+                               [placeholder]="castToImage(preview).naturalWidth.toString()"
                                class="smol"
                                [(ngModel)]="image.width">
                     </td>
@@ -54,7 +54,7 @@
                         <input id="img{{i}}-height"
                                type="number"
                                min="1"
-                               [placeholder]="castToImage(preview).naturalWidth.toString()"
+                               [placeholder]="castToImage(preview).naturalHeight.toString()"
                                class="smol"
                                [(ngModel)]="image.height">
                     </td>
