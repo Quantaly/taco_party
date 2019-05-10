@@ -30,7 +30,7 @@ class StageScreenComponent implements OnActivate, OnDestroy {
   WebRenderController _renderController;
   String bundle, spriteSetName, bundleName;
   Map<String, String> queryParameters;
-  Filters filters = const Filters([]);
+  Filters filters = const Filters({});
 
   bool displaySubscribeControl = false;
 
@@ -78,7 +78,7 @@ class StageScreenComponent implements OnActivate, OnDestroy {
 
     textContent = queryParameters["msg"] ?? "";
     try {
-      filters = Filters(queryParameters["filter"].split(","));
+      filters = Filters(queryParameters["filter"].split(",").toSet());
     } on Error {}
 
     if (spriteSet.bundle != null &&
@@ -108,7 +108,7 @@ class StageScreenComponent implements OnActivate, OnDestroy {
 }
 
 class Filters {
-  final List<String> filters;
+  final Set<String> filters;
   const Filters(this.filters);
 
   bool operator [](String name) => filters.contains(name);
