@@ -41,6 +41,10 @@ class BundleReaderService {
       case "permalink":
         final json = urlJson.decode(name);
         return SpriteSet.fromJson(json);
+      case "pastebin":
+        final response = await _client
+            .get("https://cors-anywhere.herokuapp.com/pastebin.com/raw/$name");
+        return SpriteSet.fromJson(jsonDecode(response.body));
       default:
         return getSpriteSetForBundle(await getBundle(bundle), name);
     }

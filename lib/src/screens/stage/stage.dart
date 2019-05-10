@@ -81,8 +81,7 @@ class StageScreenComponent implements OnActivate, OnDestroy {
       filters = Filters(queryParameters["filter"].split(","));
     } on Error {}
 
-    if (bundle != "internal" &&
-        bundle != "permalink" &&
+    if (spriteSet.bundle != null &&
         !_subscribedBundles.contains(bundle) &&
         (spriteSet.bundle.promptSubscribe ?? true)) {
       displaySubscribeControl = true;

@@ -50,7 +50,7 @@ class BundleSpriteSetData {
       _$BundleSpriteSetDataFromJson(map);
 }
 
-const _specialBundleNames = ["internal", "permalink"];
+const _specialBundleNames = {"internal", "permalink", "pastebin"};
 const _stringBase64Decoder = StringBase64Decoder();
 String normalizeBundleIdentifier(String identifier) {
   if (_specialBundleNames.contains(identifier)) return identifier;
