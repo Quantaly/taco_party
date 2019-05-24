@@ -74,8 +74,7 @@ class SpriteSet {
         maxAngularVelocity: toRadians(3),
         images: [
           SpriteSetImageData(
-            src:
-                "https://openclipart.org/image/2400px/svg_to_png/151201/taco.png",
+            src: "http://clipart-library.com/image_gallery/406876.png",
             width: 240,
             height: 216,
           ),
