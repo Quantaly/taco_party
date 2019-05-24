@@ -13,11 +13,11 @@ class BundleReaderService {
 
   Future<Bundle> getBundle(String url) async {
     try {
-      final response = await _client.get(url);
+      final response = await _client.get(corsProxy(url));
       final parsed = loadYamlDocument(response.body);
 
       return Bundle.fromJson(flattenYaml(parsed), url);
-    } on Bundle {
+    } on Object {
       // there are so many potential throws in this
       // that it's barely even worth trying to diagnose. TODO maybe someday
       return null;
@@ -43,7 +43,7 @@ class BundleReaderService {
         return SpriteSet.fromJson(json);
       case "pastebin":
         final response = await _client
-            .get("https://cors-anywhere.herokuapp.com/pastebin.com/raw/$name");
+            .get(corsProxy("https://pastebin.com/raw/$name"));
         return SpriteSet.fromJson(jsonDecode(response.body));
       default:
         return getSpriteSetForBundle(await getBundle(bundle), name);
@@ -57,9 +57,11 @@ class BundleReaderService {
     } on StateError {
       return null;
     }
-    final response = await _client.get(data.url);
+    final response = await _client.get(corsProxy(data.url));
     return SpriteSet.fromJson(jsonDecode(response.body), bundle);
   }
+
+  static String corsProxy(String url) => "https://cors-anywhere.herokuapp.com/$url";
 }
 
 // bluuuuh this is what i get for parsing yaml with a json lib...
