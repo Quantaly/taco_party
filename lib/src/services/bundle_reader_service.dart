@@ -42,8 +42,8 @@ class BundleReaderService {
         final json = urlJson.decode(name);
         return SpriteSet.fromJson(json);
       case "pastebin":
-        final response = await _client
-            .get(corsProxy("https://pastebin.com/raw/$name"));
+        final response =
+            await _client.get(corsProxy("https://pastebin.com/raw/$name"));
         return SpriteSet.fromJson(jsonDecode(response.body));
       default:
         return getSpriteSetForBundle(await getBundle(bundle), name);
@@ -61,7 +61,8 @@ class BundleReaderService {
     return SpriteSet.fromJson(jsonDecode(response.body), bundle);
   }
 
-  static String corsProxy(String url) => "https://cors-anywhere.herokuapp.com/$url";
+  static String corsProxy(String url) =>
+      "https://cors-anywhere.herokuapp.com/$url";
 }
 
 // bluuuuh this is what i get for parsing yaml with a json lib...
