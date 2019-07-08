@@ -32,7 +32,6 @@ dart_style:packages/dart_style/
 fixnum:packages/fixnum/
 front_end:packages/front_end/
 glob:packages/glob/
-glob_export:packages/glob_export/
 graphs:packages/graphs/
 http:packages/http/
 http_multi_server:packages/http_multi_server/
