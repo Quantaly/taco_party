@@ -1,7 +1,9 @@
+import 'dart:html';
+
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
-import 'package:taco_party/everything.g.dart';
+import 'everything.g.dart';
 
 @Component(
   selector: 'tp-app',
@@ -12,6 +14,7 @@ import 'package:taco_party/everything.g.dart';
     ClassProvider(BundleMassLoaderService),
     ClassProvider(BundleReaderService),
     ClassProvider(SubscribedBundlesService),
+    ClassProvider(FontLoaderService),
   ],
   exports: [Routes],
 )

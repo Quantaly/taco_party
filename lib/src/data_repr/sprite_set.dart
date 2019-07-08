@@ -29,6 +29,9 @@ class SpriteSet {
   @JsonKey(includeIfNull: false)
   String soundUrl;
 
+  @JsonKey(includeIfNull: false)
+  SpriteSetFontInfo font;
+
   @JsonKey(ignore: true)
   Bundle bundle;
 
@@ -43,6 +46,7 @@ class SpriteSet {
     this.backgroundColor,
     this.numTacos,
     this.soundUrl,
+    this.font,
     this.bundle,
   });
 
@@ -102,6 +106,20 @@ class SpriteSetImageData {
       _$SpriteSetImageDataFromJson(map);
 
   Map<String, dynamic> toJson() => _$SpriteSetImageDataToJson(this);
+}
+
+@JsonSerializable()
+class SpriteSetFontInfo {
+  String name;
+  @JsonKey(defaultValue: false)
+  bool googleFontsImport;
+
+  SpriteSetFontInfo({this.name, this.googleFontsImport});
+
+  factory SpriteSetFontInfo.fromJson(Map<String, dynamic> map) =>
+      _$SpriteSetFontInfoFromJson(map);
+
+  Map<String, dynamic> toJson() => _$SpriteSetFontInfoToJson(this);
 }
 
 num toRadians(num degrees) => degrees / 360 * 2 * math.pi;

@@ -48,7 +48,7 @@ class SpriteSetEditorScreenComponent implements OnInit, OnDestroy {
 
   int numTacos;
 
-  bool _soundEnabled;
+  bool _soundEnabled = false;
   bool get soundEnabled => _soundEnabled;
   set soundEnabled(bool isEnabled) {
     _soundEnabled = isEnabled;
@@ -58,6 +58,19 @@ class SpriteSetEditorScreenComponent implements OnInit, OnDestroy {
   }
 
   String soundUrl;
+
+  bool _fontEnabled = false;
+  bool get fontEnabled => _fontEnabled;
+  set fontEnabled(bool isEnabled) {
+    _fontEnabled = isEnabled;
+    if (!isEnabled) {
+      font = "";
+      fontImport = false;
+    }
+  }
+
+  String font;
+  bool fontImport;
 
   AsyncStageSpawner _previewSpawner;
 
@@ -81,8 +94,13 @@ class SpriteSetEditorScreenComponent implements OnInit, OnDestroy {
     textColor = values.textColor.toHexColor().toCssString();
     backgroundColor = values.backgroundColor.toHexColor().toCssString();
     numTacos = values.numTacos;
+
     soundEnabled = values.soundUrl != "" && values.soundUrl != null;
     soundUrl = values.soundUrl ?? "";
+
+    fontEnabled = values.font != null;
+    font = values.font?.name ?? "";
+    fontImport = values.font?.googleFontsImport ?? false;
   }
 
   void addImage() {
@@ -111,35 +129,31 @@ class SpriteSetEditorScreenComponent implements OnInit, OnDestroy {
     } on Object {}
   }
 
-  Map<String, Object> jsonify() {
-    final jsonMap = <String, Object>{
-      "maxHorzVelocity": maxHorzVelocity,
-      "minVertVelocity": minVertVelocity,
-      "maxVertVelocity": maxVertVelocity,
-      "maxAngularVelocity": maxAngularVelocity,
-      "name": name,
-      "images": images.map((img) {
-        final jsonMap = <String, Object>{"src": img.src};
-        if (img.width != null) {
-          jsonMap["width"] = img.width;
-        }
-        if (img.height != null) {
-          jsonMap["height"] = img.height;
-        }
-        if (img.weight != null) {
-          jsonMap["weight"] = img.weight;
-        }
-        return jsonMap;
-      }).toList(),
-      "textColor": textColor,
-      "backgroundColor": backgroundColor,
-      "numTacos": numTacos,
-    };
-    if (soundEnabled) {
-      jsonMap["soundUrl"] = soundUrl;
-    }
-    return jsonMap;
-  }
+  Map<String, Object> jsonify() => {
+        "maxHorzVelocity": maxHorzVelocity,
+        "minVertVelocity": minVertVelocity,
+        "maxVertVelocity": maxVertVelocity,
+        "maxAngularVelocity": maxAngularVelocity,
+        "name": name,
+        "images": [
+          for (var img in images)
+            {
+              "src": img.src,
+              if (img.width != null) "width": img.width,
+              if (img.height != null) "height": img.height,
+              if (img.weight != null) "weight": img.weight,
+            }
+        ],
+        "textColor": textColor,
+        "backgroundColor": backgroundColor,
+        "numTacos": numTacos,
+        if (soundEnabled) "soundUrl": soundUrl,
+        if (fontEnabled)
+          "font": {
+            "name": font,
+            "googleFontsImport": fontImport,
+          },
+      };
 
   void preview() {
     _previewSpawner.spawnStage(jsonEncode(jsonify()), "?msg=Sample%20text");

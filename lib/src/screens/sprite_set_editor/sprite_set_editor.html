@@ -142,6 +142,26 @@
                    [disabled]="!soundEnabled"
                    [(ngModel)]="soundUrl">
         </li>
+        <li>
+            <div>
+                <label for="pty-font">font</label>:
+                <label for="pty-fontEnabled"
+                       style="display: none">fontEnabled</label>
+                <input id="pty-fontEnabled"
+                       type="checkbox"
+                       [(ngModel)]="fontEnabled">
+                <input id="pty-font"
+                       type="text"
+                       [disabled]="!fontEnabled"
+                       [(ngModel)]="font">
+            </div>
+            <div *ngIf="fontEnabled">
+                <label for="pty-fontImport">Import from Google Fonts</label>
+                <input id="pty-fontImport"
+                       type="checkbox"
+                       [(ngModel)]="fontImport">
+            </div>
+        </li>
     </ul>
 </div>
 

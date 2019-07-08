@@ -7,7 +7,8 @@
             <div [class.filter-rainbow]="filters['rainbow']">
                 <canvas #stage></canvas>
                 <p [innerHTML]="textContent"
-                   [style.color]="textColor"></p>
+                   [style.color]="textColor"
+                   [style.font-family]="textFontFamily"></p>
             </div>
         </div>
     </div>
@@ -19,6 +20,12 @@
     <div *ngIf="displaySoundControl">This sprite set has a sound effect.
         <button (click)="startSound()">Play Sound</button>
         <button (click)="soundControlDismissed = true">Dismiss</button>
+    </div>
+    <div *ngIf="displayFontLoading">This sprite set uses a font that is still being loaded.
+        <button (click)="fontNoticeDismissed = true">Dismiss</button>
+    </div>
+    <div *ngIf="displayFontError">This sprite set uses a font that has failed to load.
+        <button (click)="fontNoticeDismissed = true">Dismiss</button>
     </div>
     <div *ngIf="displaySubscribeControl">Subscribe to bundle "{{bundleName}}"?
         <button (click)="subscribeToCurrentBundle()">Subscribe</button>

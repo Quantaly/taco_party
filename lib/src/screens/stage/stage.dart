@@ -20,11 +20,13 @@ class StageScreenComponent implements OnActivate, OnDestroy {
   final PageMetaService _pageMeta;
   final BundleReaderService _bundleReader;
   final SubscribedBundlesService _subscribedBundles;
-  StageScreenComponent(
-      this._pageMeta, this._bundleReader, this._subscribedBundles);
+  final FontLoaderService _fontLoader;
+  StageScreenComponent(this._pageMeta, this._bundleReader,
+      this._subscribedBundles, this._fontLoader);
 
   String textContent = "Loading...";
   String textColor = "purple";
+  String textFontFamily;
   String controlPanelColor = "#ffff80";
 
   WebRenderController _renderController;
@@ -38,7 +40,17 @@ class StageScreenComponent implements OnActivate, OnDestroy {
   bool get displaySoundControl =>
       !soundControlDismissed && (_renderController?.soundReady ?? false);
 
-  bool get displayControls => displaySubscribeControl || displaySoundControl;
+  bool fontLoading = false;
+  bool fontError = false;
+  bool fontNoticeDismissed = false;
+  bool get displayFontLoading => fontLoading && !fontNoticeDismissed;
+  bool get displayFontError => fontError && !fontNoticeDismissed;
+
+  bool get displayControls =>
+      displaySubscribeControl ||
+      displaySoundControl ||
+      displayFontLoading ||
+      displayFontError;
 
   @override
   void onActivate(_, RouterState current) async {
@@ -77,6 +89,21 @@ class StageScreenComponent implements OnActivate, OnDestroy {
     await _renderController.load();
 
     textContent = queryParameters["msg"] ?? "";
+    if (textContent.isNotEmpty) {
+      if (spriteSet.font != null) {
+        textFontFamily = "${spriteSet.font.name}, Sarabun, sans-serif";
+        if (spriteSet.font.googleFontsImport) {
+          fontLoading = true;
+          _fontLoader.loadFont(spriteSet.font.name).then((_) {
+            fontLoading = false;
+          }).catchError((_) {
+            fontLoading = false;
+            fontError = true;
+          });
+        }
+      }
+    }
+
     try {
       filters = Filters(queryParameters["filter"].split(",").toSet());
     } on Error {}

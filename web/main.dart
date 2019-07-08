@@ -11,6 +11,7 @@ import 'main.template.dart' as self;
   routerProvidersHash,
   FactoryProvider(BodyElement, provideBody),
   FactoryProvider(TitleElement, provideTitle),
+  FactoryProvider(HeadElement, provideHead),
   ClassProvider(http.Client),
 ])
 final InjectorFactory injector = self.injector$Injector;
@@ -21,3 +22,4 @@ void main() {
 
 BodyElement provideBody() => querySelector("body");
 TitleElement provideTitle() => querySelector("title");
+HeadElement provideHead() => querySelector("head");
