@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
@@ -14,6 +12,7 @@ import 'everything.g.dart';
     ClassProvider(BundleMassLoaderService),
     ClassProvider(BundleReaderService),
     ClassProvider(SubscribedBundlesService),
+    ClassProvider(OldSubscribedBundlesService),
     ClassProvider(FontLoaderService),
   ],
   exports: [Routes],

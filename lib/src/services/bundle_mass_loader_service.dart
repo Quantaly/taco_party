@@ -8,23 +8,21 @@ class BundleMassLoaderService {
 
   BundleMassLoaderService(this._bundleReader, this._bundleSubscriptions);
 
+  // this... isn't actually called anywhere.
   Future<List<Bundle>> loadAll() {
-    return Future.wait(_bundleSubscriptions.map(_bundleReader.getBundle));
+    return loadAsync().last;
   }
 
-  Stream<List<Bundle>> loadAsync() {
-    final ret = StreamController<List<Bundle>>();
-    final subs = List.from(_bundleSubscriptions);
-    final list = List<Bundle>(subs.length);
-    final futures = List<Future>(subs.length);
-    for (var i in range(subs.length)) {
-      futures[i] = _bundleReader.getBundle(subs[i])
-        ..then((bundle) {
-          list[i] = bundle;
-          ret.add(List.from(list));
-        });
+  // with the switch to indexedDB, the behavior here changed.
+  // before, the list it returned was always the same size
+  //   and filled with nulls where bundles had yet to load.
+  // it works differently now. it shouldn't cause problems?
+  // be on the lookout anyway.
+  Stream<List<Bundle>> loadAsync() async* {
+    final list = <Bundle>[];
+    await for (var url in _bundleSubscriptions.getSubscriptions()) {
+      list.add(await _bundleReader.getBundle(url));
+      yield list.toList();
     }
-    Future.wait(futures).then((_) => ret.close());
-    return ret.stream;
   }
 }

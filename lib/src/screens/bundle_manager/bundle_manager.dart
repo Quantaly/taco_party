@@ -22,6 +22,8 @@ class BundleManagerScreenComponent implements OnInit, OnDestroy {
 
   Bundle subscribeTo;
   bool canSubscribe;
+  bool loading = false;
+  bool working = false;
 
   int _lastFindBundleCall = 0;
   StreamController<String> findBundleController;
@@ -30,25 +32,29 @@ class BundleManagerScreenComponent implements OnInit, OnDestroy {
     try {
       identifier = normalizeBundleIdentifier(identifier);
       final bundle = await _bundleReader.getBundle(identifier);
-      if (_lastFindBundleCall == thisCall) {
+      final subscribed = await _bundleSubscriptions.subscribedTo(identifier);
+      if (_lastFindBundleCall == thisCall &&
+          !specialBundleNames.contains(identifier)) {
         subscribeTo = bundle;
-        canSubscribe = !_bundleSubscriptions.contains(identifier);
+        canSubscribe = !subscribed;
       }
     } on FormatException {
       subscribeTo = null;
     }
   }
 
-  void subscribe(InputElement input) {
-    _bundleSubscriptions.add(input.value);
+  Future<void> subscribe(InputElement input) async {
+    working = true;
+    await _bundleSubscriptions.subscribe(input.value);
     input.value = "";
     subscribeTo = null;
     canSubscribe = false;
+    working = false;
     loadSubscriptions();
   }
 
-  void unsubscribe(int index) {
-    _bundleSubscriptions.removeAt(index);
+  void unsubscribe(String url) async {
+    _bundleSubscriptions.unsubscribe(url);
     loadSubscriptions();
   }
 
@@ -79,8 +85,11 @@ class BundleManagerScreenComponent implements OnInit, OnDestroy {
         _bundleLoader.loadAsync().listen((list) => subscriptions = list);
   }
 
+  // TODO reintroduce
   void pruneBroken() async {
-    if (subscriptions.length < 1) return;
+    window.alert("uhh yeah this doesn't work right now sorry");
+    window.alert("actually you probably can't even get here");
+    /*if (subscriptions.length < 1) return;
     final broken = <int>[];
     final subUrls = List<String>.from(_bundleSubscriptions);
     for (var i in range(subUrls.length)) {
@@ -103,6 +112,6 @@ class BundleManagerScreenComponent implements OnInit, OnDestroy {
         _bundleSubscriptions.removeAt(i);
       }
       loadSubscriptions();
-    }
+    }*/
   }
 }

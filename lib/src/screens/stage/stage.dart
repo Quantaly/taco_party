@@ -30,7 +30,7 @@ class StageScreenComponent implements OnActivate, OnDestroy {
   String controlPanelColor = "#ffff80";
 
   WebRenderController _renderController;
-  String bundle, spriteSetName, bundleName;
+  String bundleUrl, spriteSetName, bundleName;
   Map<String, String> queryParameters;
   Filters filters = const Filters({});
 
@@ -59,17 +59,17 @@ class StageScreenComponent implements OnActivate, OnDestroy {
     ngOnDestroy();
 
     try {
-      bundle = Routes.getStageBundle(current.parameters);
+      bundleUrl = Routes.getStageBundle(current.parameters);
       spriteSetName = Routes.getStageSpriteSet(current.parameters);
     } on Error {
       // the parameters weren't there
       // it *says* it's a TypeError, but I don't catch it when I specify
-      bundle = "internal";
+      bundleUrl = "internal";
       spriteSetName = "default";
     }
     queryParameters = current.queryParameters;
 
-    final spriteSet = await _bundleReader.getSpriteSet(bundle, spriteSetName);
+    final spriteSet = await _bundleReader.getSpriteSet(bundleUrl, spriteSetName);
     if (spriteSet.bundle != null) {
       bundleName = spriteSet.bundle.name;
     }
@@ -108,22 +108,21 @@ class StageScreenComponent implements OnActivate, OnDestroy {
       filters = Filters(queryParameters["filter"].split(",").toSet());
     } on Error {}
 
-    if (spriteSet.bundle != null &&
-        !_subscribedBundles.contains(bundle) &&
-        (spriteSet.bundle.promptSubscribe ?? true)) {
-      displaySubscribeControl = true;
-    }
+    Future(() async {
+      if (spriteSet.bundle != null &&
+          !await _subscribedBundles.subscribedTo(bundleUrl) &&
+          (spriteSet.bundle.promptSubscribe ?? true)) {
+        displaySubscribeControl = true;
+      }
 
-    _renderController.start();
+      _renderController.start();
+    });
   }
 
   void subscribeToCurrentBundle() {
     displaySubscribeControl = false;
-    if (bundle == null ||
-        bundle == "internal" ||
-        bundle == "permalink" ||
-        _subscribedBundles.contains(bundle)) return;
-    _subscribedBundles.add(bundle);
+    if (bundleUrl == null || specialBundleNames.contains(bundleUrl)) return;
+    _subscribedBundles.subscribe(bundleUrl);
   }
 
   void startSound() => _renderController.startSound();

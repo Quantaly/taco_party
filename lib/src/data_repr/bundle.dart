@@ -50,14 +50,14 @@ class BundleSpriteSetData {
       _$BundleSpriteSetDataFromJson(map);
 }
 
-const _specialBundleNames = {"internal", "permalink", "pastebin"};
+const specialBundleNames = {"internal", "permalink", "pastebin"};
 const _stringBase64Decoder = StringBase64Decoder();
 String normalizeBundleIdentifier(String identifier) {
-  if (_specialBundleNames.contains(identifier)) return identifier;
-  if (identifier.startsWith(RegExp("https?:\\/\\/"))) return identifier;
+  if (specialBundleNames.contains(identifier)) return identifier;
+  if (identifier.startsWith(RegExp("https?:\\/\\/|data:"))) return identifier;
   try {
     final ret = _stringBase64Decoder.decode(identifier);
-    if (!ret.startsWith(RegExp("https?:\\/\\/"))) throw FormatException();
+    if (!ret.startsWith(RegExp("https?:\\/\\/|data:"))) throw FormatException();
     return ret;
   } on FormatException {
     throw FormatException("Malformed bundle identifier");

@@ -22,13 +22,13 @@
 <div class="manage-existing">
     <h2>Manage Subscriptions</h2>
     <table>
-        <template ngFor let-bundle [ngForOf]="subscriptions" let-i="index">
+        <template ngFor let-bundle [ngForOf]="subscriptions">
             <tr *ngIf="bundle != null"
                 [style.color]="bundle.headerColor"
                 [style.background-color]="bundle.headerBackgroundColor"
                 [style.border-color]="bundle.bordersColor">
                 <td [innerHTML]="bundle.name"></td>
-                <td><button (click)="unsubscribe(i)">Unsubscribe</button></td>
+                <td><button (click)="unsubscribe(bundle.url)">Unsubscribe</button></td>
             </tr>
         </template>
     </table>

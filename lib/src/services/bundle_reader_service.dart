@@ -61,8 +61,13 @@ class BundleReaderService {
     return SpriteSet.fromJson(jsonDecode(response.body), bundle);
   }
 
-  static String corsProxy(String url) =>
-      "https://cors-anywhere.herokuapp.com/$url";
+  static String corsProxy(String url) {
+    if (url.startsWith("data:")) {
+      return url;
+    }
+    return "https://cors-anywhere.herokuapp.com/$url";
+  }
+      
 }
 
 // bluuuuh this is what i get for parsing yaml with a json lib...
