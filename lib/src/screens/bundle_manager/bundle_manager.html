@@ -22,7 +22,7 @@
 <div class="manage-existing">
     <h2>Manage Subscriptions</h2>
     <table>
-        <template ngFor let-bundle [ngForOf]="subscriptions">
+        <template ngFor let-bundle [ngForOf]="bundleState.loaded">
             <tr *ngIf="bundle != null"
                 [style.color]="bundle.headerColor"
                 [style.background-color]="bundle.headerBackgroundColor"
@@ -32,7 +32,7 @@
             </tr>
         </template>
     </table>
-    <aside *ngIf="subscriptions.contains(null)">
+    <aside *ngIf="bundleState.pending.isNotEmpty">
         Some subscriptions not displayed here may be broken.
         <button (click)="pruneBroken()">Prune Potential Broken Subscriptions</button>
     </aside>

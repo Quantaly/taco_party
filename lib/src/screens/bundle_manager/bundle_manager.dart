@@ -58,7 +58,7 @@ class BundleManagerScreenComponent implements OnInit, OnDestroy {
     loadSubscriptions();
   }
 
-  List<Bundle> subscriptions = const [];
+  BundleLoadingState bundleState = BundleLoadingState([], {});
 
   @override
   void ngOnInit() {
@@ -77,41 +77,32 @@ class BundleManagerScreenComponent implements OnInit, OnDestroy {
     findBundleController.close();
   }
 
-  StreamSubscription _lastLoad;
+  StreamSubscription<BundleLoadingState> _lastLoad;
   Future<void> loadSubscriptions() async {
     _lastLoad?.cancel();
-    subscriptions = const [];
     _lastLoad =
-        _bundleLoader.loadAsync().listen((list) => subscriptions = list);
+        _bundleLoader.loadAsync().listen((state) => bundleState = state);
   }
 
-  // TODO reintroduce
   void pruneBroken() async {
-    window.alert("uhh yeah this doesn't work right now sorry");
-    window.alert("actually you probably can't even get here");
-    /*if (subscriptions.length < 1) return;
-    final broken = <int>[];
-    final subUrls = List<String>.from(_bundleSubscriptions);
-    for (var i in range(subUrls.length)) {
-      if (subscriptions[i] == null) {
-        broken.add(i);
-      }
-    }
+    if (bundleState.pending.isEmpty) return;
     final confirmMsg = StringBuffer(
         "The following URLs have not successfully loaded yet, and are assumed "
         "to be broken:\n\n");
-    for (var i in broken) {
-      confirmMsg.writeln(subUrls[i]);
+    for (var sub in bundleState.pending) {
+      confirmMsg.writeln(sub);
     }
     confirmMsg.writeln(
         "\nIf you know one or more of these loads slowly, give it some more "
         "time or make sure you have the URL copied down to resubscribe.");
     confirmMsg.writeln("\nDelete these subscriptions?");
     if (window.confirm(confirmMsg.toString())) {
-      for (var i in broken) {
-        _bundleSubscriptions.removeAt(i);
+      final futures = <Future<void>>[];
+      for (var sub in bundleState.pending) {
+        futures.add(_bundleSubscriptions.unsubscribe(sub));
       }
+      await Future.wait(futures);
       loadSubscriptions();
-    }*/
+    }
   }
 }

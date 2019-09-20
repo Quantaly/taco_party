@@ -33,7 +33,7 @@ class HomeScreenComponent implements OnInit, OnDestroy {
     _pageMeta
       ..backgroundColor = "yellow"
       ..title = "Taco Party";
-    _bundleLoader.loadAsync().listen((list) => bundles = list);
+    _bundleLoader.loadAsync().listen((state) => bundles = state.loaded);
     _stageSpawner = AsyncStageSpawner("_blank",
         _location.prepareExternalUrl(Routes.stageLink("internal", "async")))
       ..init();
